@@ -1,9 +1,13 @@
-import { heroStats } from "@/lib/site";
+"use client";
+
+import { heroStats, ui } from "@/lib/site";
 import { Button, Arrow } from "@/components/ui";
 import { TapCard } from "@/components/TapCard";
 import { Reveal } from "@/components/Reveal";
+import { useT } from "@/lib/i18n";
 
 export function Hero() {
+  const t = useT();
   return (
     <section id="top" className="section-pad relative overflow-hidden pt-32 pb-16 sm:pt-40">
       {/* backdrop grid */}
@@ -22,17 +26,15 @@ export function Hero() {
           <Reveal>
             <div className="inline-flex items-center gap-2 rounded-full border border-line bg-paper/60 px-3 py-1.5 text-xs font-medium text-ink-soft backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              Swiss-made · Ships in 3–5 days
+              {t(ui.hero.badge)}
             </div>
           </Reveal>
 
           <Reveal delay={0.05}>
             <h1 className="display mt-6 text-5xl sm:text-6xl lg:text-7xl">
-              One tap between
-              <br />
-              you and a{" "}
+              {t(ui.hero.headPre)}{" "}
               <span className="relative whitespace-nowrap text-accent">
-                five-star
+                {t(ui.hero.headHighlight)}
                 <svg
                   className="absolute -bottom-2 left-0 w-full"
                   viewBox="0 0 200 12"
@@ -46,26 +48,24 @@ export function Hero() {
                     strokeLinecap="round"
                   />
                 </svg>
-              </span>{" "}
-              review.
+              </span>
+              {t(ui.hero.headPost)}
             </h1>
           </Reveal>
 
           <Reveal delay={0.12}>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted">
-              Premium NFC cards, plates and stands for restaurants and shops.
-              Guests tap their phone — no app, no QR fuss — and land straight on
-              your Google reviews, digital menu or link page.
+              {t(ui.hero.body)}
             </p>
           </Reveal>
 
           <Reveal delay={0.18}>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Button href="#pricing">
-                Order your cards <Arrow />
+                {t(ui.hero.ctaPrimary)} <Arrow />
               </Button>
               <Button href="#how" variant="outline">
-                See how it works
+                {t(ui.hero.ctaSecondary)}
               </Button>
             </div>
           </Reveal>
@@ -73,9 +73,9 @@ export function Hero() {
           <Reveal delay={0.24}>
             <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-line pt-8">
               {heroStats.map((s) => (
-                <div key={s.label}>
+                <div key={s.value}>
                   <dt className="display text-3xl text-ink">{s.value}</dt>
-                  <dd className="mt-1 text-xs text-muted">{s.label}</dd>
+                  <dd className="mt-1 text-xs text-muted">{t(s.label)}</dd>
                 </div>
               ))}
             </dl>

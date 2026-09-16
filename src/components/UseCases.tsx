@@ -2,21 +2,24 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { useCases } from "@/lib/site";
+import { useCases, ui } from "@/lib/site";
 import { SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
+import { useT } from "@/lib/i18n";
 
 export function UseCases() {
   const [active, setActive] = useState(0);
+  const t = useT();
   const uc = useCases[active];
+  const stat = ui.useCases.stats[active];
 
   return (
     <section id="use-cases" className="section-pad py-24 sm:py-32">
       <Reveal>
         <SectionHeading
-          eyebrow="Use cases"
-          title="One card, whatever you need it to do"
-          intro="Point a tap anywhere. Switch the destination whenever your goals change — the card stays the same."
+          eyebrow={t(ui.useCases.eyebrow)}
+          title={t(ui.useCases.title)}
+          intro={t(ui.useCases.intro)}
         />
       </Reveal>
 
@@ -31,7 +34,7 @@ export function UseCases() {
                 : "border border-line text-ink-soft hover:border-ink"
             }`}
           >
-            {c.label}
+            {t(c.label)}
           </button>
         ))}
       </div>
@@ -45,18 +48,18 @@ export function UseCases() {
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="eyebrow text-accent">{uc.label}</span>
-            <h3 className="display mt-3 text-3xl sm:text-4xl">{uc.heading}</h3>
-            <p className="mt-5 text-lg leading-relaxed text-muted">{uc.body}</p>
+            <span className="eyebrow text-accent">{t(uc.label)}</span>
+            <h3 className="display mt-3 text-3xl sm:text-4xl">{t(uc.heading)}</h3>
+            <p className="mt-5 text-lg leading-relaxed text-muted">{t(uc.body)}</p>
             <ul className="mt-7 space-y-3">
-              {uc.points.map((p) => (
-                <li key={p} className="flex items-start gap-3">
+              {uc.points.map((p, pi) => (
+                <li key={pi} className="flex items-start gap-3">
                   <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent/15 text-accent">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <path d="M2 6.5 5 9l5-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
-                  <span className="text-ink-soft">{p}</span>
+                  <span className="text-ink-soft">{t(p)}</span>
                 </li>
               ))}
             </ul>
@@ -82,15 +85,9 @@ export function UseCases() {
             >
               <div>
                 <p className="display text-6xl text-paper sm:text-7xl">
-                  {active === 0 ? "+380%" : active === 1 ? "0" : "1 tap"}
+                  {t(stat.value)}
                 </p>
-                <p className="mt-3 text-sm text-paper/60">
-                  {active === 0
-                    ? "more reviews in the first month"
-                    : active === 1
-                    ? "reprints — update from your phone"
-                    : "to every profile, link and WiFi"}
-                </p>
+                <p className="mt-3 text-sm text-paper/60">{t(stat.desc)}</p>
               </div>
             </motion.div>
           </AnimatePresence>

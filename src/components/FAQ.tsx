@@ -2,21 +2,23 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { faqs } from "@/lib/site";
+import { faqs, ui } from "@/lib/site";
 import { SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
+import { useT } from "@/lib/i18n";
 
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const t = useT();
 
   return (
     <section id="faq" className="section-pad py-24 sm:py-32">
       <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <Reveal>
           <SectionHeading
-            eyebrow="FAQ"
-            title="Questions, answered"
-            intro="Still unsure? Write to us — we usually reply within a few hours."
+            eyebrow={t(ui.faq.eyebrow)}
+            title={t(ui.faq.title)}
+            intro={t(ui.faq.intro)}
           />
         </Reveal>
 
@@ -24,13 +26,13 @@ export function FAQ() {
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
-              <Reveal key={f.q} delay={i * 0.04}>
+              <Reveal key={i} delay={i * 0.04}>
                 <div>
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
                     className="flex w-full items-center justify-between gap-4 py-5 text-left"
                   >
-                    <span className="text-lg font-semibold text-ink">{f.q}</span>
+                    <span className="text-lg font-semibold text-ink">{t(f.q)}</span>
                     <span
                       className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line transition-all duration-300 ${
                         isOpen ? "rotate-45 bg-accent text-white" : "text-ink"
@@ -50,7 +52,7 @@ export function FAQ() {
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-6 pr-12 leading-relaxed text-muted">{f.a}</p>
+                        <p className="pb-6 pr-12 leading-relaxed text-muted">{t(f.a)}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>

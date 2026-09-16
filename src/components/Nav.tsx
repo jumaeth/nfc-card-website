@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { nav, site, BRAND } from "@/lib/site";
+import { nav, site, BRAND, ui } from "@/lib/site";
 import { Button, Arrow } from "@/components/ui";
+import { useLang } from "@/lib/i18n";
 
 function Wordmark() {
   return (
@@ -24,7 +25,7 @@ function Wordmark() {
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [lang, setLang] = useState<string>(site.languages[0]);
+  const { lang, setLang, t } = useLang();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -56,7 +57,7 @@ export function Nav() {
                 href={item.href}
                 className="link-underline text-sm font-medium text-ink-soft hover:text-ink"
               >
-                {item.label}
+                {t(item.label)}
               </Link>
             ))}
           </nav>
@@ -75,9 +76,11 @@ export function Nav() {
                 </button>
               ))}
             </div>
-            <Button href="#pricing" className="hidden sm:inline-flex">
-              Order cards <Arrow />
-            </Button>
+            <div className="hidden sm:block">
+              <Button href="#pricing">
+                {t(ui.nav.orderCards)} <Arrow />
+              </Button>
+            </div>
             <button
               onClick={() => setOpen((v) => !v)}
               aria-label="Menu"
@@ -111,12 +114,25 @@ export function Nav() {
                   onClick={() => setOpen(false)}
                   className="border-b border-line py-3 text-base font-medium text-ink last:border-0"
                 >
-                  {item.label}
+                  {t(item.label)}
                 </Link>
               ))}
             </nav>
-            <Button href="#pricing" className="mt-4 w-full" onClick={() => setOpen(false)}>
-              Order cards <Arrow />
+            <div className="mt-4 flex items-center justify-center rounded-full border border-line p-0.5 sm:hidden">
+              {site.languages.map((l) => (
+                <button
+                  key={l}
+                  onClick={() => setLang(l)}
+                  className={`flex-1 rounded-full px-2.5 py-2 text-sm font-semibold transition-colors ${
+                    lang === l ? "bg-ink text-paper" : "text-muted hover:text-ink"
+                  }`}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
+            <Button href="#pricing" className="mt-3 w-full" onClick={() => setOpen(false)}>
+              {t(ui.nav.orderCards)} <Arrow />
             </Button>
           </div>
         )}

@@ -1,16 +1,20 @@
-import { pricing } from "@/lib/site";
+"use client";
+
+import { pricing, ui } from "@/lib/site";
 import { SectionHeading, Button, Arrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
+import { useT } from "@/lib/i18n";
 
 export function Pricing() {
+  const t = useT();
   return (
     <section id="pricing" className="section-pad py-24 sm:py-32">
       <Reveal>
         <SectionHeading
           align="center"
-          eyebrow="Pricing"
-          title="Simple pricing, no surprises"
-          intro="Buy cards outright, or let us run the whole thing. Cancel monthly plans anytime — no lock-in beyond the first 3 months on Managed."
+          eyebrow={t(ui.pricing.eyebrow)}
+          title={t(ui.pricing.title)}
+          intro={t(ui.pricing.intro)}
         />
       </Reveal>
 
@@ -26,14 +30,14 @@ export function Pricing() {
             >
               {p.featured && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-semibold text-white">
-                  Best value
+                  {t(ui.pricing.badge)}
                 </span>
               )}
               <h3 className={`display text-2xl ${p.featured ? "text-paper" : "text-ink"}`}>
                 {p.name}
               </h3>
               <p className={`mt-1 text-sm ${p.featured ? "text-paper/60" : "text-muted"}`}>
-                {p.tagline}
+                {t(p.tagline)}
               </p>
 
               <div className="mt-6 flex items-baseline gap-1">
@@ -42,16 +46,16 @@ export function Pricing() {
                 </span>
                 <span className="display text-5xl">{p.price}</span>
                 <span className={`text-sm ${p.featured ? "text-paper/60" : "text-muted"}`}>
-                  /{p.unit.includes("month") ? "mo" : "card"}
+                  /{t(p.monthly ? ui.pricing.perMonth : ui.pricing.perCard)}
                 </span>
               </div>
               <p className={`mt-1 text-xs ${p.featured ? "text-paper/50" : "text-muted"}`}>
-                {p.unit}
+                {t(p.unit)}
               </p>
 
               <ul className="mt-8 flex-1 space-y-3">
-                {p.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-sm">
+                {p.features.map((f, fi) => (
+                  <li key={fi} className="flex items-start gap-3 text-sm">
                     <span
                       className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full ${
                         p.featured ? "bg-accent text-white" : "bg-accent/15 text-accent"
@@ -67,7 +71,7 @@ export function Pricing() {
                         />
                       </svg>
                     </span>
-                    <span className={p.featured ? "text-paper/85" : "text-ink-soft"}>{f}</span>
+                    <span className={p.featured ? "text-paper/85" : "text-ink-soft"}>{t(f)}</span>
                   </li>
                 ))}
               </ul>
@@ -77,7 +81,7 @@ export function Pricing() {
                 variant={p.featured ? "light" : "outline"}
                 className="mt-8 w-full"
               >
-                {p.cta} <Arrow />
+                {t(p.cta)} <Arrow />
               </Button>
             </div>
           </Reveal>
@@ -86,9 +90,9 @@ export function Pricing() {
 
       <Reveal delay={0.2}>
         <p className="mt-10 text-center text-sm text-muted">
-          Need 50+ cards or a multi-location rollout?{" "}
+          {t(ui.pricing.footnotePre)}{" "}
           <a href="#contact" className="link-underline font-semibold text-ink">
-            Talk to our team →
+            {t(ui.pricing.footnoteLink)}
           </a>
         </p>
       </Reveal>

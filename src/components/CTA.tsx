@@ -1,8 +1,12 @@
-import { site } from "@/lib/site";
+"use client";
+
+import { site, ui } from "@/lib/site";
 import { Button, Arrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
+import { useT } from "@/lib/i18n";
 
 export function CTA() {
+  const t = useT();
   return (
     <section id="contact" className="section-pad pb-24 sm:pb-32">
       <Reveal>
@@ -23,17 +27,16 @@ export function CTA() {
             }}
           />
           <div className="relative mx-auto max-w-2xl">
-            <span className="eyebrow text-accent">Get started</span>
+            <span className="eyebrow text-accent">{t(ui.cta.eyebrow)}</span>
             <h2 className="display mt-4 text-4xl text-paper sm:text-6xl">
-              Ready to turn taps into reviews?
+              {t(ui.cta.title)}
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-paper/70">
-              Tell us about your venue and we&apos;ll send a sample design within
-              24 hours. Cards ship across Switzerland in 3–5 days.
+              {t(ui.cta.body)}
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Button href={`mailto:${site.email}`} variant="light">
-                Order your cards <Arrow />
+                {t(ui.cta.primary)} <Arrow />
               </Button>
               <Button
                 href={`mailto:${site.email}`}

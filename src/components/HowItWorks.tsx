@@ -1,15 +1,19 @@
-import { steps } from "@/lib/site";
+"use client";
+
+import { steps, ui } from "@/lib/site";
 import { SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
+import { useT } from "@/lib/i18n";
 
 export function HowItWorks() {
+  const t = useT();
   return (
     <section id="how" className="section-pad py-24 sm:py-32">
       <Reveal>
         <SectionHeading
-          eyebrow="How it works"
-          title="From order to five stars in three steps"
-          intro="No technical setup. No app for your guests. Just a beautifully made card that does one thing brilliantly."
+          eyebrow={t(ui.how.eyebrow)}
+          title={t(ui.how.title)}
+          intro={t(ui.how.intro)}
         />
       </Reveal>
 
@@ -24,8 +28,8 @@ export function HowItWorks() {
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-ink text-sm font-bold text-paper">
                   {s.n}
                 </span>
-                <h3 className="display mt-6 text-2xl">{s.title}</h3>
-                <p className="mt-3 leading-relaxed text-muted">{s.body}</p>
+                <h3 className="display mt-6 text-2xl">{t(s.title)}</h3>
+                <p className="mt-3 leading-relaxed text-muted">{t(s.body)}</p>
               </div>
             </div>
           </Reveal>
