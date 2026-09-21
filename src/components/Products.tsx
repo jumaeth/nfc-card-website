@@ -1,9 +1,12 @@
 "use client";
 
-import { standProducts, reviewCards, ui } from "@/lib/site";
+import Image from "next/image";
+import { products, reviewCards, ui } from "@/lib/site";
 import type { L } from "@/lib/locale";
 import { SectionHeading, Button, Arrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
+import { CardPreview } from "@/components/editor/CardPreview";
+import { exampleCard } from "@/components/editor/types";
 import { useT } from "@/lib/i18n";
 
 function CardVisual({ accent }: { accent: boolean }) {
@@ -20,15 +23,14 @@ function CardVisual({ accent }: { accent: boolean }) {
             : "bg-gradient-to-br from-paper-2 to-paper-3"
         }`}
       />
-      <div
-        className="absolute right-5 top-5"
-        style={{ color: accent ? "#f0431f" : "#14120f" }}
-      >
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-          <path d="M9 8a5 5 0 0 1 0 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-          <path d="M12.5 5a9 9 0 0 1 0 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-          <circle cx="6" cy="12" r="1.5" fill="currentColor" />
-        </svg>
+      <div className="absolute right-5 top-5">
+        <Image
+          src={accent ? "/logo/taplino-mark-cream-on-ink.svg" : "/logo/taplino-mark.svg"}
+          alt=""
+          width={64}
+          height={64}
+          className="h-7 w-7"
+        />
       </div>
       <span
         className={`absolute bottom-5 left-5 display text-lg ${
@@ -63,7 +65,7 @@ function ProductGrid({ items, badge }: { items: Product[]; badge: L }) {
             }`}
           >
             {p.accent && (
-              <span className="absolute right-6 top-6 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-white">
+              <span className="absolute right-6 top-6 z-10 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-white">
                 {t(badge)}
               </span>
             )}
@@ -92,44 +94,55 @@ export function Products() {
   const t = useT();
   return (
     <>
-      {/* Flagship: the customisable NFC stand */}
+      {/* Our range: the customisable NFC cards */}
       <section id="products" className="section-pad py-24 sm:py-32">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <Reveal>
             <SectionHeading
-              eyebrow={t(ui.products.stand.eyebrow)}
-              title={t(ui.products.stand.title)}
-              intro={t(ui.products.stand.intro)}
+              eyebrow={t(ui.products.range.eyebrow)}
+              title={t(ui.products.range.title)}
+              intro={t(ui.products.range.intro)}
             />
           </Reveal>
           <Reveal delay={0.1}>
             <Button href="#pricing" variant="outline">
-              {t(ui.products.stand.cta)} <Arrow />
+              {t(ui.products.range.cta)} <Arrow />
             </Button>
           </Reveal>
         </div>
 
-        <ProductGrid items={standProducts} badge={ui.products.stand.badge} />
+        <ProductGrid items={products} badge={ui.products.range.badge} />
       </section>
 
-      {/* Separate line: plain Google Reviews cards */}
+      {/* Separate line: the Google review card — designed in our editor */}
       <section id="review-cards" className="section-pad py-24 sm:py-32">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+        <div className="grid items-center gap-12 md:grid-cols-2">
           <Reveal>
-            <SectionHeading
-              eyebrow={t(ui.products.review.eyebrow)}
-              title={t(ui.products.review.title)}
-              intro={t(ui.products.review.intro)}
-            />
+            <CardPreview config={exampleCard()} />
           </Reveal>
           <Reveal delay={0.1}>
-            <Button href="#pricing" variant="outline">
-              {t(ui.products.review.cta)} <Arrow />
-            </Button>
+            <div className="max-w-xl">
+              <SectionHeading
+                eyebrow={t(ui.products.review.eyebrow)}
+                title={t(ui.products.review.title)}
+                intro={t(ui.products.review.intro)}
+              />
+              <p className="mt-6 leading-relaxed text-ink-soft">
+                {t(reviewCards[0].blurb)}
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-6">
+                <p>
+                  <span className="text-xs text-muted">{t(ui.products.from)}</span>
+                  <br />
+                  <span className="display text-3xl">CHF {reviewCards[0].price}</span>
+                </p>
+                <Button href="/editor" variant="solid">
+                  {t(ui.products.review.editorCta)} <Arrow />
+                </Button>
+              </div>
+            </div>
           </Reveal>
         </div>
-
-        <ProductGrid items={reviewCards} badge={ui.products.review.badge} />
       </section>
     </>
   );

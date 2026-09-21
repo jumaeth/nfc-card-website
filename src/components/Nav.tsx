@@ -1,23 +1,103 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { nav, site, BRAND, ui } from "@/lib/site";
 import { Button, Arrow } from "@/components/ui";
-import { useLang } from "@/lib/i18n";
+import { useLang, useLocaleHref } from "@/lib/i18n";
+import type { Locale } from "@/lib/locale";
+
+const LANG_NAMES: Record<Locale, string> = {
+  EN: "English",
+  DE: "Deutsch",
+  FR: "Français",
+  IT: "Italiano",
+};
+
+function LanguageDropdown({ className = "" }: { className?: string }) {
+  const { lang, setLang } = useLang();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div ref={ref} className={`relative ${className}`}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className="flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-semibold text-ink transition-colors hover:bg-ink/5"
+      >
+        <span>{lang}</span>
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          className={`transition-transform ${open ? "rotate-180" : ""}`}
+        >
+          <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {open && (
+        <ul
+          role="listbox"
+          className="absolute right-0 z-50 mt-2 min-w-[9rem] overflow-hidden rounded-xl border border-line bg-paper p-1 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.35)]"
+        >
+          {site.languages.map((l) => (
+            <li key={l}>
+              <button
+                type="button"
+                role="option"
+                aria-selected={lang === l}
+                onClick={() => {
+                  setLang(l);
+                  setOpen(false);
+                }}
+                className={`flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
+                  lang === l ? "bg-ink text-paper" : "text-ink hover:bg-ink/5"
+                }`}
+              >
+                <span>{LANG_NAMES[l]}</span>
+                <span className={`text-xs font-semibold ${lang === l ? "text-paper/70" : "text-muted"}`}>{l}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 function Wordmark() {
+  const localize = useLocaleHref();
   return (
-    <Link href="#top" className="group flex items-center gap-2">
-      <span className="relative grid h-8 w-8 place-items-center rounded-lg bg-ink text-paper">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M9 8a5 5 0 0 1 0 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          <path d="M12.5 5a9 9 0 0 1 0 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          <circle cx="6" cy="12" r="1.6" fill="currentColor" />
-        </svg>
-        <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accent" />
-      </span>
-      <span className="display text-xl tracking-tight">{BRAND}</span>
+    <Link href={localize("#top")} className="group flex items-center">
+      <Image
+        src="/logo/taplino-lockup.svg"
+        alt={BRAND}
+        width={330}
+        height={80}
+        priority
+        className="h-8 w-auto"
+      />
     </Link>
   );
 }
@@ -25,7 +105,8 @@ function Wordmark() {
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { lang, setLang, t } = useLang();
+  const { t } = useLang();
+  const localize = useLocaleHref();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -54,7 +135,7 @@ export function Nav() {
             {nav.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={localize(item.href)}
                 className="link-underline text-sm font-medium text-ink-soft hover:text-ink"
               >
                 {t(item.label)}
@@ -63,21 +144,9 @@ export function Nav() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <div className="hidden items-center rounded-full border border-line p-0.5 sm:flex">
-              {site.languages.map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${
-                    lang === l ? "bg-ink text-paper" : "text-muted hover:text-ink"
-                  }`}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
+            <LanguageDropdown className="hidden sm:block" />
             <div className="hidden sm:block">
-              <Button href="#pricing">
+              <Button href="/editor">
                 {t(ui.nav.orderCards)} <Arrow />
               </Button>
             </div>
@@ -110,7 +179,7 @@ export function Nav() {
               {nav.map((item) => (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={localize(item.href)}
                   onClick={() => setOpen(false)}
                   className="border-b border-line py-3 text-base font-medium text-ink last:border-0"
                 >
@@ -118,20 +187,10 @@ export function Nav() {
                 </Link>
               ))}
             </nav>
-            <div className="mt-4 flex items-center justify-center rounded-full border border-line p-0.5 sm:hidden">
-              {site.languages.map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`flex-1 rounded-full px-2.5 py-2 text-sm font-semibold transition-colors ${
-                    lang === l ? "bg-ink text-paper" : "text-muted hover:text-ink"
-                  }`}
-                >
-                  {l}
-                </button>
-              ))}
+            <div className="mt-4 flex justify-center sm:hidden">
+              <LanguageDropdown />
             </div>
-            <Button href="#pricing" className="mt-3 w-full" onClick={() => setOpen(false)}>
+            <Button href="/editor" className="mt-3 w-full" onClick={() => setOpen(false)}>
               {t(ui.nav.orderCards)} <Arrow />
             </Button>
           </div>

@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
+import { useLocaleHref } from "@/lib/i18n";
 
 export function Button({
   children,
@@ -12,6 +15,7 @@ export function Button({
   href?: string;
   variant?: "solid" | "outline" | "ghost" | "light";
 } & Omit<ComponentProps<"a">, "href">) {
+  const localize = useLocaleHref();
   const base =
     "group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 will-change-transform";
   const styles = {
@@ -28,7 +32,7 @@ export function Button({
 
   if (href) {
     return (
-      <Link href={href} className={cls}>
+      <Link href={localize(href)} className={cls} {...props}>
         {children}
       </Link>
     );
@@ -75,7 +79,7 @@ export function SectionHeading({
 }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <div className="flex items-center gap-3">
+      <div className={`flex items-center gap-3 ${align === "center" ? "justify-center" : ""}`}>
         {align === "center" && <span className="hidden h-px w-8 bg-accent sm:block" />}
         <span className="eyebrow text-accent">{eyebrow}</span>
         {align === "center" && <span className="hidden h-px w-8 bg-accent sm:block" />}

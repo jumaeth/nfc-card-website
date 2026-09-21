@@ -18,7 +18,7 @@ export function Testimonials() {
 
       <div className="mt-16 grid gap-6 md:grid-cols-3">
         {testimonials.map((item, i) => (
-          <Reveal key={item.name} delay={i * 0.1}>
+          <Reveal key={i} delay={i * 0.1}>
             <figure className="flex h-full flex-col rounded-card border border-line bg-paper-2/40 p-8">
               <div className="flex gap-1 text-accent">
                 {Array.from({ length: 5 }).map((_, s) => (

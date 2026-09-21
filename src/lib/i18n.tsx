@@ -1,15 +1,15 @@
 "use client";
 
+import { createContext, useContext, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
-import { DEFAULT_LOCALE, isLocale, type L, type Locale } from "./locale";
+  isLocaleSlug,
+  localeToSlug,
+  type L,
+  type Locale,
+} from "./locale";
 
-const STORAGE_KEY = "taplino-lang";
+const COOKIE_KEY = "taplino-locale";
 
 type LangCtx = {
   lang: Locale;
@@ -21,28 +21,34 @@ type LangCtx = {
 
 const Ctx = createContext<LangCtx | null>(null);
 
-export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Locale>(DEFAULT_LOCALE);
+// The active locale is driven by the URL (/de, /fr, …) and passed in from the
+// server layout, so server-rendered HTML is already in the right language.
+// Switching languages navigates to the sibling locale path rather than toggling
+// client state, which keeps every URL independently indexable.
+export function LangProvider({
+  lang,
+  children,
+}: {
+  lang: Locale;
+  children: ReactNode;
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
 
-  // Restore a saved choice, else fall back to the browser language, once mounted.
-  useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (stored && isLocale(stored)) {
-      apply(stored);
-      return;
+  const setLang = (next: Locale) => {
+    const nextSlug = localeToSlug(next);
+    const segments = (pathname || "/").split("/");
+    if (isLocaleSlug(segments[1] ?? "")) {
+      segments[1] = nextSlug;
+    } else {
+      segments.splice(1, 0, nextSlug);
     }
-    const guess = window.navigator.language.slice(0, 2).toUpperCase();
-    if (isLocale(guess)) apply(guess);
-  }, []);
-
-  function apply(l: Locale) {
-    setLangState(l);
-    document.documentElement.lang = l.toLowerCase();
-  }
-
-  const setLang = (l: Locale) => {
-    window.localStorage.setItem(STORAGE_KEY, l);
-    apply(l);
+    const hash = typeof window !== "undefined" ? window.location.hash : "";
+    // Remember the choice so the root redirect (proxy) honours it next visit.
+    if (typeof document !== "undefined") {
+      document.cookie = `${COOKIE_KEY}=${nextSlug}; path=/; max-age=31536000; samesite=lax`;
+    }
+    router.push((segments.join("/") || `/${nextSlug}`) + hash);
   };
 
   const t = (v: L | string) => (typeof v === "string" ? v : v[lang]);
@@ -58,4 +64,21 @@ export function useLang() {
 
 export function useT() {
   return useLang().t;
+}
+
+// Prefix an internal href with the active locale. External/mailto/tel links pass
+// through. In-page hash links stay bare on the home page and resolve back to the
+// localized home elsewhere (e.g. "#pricing" → "/de#pricing" on the editor page).
+export function useLocaleHref() {
+  const { lang } = useLang();
+  const pathname = usePathname();
+  const slug = localeToSlug(lang);
+  const onHome = pathname === `/${slug}`;
+  return (href: string) => {
+    if (/^(https?:|mailto:|tel:|#)/.test(href)) {
+      return href.startsWith("#") ? (onHome ? href : `/${slug}${href}`) : href;
+    }
+    if (href.startsWith("/")) return `/${slug}${href}`;
+    return href;
+  };
 }

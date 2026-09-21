@@ -71,7 +71,7 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={0.24}>
-            <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-line pt-8">
+            <dl className="mt-12 grid max-w-md grid-cols-2 gap-6 border-t border-line pt-8">
               {heroStats.map((s) => (
                 <div key={s.value}>
                   <dt className="display text-3xl text-ink">{s.value}</dt>

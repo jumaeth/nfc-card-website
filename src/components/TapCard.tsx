@@ -5,13 +5,14 @@ import { AnimatePresence, motion } from "motion/react";
 import { destinations, ui } from "@/lib/site";
 import { useT } from "@/lib/i18n";
 
-function NfcWaves({ color = "currentColor" }: { color?: string }) {
+function TaplinoMark({ size = 38, accent = "#F24B1F" }: { size?: number; accent?: string }) {
   return (
-    <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-      <path d="M8.5 8.5a5 5 0 0 1 0 7" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M11.5 5.5a9 9 0 0 1 0 13" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
-      <path d="M14.5 2.5a13 13 0 0 1 0 19" stroke={color} strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="5.5" cy="12" r="1.6" fill={color} />
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none">
+      <g transform="rotate(-12 32 32)">
+        <rect x="6" y="24" width="38" height="24" rx="6" fill="#F6F3EE" />
+      </g>
+      <circle cx="52" cy="14" r="4" fill={accent} />
+      <circle cx="52" cy="14" r="9.5" stroke={accent} strokeWidth="3" fill="none" />
     </svg>
   );
 }
@@ -31,7 +32,7 @@ function Stars() {
 function Screen({ d }: { d: (typeof destinations)[number] }) {
   const t = useT();
   return (
-    <div className="flex h-full flex-col p-4">
+    <div className="flex h-full flex-col px-4 pb-4 pt-7">
       <div className="flex items-center gap-2">
         <span
           className="grid h-8 w-8 place-items-center rounded-full text-white"
@@ -148,17 +149,17 @@ export function TapCard() {
         whileHover={{ rotate: -4, y: -6 }}
         className="absolute bottom-2 left-0 h-[186px] w-[290px] rounded-[1.4rem] bg-gradient-to-br from-ink-2 to-ink p-5 text-paper shadow-[0_40px_80px_-24px_rgba(0,0,0,0.6)] sm:bottom-4 sm:left-2 sm:h-[210px] sm:w-[330px] sm:p-6"
       >
-        {/* ripples from NFC point */}
-        <div className="absolute right-6 top-6">
+        {/* Taplino logo with ripples radiating from its center */}
+        <div className="absolute right-6 top-6 grid place-items-center">
           {[0, 0.8, 1.6].map((delay) => (
             <span
               key={delay}
-              className="ripple-ring absolute right-2 top-2 h-8 w-8 rounded-full border"
+              className="ripple-ring absolute left-1/2 top-1/2 -ml-4 -mt-4 h-8 w-8 rounded-full border"
               style={{ borderColor: `${d.accent}`, animationDelay: `${delay}s` }}
             />
           ))}
-          <span className="relative text-accent" style={{ color: d.accent }}>
-            <NfcWaves color={d.accent} />
+          <span className="relative">
+            <TaplinoMark accent={d.accent} />
           </span>
         </div>
 
