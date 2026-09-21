@@ -24,13 +24,6 @@ export function Hero() {
       <div className="relative grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
         <div>
           <Reveal>
-            <div className="inline-flex items-center gap-2 rounded-full border border-line bg-paper/60 px-3 py-1.5 text-xs font-medium text-ink-soft backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-              {t(ui.hero.badge)}
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.05}>
             <h1 className="display mt-6 text-5xl sm:text-6xl lg:text-7xl">
               {t(ui.hero.headPre)}{" "}
               <span className="relative whitespace-nowrap text-accent">

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ui } from "@/lib/site";
 import { useT } from "@/lib/i18n";
-import { FONT_STACKS, type CardConfig, type HeaderShape } from "./types";
+import { CARD_TYPES, FINISHES, FONT_STACKS, type CardConfig, type HeaderShape } from "./types";
 
 const STAR =
   "M12 2l3 6.5 7 .8-5.2 4.7 1.4 6.9L12 17.6 5.4 20.9l1.4-6.9L1.6 9.3l7-.8L12 2z";
@@ -125,6 +125,129 @@ function QrCode({ value, fg, size = 46 }: { value: string; fg: string; size?: nu
   );
 }
 
+// A tiny contact line (icon + value) for the metal business card.
+function ContactLine({
+  icon,
+  value,
+  accent,
+  text,
+}: {
+  icon: "phone" | "mail" | "web";
+  value: string;
+  accent: string;
+  text: string;
+}) {
+  const paths: Record<typeof icon, string> = {
+    phone: "M6.5 3h2l1 3-1.5 1a8 8 0 0 0 4 4l1-1.5 3 1v2a1.5 1.5 0 0 1-1.6 1.5A11 11 0 0 1 5 4.6 1.5 1.5 0 0 1 6.5 3z",
+    mail: "M3 5.5h12v7H3v-7zm0 .5l6 4 6-4",
+    web: "M9 2.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM2.5 9h13M9 2.5c2 2 2 11 0 13M9 2.5c-2 2-2 11 0 13",
+  };
+  return (
+    <span className="flex items-center gap-1.5 text-[0.66rem] leading-none" style={{ color: text }}>
+      <svg width="11" height="11" viewBox="0 0 18 18" fill="none" aria-hidden className="shrink-0">
+        <path d={paths[icon]} stroke={accent} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span className="truncate">{value}</span>
+    </span>
+  );
+}
+
+// The premium metal business card face — brushed metal (silver or black). A real
+// business card: name, role, company and contact details, with an NFC glyph and
+// a very subtle Taplino imprint. Rendered when the "business" card type is chosen.
+function MetalCardFace({
+  config,
+  dark,
+  t,
+}: {
+  config: CardConfig;
+  dark: boolean; // black finish → light text; silver finish → dark text
+  t: ReturnType<typeof useT>;
+}) {
+  const cardFont = FONT_STACKS[config.font];
+  const serif = config.font === "serif";
+  const display = config.font === "display";
+  const ink = dark ? "#f4f1ea" : "#18171c";
+  const sub = dark ? "rgba(244,241,234,0.66)" : "rgba(24,23,28,0.6)";
+  const accent = config.accentColor;
+
+  const nameStyle = {
+    fontFamily: cardFont,
+    fontWeight: serif ? 500 : display ? 800 : 700,
+    fontStyle: serif ? ("italic" as const) : ("normal" as const),
+    letterSpacing: display ? "-0.02em" : "-0.01em",
+  };
+
+  const name = config.fullName || t(ui.editor.bizNameDefault);
+  const role = config.jobTitle;
+  const company = config.company;
+  const phone = config.phone || t(ui.editor.fieldPhonePh);
+  const email = config.email || t(ui.editor.fieldEmailPh);
+  const website = config.website || t(ui.editor.fieldWebsitePh);
+
+  return (
+    <div className="relative h-full">
+      {/* brushed-metal sheen */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(120deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0) 34%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.20) 100%)",
+        }}
+      />
+      <div
+        className="relative flex h-full flex-col justify-between p-[7%]"
+        style={{ color: ink, fontFamily: cardFont }}
+      >
+        {/* Top — logo / company + contactless glyph */}
+        <div className="flex items-start justify-between gap-3">
+          {config.logoDataUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={config.logoDataUrl}
+              alt="logo"
+              className="max-h-7 max-w-[120px] object-contain"
+              style={dark ? { filter: "brightness(0) invert(1)" } : undefined}
+            />
+          ) : company ? (
+            <span className="truncate text-[0.62rem] font-semibold uppercase tracking-[0.16em]" style={{ color: sub }}>
+              {company}
+            </span>
+          ) : (
+            <span />
+          )}
+          <Image
+            src={dark ? "/logo/taplino-mark-cream-on-ink.svg" : "/logo/taplino-mark.svg"}
+            alt="Taplino"
+            width={64}
+            height={64}
+            className="h-6 w-6 shrink-0 opacity-90"
+          />
+        </div>
+
+        {/* Middle — name, role, company */}
+        <div className="min-w-0">
+          <p className="truncate text-[1.35rem] leading-tight" style={nameStyle}>
+            {name}
+          </p>
+          {(role || (company && config.logoDataUrl)) && (
+            <p className="mt-0.5 truncate text-[0.75rem]" style={{ color: sub }}>
+              {[role, config.logoDataUrl ? company : ""].filter(Boolean).join(" · ")}
+            </p>
+          )}
+        </div>
+
+        {/* Bottom — contact details */}
+        <div className="flex min-w-0 flex-col gap-1">
+          <ContactLine icon="phone" value={phone} accent={accent} text={sub} />
+          <ContactLine icon="mail" value={email} accent={accent} text={sub} />
+          <ContactLine icon="web" value={website} accent={accent} text={sub} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // A faithful, live-updating recreation of the printed Google-review card.
 export function CardPreview({ config }: { config: CardConfig }) {
   const t = useT();
@@ -147,12 +270,33 @@ export function CardPreview({ config }: { config: CardConfig }) {
     .filter(Boolean);
   const listItems = items.length ? items : t(ui.editor.defaultListItems).split("\n");
 
+  // Each card type has its own physical format (aspect ratio + relative size).
+  const typeDef = CARD_TYPES.find((c) => c.key === config.cardType);
+  const metal = config.cardType === "business";
+  const finish = FINISHES.find((f) => f.key === config.finish) ?? FINISHES[0];
+  const scale = typeDef?.previewScale ?? 1;
+  const aspect = typeDef?.aspect ?? "5 / 6";
+
   return (
     <div className="w-full">
       <div
-        className="mx-auto aspect-[5/6] w-full max-w-[380px] overflow-hidden rounded-[1.75rem] border border-black/5 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.55)]"
-        style={{ backgroundColor: config.bodyColor }}
+        className={`mx-auto w-full ${metal ? "rounded-[1.65rem] p-[3px] shadow-[0_40px_80px_-40px_rgba(0,0,0,0.6)]" : ""}`}
+        style={{ maxWidth: 380 * scale, ...(metal ? { background: finish.ring } : {}) }}
       >
+      <div
+        className={`w-full overflow-hidden ${metal ? "rounded-[1.5rem]" : "rounded-[1.75rem]"} ${
+          metal ? "border" : "border border-black/5 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.55)]"
+        }`}
+        style={{
+          aspectRatio: aspect,
+          ...(metal
+            ? { background: finish.swatch, borderColor: finish.ring }
+            : { backgroundColor: config.bodyColor }),
+        }}
+      >
+        {metal ? (
+          <MetalCardFace config={config} dark={config.finish === "black"} t={t} />
+        ) : (
         <div className="flex h-full flex-col p-4">
           {/* Header band */}
           <div>
@@ -319,11 +463,15 @@ export function CardPreview({ config }: { config: CardConfig }) {
             </div>
           </div>
         </div>
+        )}
+      </div>
       </div>
 
       <p className="mt-4 text-center text-xs text-muted">
         {config.category ? `${config.category} · ` : ""}
-        {t(ui.editor.cardSize).replace(/^.*·\s*/, "")}
+        {typeDef
+          ? `${t(typeDef.material)}${metal ? ` · ${t(finish.label)}` : ""} · ${t(typeDef.sizeLabel)}`
+          : ""}
       </p>
     </div>
   );

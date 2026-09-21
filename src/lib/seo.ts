@@ -102,16 +102,16 @@ export const seoCopy: Record<"home" | "editor", { title: L; description: L }> = 
     // Home sits in the same segment as the title template, so it isn't wrapped;
     // it leads with the brand explicitly. Sub-pages get "%s · Taplino".
     title: l(
-      "Taplino — NFC cards for reviews, menus & links",
-      "Taplino — NFC-Karten für Bewertungen, Menüs & Links",
-      "Taplino — cartes NFC pour avis, menus et liens",
-      "Taplino — carte NFC per recensioni, menu e link",
+      "Taplino: NFC cards for reviews, menus & links",
+      "Taplino: NFC-Karten für Bewertungen, Menüs & Links",
+      "Taplino: cartes NFC pour avis, menus et liens",
+      "Taplino: carte NFC per recensioni, menu e link",
     ),
     description: l(
-      "Premium customisable NFC cards from a Swiss company. Customers tap their phone — no app — to open your Google reviews, digital menu, links, socials or booking.",
-      "Hochwertige, anpassbare NFC-Karten von einem Schweizer Unternehmen. Kunden tippen ihr Handy an — ohne App — und öffnen Google-Bewertungen, das digitale Menü, Links, Social Media oder die Buchung.",
-      "Cartes NFC premium et personnalisables d'une entreprise suisse. Les clients approchent leur téléphone — sans appli — pour ouvrir vos avis Google, votre menu, vos liens, réseaux ou réservations.",
-      "Carte NFC premium e personalizzabili da un'azienda svizzera. I clienti avvicinano il telefono — senza app — per aprire recensioni Google, menu digitale, link, social o prenotazioni.",
+      "Premium customisable NFC cards from a Swiss company. Customers tap their phone, no app needed, to open your Google reviews, digital menu, links, socials or booking.",
+      "Hochwertige, anpassbare NFC-Karten von einem Schweizer Unternehmen. Kunden tippen ihr Handy an, ohne App, und öffnen Google-Bewertungen, das digitale Menü, Links, Social Media oder die Buchung.",
+      "Cartes NFC premium et personnalisables d'une entreprise suisse. Les clients approchent leur téléphone, sans appli, pour ouvrir vos avis Google, votre menu, vos liens, réseaux ou réservations.",
+      "Carte NFC premium e personalizzabili da un'azienda svizzera. I clienti avvicinano il telefono, senza app, per aprire recensioni Google, menu digitale, link, social o prenotazioni.",
     ),
   },
   editor: {

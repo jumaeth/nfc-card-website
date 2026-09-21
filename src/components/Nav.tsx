@@ -89,15 +89,18 @@ function LanguageDropdown({ className = "" }: { className?: string }) {
 function Wordmark() {
   const localize = useLocaleHref();
   return (
-    <Link href={localize("#top")} className="group flex items-center">
+    <Link href={localize("#top")} className="group flex items-center gap-2.5">
       <Image
-        src="/logo/taplino-lockup.svg"
+        src="/logo/taplino-mark.svg"
         alt={BRAND}
-        width={330}
-        height={80}
+        width={64}
+        height={64}
         priority
-        className="h-8 w-auto"
+        className="h-8 w-8"
       />
+      <span className="font-display text-2xl font-bold tracking-tight text-ink">
+        {BRAND}
+      </span>
     </Link>
   );
 }

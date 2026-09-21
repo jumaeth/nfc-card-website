@@ -21,6 +21,7 @@ export function Logos() {
                 alt={item.name}
                 width={96}
                 height={96}
+                priority={i === 0}
                 className="h-24 w-24 shrink-0 rounded-full object-contain transition-transform hover:scale-105"
               />
             ) : (

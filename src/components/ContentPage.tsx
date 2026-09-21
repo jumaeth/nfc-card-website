@@ -22,6 +22,9 @@ export function ContentPage({ data }: { data: ContentPageData }) {
               <span className="eyebrow text-accent">{t(data.eyebrow)}</span>
               <h1 className="display mt-4 text-4xl text-ink sm:text-5xl">{t(data.title)}</h1>
               <p className="mt-5 text-lg leading-relaxed text-muted">{t(data.intro)}</p>
+              {data.updated && (
+                <p className="mt-4 text-sm text-muted/80">{t(data.updated)}</p>
+              )}
             </Reveal>
 
             <div className="mt-12 space-y-10">

@@ -7,6 +7,7 @@ import { LangProvider } from "@/lib/i18n";
 import { LOCALE_SLUGS, localeToSlug, slugToLocale } from "@/lib/locale";
 import { SITE_NAME, SITE_URL, seoCopy } from "@/lib/seo";
 import { SiteJsonLd } from "@/components/JsonLd";
+import { CookieBanner } from "@/components/CookieBanner";
 
 const display = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -66,7 +67,10 @@ export default async function RootLayout({
     >
       <body className="grain min-h-full flex flex-col">
         <SiteJsonLd locale={loc} />
-        <LangProvider lang={loc}>{children}</LangProvider>
+        <LangProvider lang={loc}>
+          {children}
+          <CookieBanner />
+        </LangProvider>
         <Analytics />
       </body>
     </html>

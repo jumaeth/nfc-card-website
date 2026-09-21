@@ -1,10 +1,10 @@
 # Taplino
 
 > Taplino is a Swiss company selling premium, fully customisable NFC cards for
-> businesses. A customer taps their phone on the card — no app, no scanning — and
+> businesses. A customer taps their phone on the card (no app, no scanning) and
 > instantly opens whatever the business chooses: Google reviews, a digital menu,
 > a link hub, socials, WiFi or booking. Cards are personalised, encoded and
-> quality-checked in Switzerland and ship in 3–5 days.
+> quality-checked in Switzerland and ship in 3-5 days.
 
 Website: https://taplino.ch
 Contact: hello@taplino.ch
@@ -15,26 +15,26 @@ Compatibility: iPhone XR (2018) and newer, and all NFC-enabled Android phones. E
 ## What Taplino does
 
 - Turns one tap into more Google reviews, a live multilingual menu, or an all-in-one link hub.
-- No app required for the business or its customers — the destination opens in the phone browser.
+- No app required for the business or its customers. The destination opens in the phone browser.
 - Destinations are re-pointable from a dashboard (Pro/Managed plans) without reordering cards.
 - Built for restaurants, cafés, shops, salons, fitness studios and any local venue.
 
 ## Products (prices in CHF)
 
-- NFC Business Card — from CHF 89, anodised aluminium. Shares contact details, socials and links with one tap, customised to your brand.
-- Menu Card — from CHF 39, recycled PVC. Opens a live digital menu in any language; update prices/specials from your phone, never reprint.
-- Link Card — from CHF 29, matte PVC. One tap to a link hub with Instagram, WiFi, booking and webshop.
-- Google Review Card — from CHF 50, recycled PVC. Credit-card sized; one tap opens your Google review form.
+- NFC Business Card: from CHF 89, anodised aluminium. Shares contact details, socials and links with one tap, customised to your brand.
+- Menu Card: from CHF 39, recycled PVC. Opens a live digital menu in any language; update prices/specials from your phone, never reprint.
+- Link Card: from CHF 29, matte PVC. One tap to a link hub with Instagram, WiFi, booking and webshop.
+- Google Review Card: from CHF 50, recycled PVC. Credit-card sized; one tap opens your Google review form.
 
 ## Pricing plans
 
-- Starter — CHF 50 one-time per card. Buy cards, manage them yourself; one destination per card, free backup QR, email support.
-- Pro — CHF 39/month. Unlimited destination changes, analytics & review insights, multiple locations, priority support.
-- Managed — CHF 250/month. We run your menu and reviews: 10 personalised cards, menu translation & updates, replies to every Google review, dedicated account manager.
+- Starter: CHF 50 one-time per card. Buy cards, manage them yourself; one destination per card, free backup QR, email support.
+- Pro: CHF 39/month. Unlimited destination changes, analytics & review insights, multiple locations, priority support.
+- Managed: CHF 250/month. We run your menu and reviews: 10 personalised cards, menu translation & updates, replies to every Google review, dedicated account manager.
 
 ## Use cases
 
-- Google Reviews: a direct link to your review form (no searching) with smart routing to catch feedback before it goes public. Restaurants report roughly 3–5× more reviews in the first month.
+- Google Reviews: a direct link to your review form (no searching) with smart routing to catch feedback before it goes public. Restaurants report roughly 3-5x more reviews in the first month.
 - Digital Menu: update prices or add a special from your phone; it goes live instantly on every card. Multilingual (EN/DE/FR/IT), with allergens, photos and daily specials.
 - Link Hub: Instagram, TikTok, newsletter sign-up, one-tap WiFi connect, table booking, loyalty and shop links.
 
@@ -42,7 +42,7 @@ Compatibility: iPhone XR (2018) and newer, and all NFC-enabled Android phones. E
 
 - Swiss company; cards designed, encoded and quality-checked in Switzerland.
 - Waterproof and durable, built for daily use in busy venues.
-- Free shipping in Switzerland, delivery in 3–5 days.
+- Free shipping in Switzerland, delivery in 3-5 days.
 - Live dashboard to track taps, reviews and menu views.
 
 ## Localized pages

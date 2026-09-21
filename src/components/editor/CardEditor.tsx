@@ -2,21 +2,40 @@
 
 import { useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
-import { ui, site, reviewCards } from "@/lib/site";
+import { ui, site } from "@/lib/site";
 import { useT } from "@/lib/i18n";
 import { Button, Arrow } from "@/components/ui";
 import { CardPreview } from "./CardPreview";
 import {
+  CARD_TYPES,
+  FINISHES,
   PRESETS,
   exampleCard,
   type CardConfig,
   type CardLayout,
+  type CardType,
   type FontStyle,
   type HeaderShape,
   type Preset,
 } from "./types";
 
-const UNIT_PRICE = Number(reviewCards[0].price); // CHF per card
+// Volume pricing — the more cards ordered, the bigger the per-card discount.
+// Tiers are checked high-to-low; the first one the quantity clears applies.
+const VOLUME_TIERS = [
+  { min: 200, off: 0.2 },
+  { min: 100, off: 0.15 },
+  { min: 50, off: 0.1 },
+  { min: 20, off: 0.07 },
+  { min: 10, off: 0.05 },
+  { min: 5, off: 0.03 },
+];
+
+function tierFor(qty: number) {
+  return VOLUME_TIERS.find((tier) => qty >= tier.min);
+}
+
+const chf = (n: number) =>
+  n.toLocaleString("de-CH", { maximumFractionDigits: 2 });
 
 function initialConfig(): CardConfig {
   return exampleCard();
@@ -195,8 +214,23 @@ export function CardEditor() {
   const [config, setConfig] = useState<CardConfig>(initialConfig);
   const [activePreset, setActivePreset] = useState<string>(PRESETS[0].key);
   const [qty, setQty] = useState(50);
+  const [step, setStep] = useState(0);
   const [ordered, setOrdered] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  const activeType = CARD_TYPES.find((c) => c.key === config.cardType) ?? CARD_TYPES[1];
+  const isBusiness = config.cardType === "business";
+  const basePrice = activeType.price;
+
+  // Wizard steps. Each step reveals a slice of the design controls; the live
+  // preview and order box stay pinned in the sidebar throughout.
+  const STEPS = [
+    ui.editor.stepCard,
+    ui.editor.stepTemplate,
+    ui.editor.stepDesign,
+    ui.editor.stepContent,
+  ];
+  const lastStep = STEPS.length - 1;
 
   const set = <K extends keyof CardConfig>(key: K, val: CardConfig[K]) =>
     setConfig((c) => ({ ...c, [key]: val }));
@@ -240,54 +274,86 @@ export function CardEditor() {
     setConfig(initialConfig());
     setActivePreset(PRESETS[0].key);
     setQty(50);
+    setStep(0);
     if (fileRef.current) fileRef.current.value = "";
   };
 
-  const total = (qty * UNIT_PRICE).toLocaleString("de-CH");
+  const tier = tierFor(qty);
+  const off = tier?.off ?? 0;
+  const unit = basePrice * (1 - off);
+  const subtotalNum = qty * basePrice;
+  const totalNum = qty * unit;
+  const savingsNum = subtotalNum - totalNum;
+  const total = chf(totalNum);
 
   const placeOrder = () => {
+    if (!activeType.available) return;
     const lines = [
-      "New Google-review card order",
+      "New card order",
       "",
-      `Template: ${presetLabel[activePreset as Preset["key"]] ?? activePreset}`,
-      `Layout: ${config.layout}`,
-      `Category: ${config.category || "—"}`,
-      `Headline: ${config.headline || t(ui.editor.defaultHeadline)}`,
-      ...(config.layout === "logo"
+      `Card: ${t(activeType.name)}, ${t(activeType.material)}`,
+      ...(isBusiness ? [`Finish: ${config.finish}`] : []),
+      "",
+      ...(isBusiness
         ? [
-            `Logo label: ${config.logoText || t(ui.editor.defaultLogoText)}`,
-            `Logo caption: ${config.logoHint || t(ui.editor.defaultLogoHint)}`,
+            "Contact details",
+            `  Name: ${config.fullName || "-"}`,
+            `  Job title: ${config.jobTitle || "-"}`,
+            `  Company: ${config.company || "-"}`,
+            `  Phone: ${config.phone || "-"}`,
+            `  Email: ${config.email || "-"}`,
+            `  Website: ${config.website || "-"}`,
+            `  Logo file: ${config.logoName ?? "none uploaded, will send separately"}`,
+            `  Font: ${config.font}`,
+            `  Accent: ${config.accentColor}`,
           ]
-        : []),
-      ...(config.layout === "text"
-        ? [`Message: ${config.bodyText || t(ui.editor.defaultBodyText)}`]
-        : []),
-      ...(config.layout === "list"
-        ? [
-            `List title: ${config.listTitle || t(ui.editor.defaultListTitle)}`,
-            `List items: ${(config.listItems || t(ui.editor.defaultListItems)).split("\n").filter(Boolean).join(", ")}`,
-          ]
-        : []),
-      `Logo file: ${config.logoName ?? "none uploaded — will send separately"}`,
-      `Font: ${config.font}`,
-      `Header edge: ${config.headerShape}`,
-      `Star rating: ${config.showStars ? "shown" : "hidden"}`,
-      `Backup QR code: ${config.showQr ? "yes" : "no"}`,
-      "",
-      "Colours",
-      `  Header: ${config.headerColor}`,
-      `  Header text: ${config.headerTextColor}`,
-      `  Background: ${config.bodyColor}`,
-      `  Stars: ${config.starColor}`,
-      `  Accent: ${config.accentColor}`,
-      "",
-      `Review link: ${config.reviewUrl || "—"}`,
+        : [
+            `Template: ${presetLabel[activePreset as Preset["key"]] ?? activePreset}`,
+            `Layout: ${config.layout}`,
+            `Category: ${config.category || "-"}`,
+            `Headline: ${config.headline || t(ui.editor.defaultHeadline)}`,
+            ...(config.layout === "logo"
+              ? [
+                  `Logo label: ${config.logoText || t(ui.editor.defaultLogoText)}`,
+                  `Logo caption: ${config.logoHint || t(ui.editor.defaultLogoHint)}`,
+                ]
+              : []),
+            ...(config.layout === "text"
+              ? [`Message: ${config.bodyText || t(ui.editor.defaultBodyText)}`]
+              : []),
+            ...(config.layout === "list"
+              ? [
+                  `List title: ${config.listTitle || t(ui.editor.defaultListTitle)}`,
+                  `List items: ${(config.listItems || t(ui.editor.defaultListItems)).split("\n").filter(Boolean).join(", ")}`,
+                ]
+              : []),
+            `Logo file: ${config.logoName ?? "none uploaded, will send separately"}`,
+            `Font: ${config.font}`,
+            `Header edge: ${config.headerShape}`,
+            `Star rating: ${config.showStars ? "shown" : "hidden"}`,
+            `Backup QR code: ${config.showQr ? "yes" : "no"}`,
+            "",
+            "Colours",
+            `  Header: ${config.headerColor}`,
+            `  Header text: ${config.headerTextColor}`,
+            `  Background: ${config.bodyColor}`,
+            `  Stars: ${config.starColor}`,
+            `  Accent: ${config.accentColor}`,
+            "",
+            `Review link: ${config.reviewUrl || "-"}`,
+          ]),
       "",
       `Quantity: ${qty}`,
+      `Unit price: CHF ${chf(unit)}${off ? ` (−${Math.round(off * 100)}% volume discount)` : ""}`,
+      ...(off
+        ? [`Subtotal: CHF ${chf(subtotalNum)}`, `Discount: −CHF ${chf(savingsNum)}`]
+        : []),
       `Total: CHF ${total}`,
     ].join("\n");
 
-    const subject = `Card order — ${config.category || "Custom"} (${qty} pcs)`;
+    const subject = `Card order: ${
+      isBusiness ? config.company || config.fullName || "Business card" : config.category || "Custom"
+    } (${qty} pcs)`;
     window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(lines)}`;
@@ -298,7 +364,101 @@ export function CardEditor() {
     <div className="section-pad grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)]">
       {/* ── Controls ─────────────────────────────────────────────── */}
       <div className="order-2 lg:order-1">
-        {/* 1. Template */}
+        {/* Wizard progress */}
+        <div className="mb-8">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-xs font-semibold uppercase tracking-wide text-muted">
+              {t(ui.editor.stepWord)} {step + 1}/{STEPS.length}
+            </span>
+            <span className="text-xs font-semibold text-ink">{t(STEPS[step])}</span>
+          </div>
+          <div className="flex gap-1.5">
+            {STEPS.map((s, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => i < step && setStep(i)}
+                disabled={i > step}
+                aria-label={t(s)}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  i <= step ? "bg-accent" : "bg-line"
+                } ${i < step ? "cursor-pointer" : "cursor-default"}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Step 1 — card type */}
+        {step === 0 && (
+          <Section n={1} title={t(ui.editor.stepCard)}>
+            <p className="mb-4 text-sm text-muted">{t(ui.editor.cardTypeHint)}</p>
+            <div className="space-y-3">
+              {CARD_TYPES.map((c) => {
+                const active = config.cardType === c.key;
+                return (
+                  <button
+                    key={c.key}
+                    type="button"
+                    onClick={() => set("cardType", c.key as CardType)}
+                    className={`flex w-full items-center justify-between gap-4 rounded-2xl border p-4 text-left transition-all ${
+                      active ? "border-ink ring-2 ring-ink/10" : "border-line hover:border-ink/40"
+                    }`}
+                  >
+                    <span className="min-w-0">
+                      <span className="flex flex-wrap items-center gap-2 text-sm font-semibold text-ink">
+                        {t(c.name)}
+                        {!c.available && (
+                          <span className="rounded-full border border-line bg-paper px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wide text-muted">
+                            {t(ui.editor.notAvailable)}
+                          </span>
+                        )}
+                      </span>
+                      <span className="mt-0.5 block text-xs leading-snug text-muted">{t(c.tagline)}</span>
+                      <span className="mt-1 block text-xs font-medium text-muted">{t(c.material)}</span>
+                    </span>
+                    <span className="shrink-0 text-right">
+                      <span className="block text-[0.7rem] text-muted">{t(ui.products.from)}</span>
+                      <span className="display text-xl text-ink">CHF {c.price}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Finish picker — metal card only */}
+            {activeType.finishes && (
+              <div className="mt-5">
+                <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted">
+                  {t(ui.editor.finishLabel)}
+                </span>
+                <div className="flex gap-2">
+                  {FINISHES.filter((f) => activeType.finishes!.includes(f.key)).map((f) => {
+                    const active = config.finish === f.key;
+                    return (
+                      <button
+                        key={f.key}
+                        type="button"
+                        onClick={() => set("finish", f.key)}
+                        className={`flex items-center gap-2.5 rounded-xl border px-3 py-2 transition-all ${
+                          active ? "border-ink ring-2 ring-ink/10" : "border-line hover:border-ink/40"
+                        }`}
+                      >
+                        <span
+                          className="h-6 w-6 rounded-full border border-black/10"
+                          style={{ background: f.swatch }}
+                        />
+                        <span className="text-sm font-semibold text-ink">{t(f.label)}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </Section>
+        )}
+
+        {/* Step 2 — template */}
+        {step === 1 && (
         <Section n={1} title={t(ui.editor.stepTemplate)}>
           <p className="mb-4 text-sm text-muted">{t(ui.editor.templateHint)}</p>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
@@ -342,12 +502,17 @@ export function CardEditor() {
             })}
           </div>
         </Section>
+        )}
 
-        {/* 2. Layout & style */}
-        <Section n={2} title={t(ui.editor.stepStyle)}>
+        {/* Step 3 — design: layout, style, logo & colours */}
+        {step === 2 && (
+        <>
+        <Section n={1} title={t(ui.editor.stepStyle)}>
           <p className="mb-4 text-sm text-muted">{t(ui.editor.styleHint)}</p>
 
-          {/* Layout picker */}
+          {/* Layout picker — review/menu cards only */}
+          {!isBusiness && (
+          <>
           <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted">
             {t(ui.editor.layoutLabel)}
           </span>
@@ -376,6 +541,8 @@ export function CardEditor() {
               );
             })}
           </div>
+          </>
+          )}
 
           <div className="flex flex-wrap gap-x-8 gap-y-5">
             <Segmented<FontStyle>
@@ -389,6 +556,7 @@ export function CardEditor() {
                 { value: "display", label: t(ui.editor.fontDisplay) },
               ]}
             />
+            {!isBusiness && (
             <Segmented<HeaderShape>
               label={t(ui.editor.headerEdge)}
               value={config.headerShape}
@@ -400,8 +568,10 @@ export function CardEditor() {
                 { value: "scallop", label: t(ui.editor.edgeScallop) },
               ]}
             />
+            )}
           </div>
 
+          {!isBusiness && (
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <Toggle
               label={t(ui.editor.showStars)}
@@ -416,10 +586,11 @@ export function CardEditor() {
               onChange={(v) => set("showQr", v)}
             />
           </div>
+          )}
         </Section>
 
         {/* 3. Logo */}
-        <Section n={3} title={t(ui.editor.stepLogo)}>
+        <Section n={2} title={t(ui.editor.stepLogo)}>
           <input
             ref={fileRef}
             type="file"
@@ -474,18 +645,94 @@ export function CardEditor() {
         </Section>
 
         {/* 4. Colours */}
-        <Section n={4} title={t(ui.editor.stepColors)}>
+        <Section n={3} title={t(ui.editor.stepColors)}>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-            <ColorField label={t(ui.editor.colorHeader)} value={config.headerColor} onChange={(v) => set("headerColor", v)} />
-            <ColorField label={t(ui.editor.colorHeaderText)} value={config.headerTextColor} onChange={(v) => set("headerTextColor", v)} />
-            <ColorField label={t(ui.editor.colorBody)} value={config.bodyColor} onChange={(v) => set("bodyColor", v)} />
-            <ColorField label={t(ui.editor.colorStars)} value={config.starColor} onChange={(v) => set("starColor", v)} />
+            {!isBusiness && (
+              <>
+                <ColorField label={t(ui.editor.colorHeader)} value={config.headerColor} onChange={(v) => set("headerColor", v)} />
+                <ColorField label={t(ui.editor.colorHeaderText)} value={config.headerTextColor} onChange={(v) => set("headerTextColor", v)} />
+                <ColorField label={t(ui.editor.colorBody)} value={config.bodyColor} onChange={(v) => set("bodyColor", v)} />
+                <ColorField label={t(ui.editor.colorStars)} value={config.starColor} onChange={(v) => set("starColor", v)} />
+              </>
+            )}
             <ColorField label={t(ui.editor.colorAccent)} value={config.accentColor} onChange={(v) => set("accentColor", v)} />
           </div>
         </Section>
 
-        {/* 5. Content */}
-        <Section n={5} title={t(ui.editor.stepContent)}>
+        </>
+        )}
+
+        {/* Step 4 — content & destination */}
+        {step === 3 && (
+        <>
+        <Section n={1} title={isBusiness ? t(ui.editor.stepDetails) : t(ui.editor.stepContent)}>
+          {isBusiness ? (
+          <>
+            <p className="mb-4 text-sm text-muted">{t(ui.editor.detailsHint)}</p>
+            <div className="space-y-4">
+              <Field label={t(ui.editor.fieldName)}>
+                <input
+                  type="text"
+                  className={inputCls}
+                  value={config.fullName}
+                  placeholder={t(ui.editor.fieldNamePh)}
+                  onChange={(e) => set("fullName", e.target.value)}
+                />
+              </Field>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label={t(ui.editor.fieldRole)}>
+                  <input
+                    type="text"
+                    className={inputCls}
+                    value={config.jobTitle}
+                    placeholder={t(ui.editor.fieldRolePh)}
+                    onChange={(e) => set("jobTitle", e.target.value)}
+                  />
+                </Field>
+                <Field label={t(ui.editor.fieldCompany)}>
+                  <input
+                    type="text"
+                    className={inputCls}
+                    value={config.company}
+                    placeholder={t(ui.editor.fieldCompanyPh)}
+                    onChange={(e) => set("company", e.target.value)}
+                  />
+                </Field>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field label={t(ui.editor.fieldPhone)}>
+                  <input
+                    type="tel"
+                    inputMode="tel"
+                    className={inputCls}
+                    value={config.phone}
+                    placeholder={t(ui.editor.fieldPhonePh)}
+                    onChange={(e) => set("phone", e.target.value)}
+                  />
+                </Field>
+                <Field label={t(ui.editor.fieldEmail)}>
+                  <input
+                    type="email"
+                    inputMode="email"
+                    className={inputCls}
+                    value={config.email}
+                    placeholder={t(ui.editor.fieldEmailPh)}
+                    onChange={(e) => set("email", e.target.value)}
+                  />
+                </Field>
+              </div>
+              <Field label={t(ui.editor.fieldWebsite)}>
+                <input
+                  type="text"
+                  className={inputCls}
+                  value={config.website}
+                  placeholder={t(ui.editor.fieldWebsitePh)}
+                  onChange={(e) => set("website", e.target.value)}
+                />
+              </Field>
+            </div>
+          </>
+          ) : (
           <div className="space-y-4">
             <Field label={t(ui.editor.fieldHeadline)}>
               <input
@@ -566,10 +813,12 @@ export function CardEditor() {
               />
             </Field>
           </div>
+          )}
         </Section>
 
-        {/* 6. Destination */}
-        <Section n={6} title={t(ui.editor.stepLink)}>
+        {/* 6. Destination — review/menu cards only */}
+        {!isBusiness && (
+        <Section n={2} title={t(ui.editor.stepLink)}>
           <Field label={t(ui.editor.reviewUrl)}>
             <input
               type="url"
@@ -582,14 +831,43 @@ export function CardEditor() {
           </Field>
           <p className="mt-2 text-xs leading-relaxed text-muted">{t(ui.editor.reviewUrlHint)}</p>
         </Section>
+        )}
+        </>
+        )}
 
-        <button
-          type="button"
-          onClick={reset}
-          className="mt-2 text-sm font-semibold text-muted hover:text-accent"
-        >
-          ↺ {t(ui.editor.resetDesign)}
-        </button>
+        {/* Step navigation */}
+        <div className="mt-8 border-t border-line pt-6">
+          <div className="flex items-center justify-between gap-3">
+            <button
+              type="button"
+              onClick={() => setStep((s) => Math.max(0, s - 1))}
+              disabled={step === 0}
+              className="text-sm font-semibold text-muted transition-colors hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              ← {t(ui.editor.back)}
+            </button>
+            {!activeType.available ? (
+              <span className="inline-flex items-center rounded-full border border-line px-6 py-3 text-sm font-semibold text-muted">
+                {t(ui.editor.notAvailable)}
+              </span>
+            ) : step < lastStep ? (
+              <Button onClick={() => setStep((s) => Math.min(lastStep, s + 1))}>
+                {t(ui.editor.continue)} <Arrow />
+              </Button>
+            ) : (
+              <Button onClick={placeOrder}>
+                {t(ui.editor.placeOrder)} <Arrow />
+              </Button>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={reset}
+            className="mx-auto mt-4 block text-sm font-semibold text-muted transition-colors hover:text-accent"
+          >
+            ↺ {t(ui.editor.resetDesign)}
+          </button>
+        </div>
       </div>
 
       {/* ── Preview + order (sticky) ─────────────────────────────── */}
@@ -604,7 +882,7 @@ export function CardEditor() {
               <div className="flex items-center gap-3">
                 <button
                   type="button"
-                  onClick={() => setQty((q) => Math.max(1, q - 10))}
+                  onClick={() => setQty((q) => Math.max(1, q - 1))}
                   className="grid h-8 w-8 place-items-center rounded-full border border-line text-lg leading-none text-ink hover:border-ink"
                   aria-label="−"
                 >
@@ -619,7 +897,7 @@ export function CardEditor() {
                 />
                 <button
                   type="button"
-                  onClick={() => setQty((q) => q + 10)}
+                  onClick={() => setQty((q) => q + 1)}
                   className="grid h-8 w-8 place-items-center rounded-full border border-line text-lg leading-none text-ink hover:border-ink"
                   aria-label="+"
                 >
@@ -628,16 +906,67 @@ export function CardEditor() {
               </div>
             </div>
 
+            {/* Volume discount tiers */}
+            <div className="mt-4 rounded-xl border border-line bg-paper/60 p-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs font-semibold uppercase tracking-wide text-muted">
+                  {t(ui.editor.volumeDiscount)}
+                </span>
+                {off > 0 && (
+                  <span className="rounded-full bg-accent px-2 py-0.5 text-[0.7rem] font-bold text-white">
+                    −{Math.round(off * 100)}%
+                  </span>
+                )}
+              </div>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {[...VOLUME_TIERS].reverse().map((tt) => {
+                  const reached = qty >= tt.min;
+                  const current = tier?.min === tt.min;
+                  return (
+                    <span
+                      key={tt.min}
+                      className={`rounded-full border px-2 py-0.5 text-[0.7rem] font-semibold transition-colors ${
+                        current
+                          ? "border-accent bg-accent/10 text-accent"
+                          : reached
+                            ? "border-ink/30 text-ink-soft"
+                            : "border-line text-muted"
+                      }`}
+                    >
+                      {tt.min}+ · −{Math.round(tt.off * 100)}%
+                    </span>
+                  );
+                })}
+              </div>
+              {off === 0 && (
+                <p className="mt-2 text-[0.7rem] leading-snug text-muted">
+                  {t(ui.editor.volumeHint)}
+                </p>
+              )}
+            </div>
+
             <div className="mt-4 flex items-end justify-between border-t border-line pt-4">
               <div>
                 <span className="text-xs text-muted">
-                  {t(ui.editor.total)} · CHF {UNIT_PRICE} {t(ui.editor.unitPrice)}
+                  {t(ui.editor.total)} · CHF {chf(unit)} {t(ui.editor.unitPrice)}
                 </span>
                 <p className="display text-3xl text-ink">CHF {total}</p>
+                {off > 0 && (
+                  <p className="mt-0.5 text-xs font-medium text-accent">
+                    {t(ui.editor.youSave)} CHF {chf(savingsNum)}{" "}
+                    <span className="text-muted line-through">CHF {chf(subtotalNum)}</span>
+                  </p>
+                )}
               </div>
-              <Button onClick={placeOrder}>
-                {t(ui.editor.placeOrder)} <Arrow />
-              </Button>
+              {activeType.available ? (
+                <Button onClick={placeOrder}>
+                  {t(ui.editor.placeOrder)} <Arrow />
+                </Button>
+              ) : (
+                <span className="inline-flex items-center rounded-full border border-line px-6 py-3 text-sm font-semibold text-muted">
+                  {t(ui.editor.notAvailable)}
+                </span>
+              )}
             </div>
 
             <p className="mt-3 text-xs leading-relaxed text-muted">{t(ui.editor.orderNote)}</p>

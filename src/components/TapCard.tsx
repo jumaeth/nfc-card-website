@@ -110,7 +110,7 @@ export function TapCard() {
   }, []);
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[340px] sm:max-w-[520px]">
+    <div className="relative mx-auto aspect-[7/8] w-full max-w-[360px] sm:aspect-square sm:max-w-[520px]">
       {/* soft glow */}
       <div
         className="absolute inset-0 rounded-full blur-3xl transition-colors duration-700"
@@ -122,7 +122,7 @@ export function TapCard() {
         initial={{ opacity: 0, y: 30, rotate: 4 }}
         animate={{ opacity: 1, y: 0, rotate: 4 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute right-0 top-4 h-[300px] w-[150px] rounded-[2rem] border-[6px] border-ink bg-paper shadow-[0_40px_80px_-30px_rgba(0,0,0,0.45)] sm:right-6 sm:top-6 sm:h-[340px] sm:w-[172px]"
+        className="absolute right-0 top-0 h-[310px] w-[156px] rounded-[2rem] border-[6px] border-ink bg-paper shadow-[0_40px_80px_-30px_rgba(0,0,0,0.45)] sm:right-6 sm:top-6 sm:h-[340px] sm:w-[172px]"
       >
         <div className="absolute left-1/2 top-2 h-1.5 w-14 -translate-x-1/2 rounded-full bg-ink/80" />
         <div className="h-full w-full overflow-hidden rounded-[1.5rem]">
@@ -147,7 +147,7 @@ export function TapCard() {
         animate={{ opacity: 1, y: 0, rotate: -8 }}
         transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         whileHover={{ rotate: -4, y: -6 }}
-        className="absolute bottom-2 left-0 h-[186px] w-[290px] rounded-[1.4rem] bg-gradient-to-br from-ink-2 to-ink p-5 text-paper shadow-[0_40px_80px_-24px_rgba(0,0,0,0.6)] sm:bottom-4 sm:left-2 sm:h-[210px] sm:w-[330px] sm:p-6"
+        className="absolute bottom-0 left-0 h-[180px] w-[280px] rounded-[1.4rem] bg-gradient-to-br from-ink-2 to-ink p-5 text-paper shadow-[0_40px_80px_-24px_rgba(0,0,0,0.6)] sm:bottom-4 sm:left-2 sm:h-[210px] sm:w-[330px] sm:p-6"
       >
         {/* Taplino logo with ripples radiating from its center */}
         <div className="absolute right-6 top-6 grid place-items-center">

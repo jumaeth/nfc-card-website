@@ -3,6 +3,94 @@ import { l, type L } from "@/lib/locale";
 
 export type FontStyle = "sans" | "serif" | "rounded" | "display";
 
+// The physical card the customer is ordering. "business" is the premium metal
+// card (available in a silver or black finish); "review" is our classic printed
+// card (the one shown across the site); "simple" is the budget matte-PVC card.
+export type CardType = "business" | "review" | "simple";
+export type CardFinish = "silver" | "black";
+
+export type CardTypeDef = {
+  key: CardType;
+  name: L;
+  tagline: L;
+  material: L;
+  price: number; // base CHF per card, before volume discount
+  available: boolean; // false → shown for preview but not orderable yet
+  aspect: string; // CSS aspect-ratio of the physical card
+  previewScale: number; // relative preview size (1 = largest)
+  sizeLabel: L; // printed dimensions
+  finishes?: CardFinish[]; // metal cards only
+};
+
+export const CARD_TYPES: CardTypeDef[] = [
+  {
+    key: "business",
+    name: l("Metal business card", "Metall-Visitenkarte", "Carte de visite métal", "Biglietto da visita in metallo"),
+    tagline: l(
+      "Premium anodised metal, brushed finish",
+      "Hochwertiges eloxiertes Metall, gebürstet",
+      "Métal anodisé premium, finition brossée",
+      "Metallo anodizzato premium, finitura spazzolata",
+    ),
+    material: l("Anodised aluminium", "Eloxiertes Aluminium", "Aluminium anodisé", "Alluminio anodizzato"),
+    price: 89,
+    available: true,
+    aspect: "85 / 54", // standard business-card landscape
+    previewScale: 0.92,
+    sizeLabel: l("85 × 54 mm", "85 × 54 mm", "85 × 54 mm", "85 × 54 mm"),
+    finishes: ["silver", "black"],
+  },
+  {
+    key: "review",
+    name: l("Review & menu card", "Bewertungs- & Menükarte", "Carte avis & menu", "Carta recensioni & menu"),
+    tagline: l(
+      "Our classic, the card shown across the site",
+      "Unser Klassiker, die Karte von der Website",
+      "Notre classique, la carte présentée sur le site",
+      "Il nostro classico, la carta mostrata sul sito",
+    ),
+    material: l("PVC", "PVC", "PVC", "PVC"),
+    price: 50,
+    available: true,
+    aspect: "5 / 6", // large portrait review/menu card
+    previewScale: 1,
+    sizeLabel: l("120 × 120 mm", "120 × 120 mm", "120 × 120 mm", "120 × 120 mm"),
+  },
+  {
+    key: "simple",
+    name: l("Simple card", "Einfache Karte", "Carte simple", "Carta semplice"),
+    tagline: l(
+      "Clean and budget-friendly matte PVC",
+      "Schlicht und günstig, mattes PVC",
+      "Sobre et économique, PVC mat",
+      "Essenziale ed economica, PVC opaco",
+    ),
+    material: l("Matte PVC", "Mattes PVC", "PVC mat", "PVC opaco"),
+    price: 29,
+    available: false,
+    aspect: "5 / 6", // compact portrait card
+    previewScale: 0.74,
+    sizeLabel: l("85 × 100 mm", "85 × 100 mm", "85 × 100 mm", "85 × 100 mm"),
+  },
+];
+
+// Finish swatches for the metal card. The gradient approximates brushed metal
+// and also themes the live preview frame.
+export const FINISHES: { key: CardFinish; label: L; swatch: string; ring: string }[] = [
+  {
+    key: "silver",
+    label: l("Silver", "Silber", "Argent", "Argento"),
+    swatch: "linear-gradient(135deg,#f2f3f5 0%,#c3c6cd 38%,#e9eaee 55%,#a9adb6 78%,#dfe1e6 100%)",
+    ring: "#b9bcc4",
+  },
+  {
+    key: "black",
+    label: l("Black", "Schwarz", "Noir", "Nero"),
+    swatch: "linear-gradient(135deg,#43444a 0%,#161719 38%,#33343a 55%,#0d0e10 78%,#2a2b31 100%)",
+    ring: "#2b2c31",
+  },
+];
+
 // How the bottom edge of the header band is drawn. "wave" and "scallop" give
 // the soft, flowy look of Google's review cards; "round" is a single arch.
 export type HeaderShape = "straight" | "wave" | "round" | "scallop";
@@ -14,6 +102,8 @@ export type CardLayout = "logo" | "text" | "list";
 
 // The full, serialisable description of a customer's card design.
 export type CardConfig = {
+  cardType: CardType;
+  finish: CardFinish; // only meaningful for the metal business card
   category: string;
   layout: CardLayout;
   headline: string;
@@ -35,6 +125,13 @@ export type CardConfig = {
   showStars: boolean;
   showQr: boolean; // backup QR code for phones without NFC
   reviewUrl: string;
+  // Business-card fields (metal card only)
+  fullName: string;
+  jobTitle: string;
+  company: string;
+  phone: string;
+  email: string;
+  website: string;
 };
 
 export type Preset = {
@@ -57,6 +154,8 @@ export type Preset = {
 export function exampleCard(): CardConfig {
   const p = PRESETS[0];
   return {
+    cardType: "review",
+    finish: "silver",
     category: "",
     layout: p.layout,
     headline: "",
@@ -77,6 +176,12 @@ export function exampleCard(): CardConfig {
     showStars: p.showStars,
     showQr: false,
     reviewUrl: "",
+    fullName: "",
+    jobTitle: "",
+    company: "",
+    phone: "",
+    email: "",
+    website: "",
   };
 }
 

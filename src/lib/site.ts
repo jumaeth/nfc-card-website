@@ -261,10 +261,10 @@ export const features = [
     key: "privacy",
     title: l("Privacy first", "Datenschutz zuerst", "Confidentialité d'abord", "Privacy al primo posto"),
     body: l(
-      "Fully compliant with the Swiss nFADP and EU GDPR. No hidden tracking.",
-      "Voll konform mit dem Schweizer revDSG und der EU-DSGVO. Kein verstecktes Tracking.",
-      "Pleinement conforme à la nLPD suisse et au RGPD de l'UE. Aucun pistage caché.",
-      "Pienamente conforme alla nLPD svizzera e al GDPR dell'UE. Nessun tracciamento nascosto.",
+      "Built to comply with Swiss data protection law. No hidden tracking.",
+      "Auf die Einhaltung des Schweizer Datenschutzgesetzes ausgelegt. Kein verstecktes Tracking.",
+      "Conçu pour respecter la loi suisse sur la protection des données. Aucun pistage caché.",
+      "Progettato per rispettare la legge svizzera sulla protezione dei dati. Nessun tracciamento nascosto.",
     ),
   },
 ];
@@ -287,7 +287,7 @@ export const products = [
   },
   {
     name: "Menu Card",
-    material: l("Recycled PVC", "Recyceltes PVC", "PVC recyclé", "PVC riciclato"),
+    material: l("PVC", "PVC", "PVC", "PVC"),
     price: "50",
     blurb: l(
       "Tap to open your live digital menu in any language. Update prices and specials from your phone and never reprint again.",
@@ -316,7 +316,7 @@ export const products = [
 export const reviewCards = [
   {
     name: "Google Review Card",
-    material: l("Recycled PVC", "Recyceltes PVC", "PVC recyclé", "PVC riciclato"),
+    material: l("PVC", "PVC", "PVC", "PVC"),
     price: "50",
     blurb: l(
       "Credit-card sized and printed with your five-star Google review link, so one tap opens the review form. Hand it over or leave it on the table.",
@@ -386,7 +386,6 @@ export const pricing = [
       l("Everything in Pro", "Alles aus Pro", "Tout de Pro", "Tutto di Pro"),
       l("10 personalised NFC cards", "10 personalisierte NFC-Karten", "10 cartes NFC personnalisées", "10 carte NFC personalizzate"),
       l("Menu translation & updates", "Übersetzung und Updates des Menüs", "Traduction & mises à jour du menu", "Traduzione e aggiornamenti del menu"),
-      l("We reply to every Google review", "Wir beantworten jede Google-Bewertung", "Nous répondons à chaque avis Google", "Rispondiamo a ogni recensione Google"),
       l("Dedicated account manager", "Persönlicher Account Manager", "Gestionnaire de compte dédié", "Account manager dedicato"),
     ],
     cta: l("Talk to us", "Kontaktieren Sie uns", "Contactez-nous", "Parla con noi"),
@@ -494,10 +493,10 @@ export const faqs = [
       "È conforme alla privacy?",
     ),
     a: l(
-      "Absolutely. Taplino is fully compliant with the revised Swiss Federal Act on Data Protection (nFADP) and the EU GDPR. We never sell data.",
-      "Absolut. Taplino ist vollständig konform mit dem revidierten Schweizer Datenschutzgesetz (revDSG) und der EU-DSGVO. Wir verkaufen niemals Daten.",
-      "Absolument. Taplino est pleinement conforme à la loi fédérale suisse révisée sur la protection des données (nLPD) et au RGPD de l'UE. Nous ne vendons jamais de données.",
-      "Assolutamente. Taplino è pienamente conforme alla legge svizzera sulla protezione dei dati riveduta (nLPD) e al GDPR dell'UE. Non vendiamo mai i dati.",
+      "Taplino is built to comply with Swiss data protection law (the revised Federal Act on Data Protection, revFADP).",
+      "Taplino ist auf die Einhaltung des Schweizer Datenschutzrechts (revidiertes Datenschutzgesetz, revDSG) ausgelegt.",
+      "Taplino est conçu pour respecter le droit suisse de la protection des données (loi fédérale révisée sur la protection des données, nLPD).",
+      "Taplino è progettato per rispettare il diritto svizzero sulla protezione dei dati (legge federale riveduta sulla protezione dei dati, nLPD).",
     ),
   },
   {
@@ -533,12 +532,6 @@ export const ui = {
     orderCards: l("Order cards", "Karten bestellen", "Commander des cartes", "Ordina le carte"),
   },
   hero: {
-    badge: l(
-      "Swiss company · Ships in 3 to 5 days",
-      "Schweizer Unternehmen · Versand in 3 bis 5 Tagen",
-      "Entreprise suisse · Expédié en 3 à 5 jours",
-      "Azienda svizzera · Spedizione in 3 a 5 giorni",
-    ),
     headPre: l("One tap between you and", "Ein Tap zwischen Ihnen und", "Un tap entre vous et", "Un tap tra te e"),
     headHighlight: l("everything", "allem", "tout", "tutto"),
     // Leading separator is part of the string so each language can punctuate
@@ -728,10 +721,10 @@ export const ui = {
       "Pronto a trasformare i tap in recensioni?",
     ),
     body: l(
-      "Tell us about your venue and we'll send a sample design within 24 hours. Cards ship across Switzerland in 3 to 5 days.",
-      "Erzählen Sie uns von Ihrem Betrieb, und wir senden innert 24 Stunden ein Musterdesign. Versand in der ganzen Schweiz in 3 bis 5 Tagen.",
-      "Parlez-nous de votre établissement et nous vous enverrons une maquette sous 24 heures. Expédition dans toute la Suisse en 3 à 5 jours.",
-      "Raccontaci della tua attività e ti invieremo una bozza entro 24 ore. Spedizione in tutta la Svizzera in 3 a 5 giorni.",
+      "Design your card and place your order in minutes. We ship across Switzerland.",
+      "Gestalten Sie Ihre Karte und bestellen Sie in wenigen Minuten. Wir versenden in die ganze Schweiz.",
+      "Concevez votre carte et commandez en quelques minutes. Nous livrons dans toute la Suisse.",
+      "Progetta la tua carta e ordina in pochi minuti. Spediamo in tutta la Svizzera.",
     ),
     primary: l("Order your cards", "Karten bestellen", "Commander vos cartes", "Ordina le tue carte"),
   },
@@ -756,12 +749,48 @@ export const ui = {
       "Scegli uno stile, aggiungi il tuo logo, definisci i colori e la destinazione del tap. La tua carta si aggiorna in tempo reale: ordina quando è pronta.",
     ),
     // Step / section headings
+    stepCard: l("Card", "Karte", "Carte", "Carta"),
+    stepDesign: l("Design", "Design", "Design", "Design"),
     stepTemplate: l("Template", "Vorlage", "Modèle", "Modello"),
     stepLogo: l("Your logo", "Ihr Logo", "Votre logo", "Il tuo logo"),
     stepColors: l("Colours", "Farben", "Couleurs", "Colori"),
     stepContent: l("Content", "Inhalt", "Contenu", "Contenuto"),
     stepLink: l("Destination", "Ziel", "Destination", "Destinazione"),
     stepOrder: l("Order", "Bestellung", "Commande", "Ordine"),
+    // Wizard navigation
+    stepWord: l("Step", "Schritt", "Étape", "Passo"),
+    back: l("Back", "Zurück", "Retour", "Indietro"),
+    continue: l("Continue", "Weiter", "Continuer", "Continua"),
+    // Card-type step
+    cardTypeHint: l(
+      "Pick the card you want, then design its face in the next steps.",
+      "Wählen Sie die gewünschte Karte, gestalten Sie die Vorderseite in den nächsten Schritten.",
+      "Choisissez la carte souhaitée, puis personnalisez sa face dans les étapes suivantes.",
+      "Scegli la carta che vuoi, poi personalizza il fronte nei passaggi successivi.",
+    ),
+    finishLabel: l("Finish", "Oberfläche", "Finition", "Finitura"),
+    notAvailable: l("Currently not available", "Zurzeit nicht verfügbar", "Actuellement indisponible", "Attualmente non disponibile"),
+    // Business-card fields
+    stepDetails: l("Your details", "Ihre Angaben", "Vos coordonnées", "I tuoi dati"),
+    detailsHint: l(
+      "This is what your metal business card shares with one tap.",
+      "Das teilt Ihre Metall-Visitenkarte mit einem Tap.",
+      "Voici ce que votre carte de visite métal partage d'un tap.",
+      "Questo è ciò che il tuo biglietto in metallo condivide con un tap.",
+    ),
+    fieldName: l("Full name", "Name", "Nom complet", "Nome completo"),
+    fieldNamePh: l("Jane Meier", "Jane Meier", "Jane Meier", "Jane Meier"),
+    fieldRole: l("Job title", "Position", "Fonction", "Ruolo"),
+    fieldRolePh: l("Founder", "Gründerin", "Fondatrice", "Fondatrice"),
+    fieldCompany: l("Company", "Firma", "Entreprise", "Azienda"),
+    fieldCompanyPh: l("Meier GmbH", "Meier GmbH", "Meier Sàrl", "Meier SA"),
+    fieldPhone: l("Phone", "Telefon", "Téléphone", "Telefono"),
+    fieldPhonePh: l("+41 79 123 45 67", "+41 79 123 45 67", "+41 79 123 45 67", "+41 79 123 45 67"),
+    fieldEmail: l("Email", "E-Mail", "E-mail", "Email"),
+    fieldEmailPh: l("jane@meier.ch", "jane@meier.ch", "jane@meier.ch", "jane@meier.ch"),
+    fieldWebsite: l("Website", "Website", "Site web", "Sito web"),
+    fieldWebsitePh: l("meier.ch", "meier.ch", "meier.ch", "meier.ch"),
+    bizNameDefault: l("Your name", "Ihr Name", "Votre nom", "Il tuo nome"),
     // Template picker
     templateHint: l(
       "Start from an industry style and keep everything editable.",
@@ -873,11 +902,19 @@ export const ui = {
     quantity: l("Quantity", "Menge", "Quantité", "Quantità"),
     unitPrice: l("per card", "pro Karte", "par carte", "a carta"),
     total: l("Total", "Total", "Total", "Totale"),
+    volumeDiscount: l("Volume discount", "Mengenrabatt", "Remise sur volume", "Sconto quantità"),
+    volumeHint: l(
+      "The more you order, the less you pay per card.",
+      "Je mehr Sie bestellen, desto weniger zahlen Sie pro Karte.",
+      "Plus vous commandez, moins vous payez par carte.",
+      "Più ordini, meno paghi a carta.",
+    ),
+    youSave: l("You save", "Sie sparen", "Vous économisez", "Risparmi"),
     orderNote: l(
-      "Incl. personalisation & Swiss QA. Free shipping in Switzerland, delivery in 3 to 5 days.",
-      "Inkl. Personalisierung & Schweizer Qualitätsprüfung. Kostenloser Versand in der Schweiz, Lieferung in 3 bis 5 Tagen.",
-      "Personnalisation & contrôle qualité suisse inclus. Livraison gratuite en Suisse, en 3 à 5 jours.",
-      "Personalizzazione e controllo qualità svizzero inclusi. Spedizione gratuita in Svizzera, consegna in 3 a 5 giorni.",
+      "Incl. personalisation & Swiss QA. Free shipping in Switzerland.",
+      "Inkl. Personalisierung & Schweizer Qualitätsprüfung. Kostenloser Versand in der Schweiz.",
+      "Personnalisation & contrôle qualité suisse inclus. Livraison gratuite en Suisse.",
+      "Personalizzazione e controllo qualità svizzero inclusi. Spedizione gratuita in Svizzera.",
     ),
     placeOrder: l("Place order", "Bestellung aufgeben", "Passer commande", "Ordina ora"),
     resetDesign: l("Reset design", "Design zurücksetzen", "Réinitialiser", "Reimposta"),
@@ -913,6 +950,18 @@ export const ui = {
     terms: { href: "/terms", label: l("Terms", "AGB", "Conditions", "Termini") },
     imprint: { href: "/imprint", label: l("Imprint", "Impressum", "Mentions légales", "Note legali") },
   },
+  cookie: {
+    message: l(
+      "We use cookies to run this site and understand how it is used. See our privacy policy for details.",
+      "Wir verwenden Cookies, um diese Website zu betreiben und zu verstehen, wie sie genutzt wird. Details finden Sie in unserer Datenschutzerklärung.",
+      "Nous utilisons des cookies pour faire fonctionner ce site et comprendre son utilisation. Consultez notre politique de confidentialité pour en savoir plus.",
+      "Utilizziamo i cookie per far funzionare questo sito e capire come viene utilizzato. Consulta la nostra informativa sulla privacy per i dettagli.",
+    ),
+    learnMore: l("Learn more", "Mehr erfahren", "En savoir plus", "Scopri di più"),
+    accept: l("Accept", "Akzeptieren", "Accepter", "Accetta"),
+    decline: l("Decline", "Ablehnen", "Refuser", "Rifiuta"),
+    settings: l("Cookie settings", "Cookie-Einstellungen", "Paramètres des cookies", "Impostazioni cookie"),
+  },
   tapCard: {
     tapToOpen: l("Tap to open · no app needed", "Tippen zum Öffnen · keine App nötig", "Tapez pour ouvrir · sans appli", "Tappa per aprire · nessuna app"),
     tellUs: l("Tell us how it went…", "Wie war Ihr Besuch?…", "Dites-nous comment c'était…", "Com'è andata?…"),
@@ -939,6 +988,8 @@ export type ContentPageData = {
   eyebrow: L;
   title: L;
   intro: L;
+  // Optional "last updated" line, shown under the intro on legal pages.
+  updated?: L;
   sections: ContentSection[];
 };
 
@@ -952,19 +1003,19 @@ export const pages: Record<"about" | "privacy" | "terms" | "imprint", ContentPag
       "Il team dietro Taplino",
     ),
     intro: l(
-      "We build premium NFC cards for Swiss businesses — one tap between you and everything you share.",
-      "Wir bauen hochwertige NFC-Karten für Schweizer Unternehmen — ein Tap zwischen Ihnen und allem, was Sie teilen.",
-      "Nous concevons des cartes NFC premium pour les entreprises suisses — un tap entre vous et tout ce que vous partagez.",
-      "Realizziamo carte NFC premium per le aziende svizzere — un tap tra te e tutto ciò che condividi.",
+      "We build premium NFC cards for Swiss businesses. One tap between you and everything you share.",
+      "Wir bauen hochwertige NFC-Karten für Schweizer Unternehmen. Ein Tap zwischen Ihnen und allem, was Sie teilen.",
+      "Nous concevons des cartes NFC premium pour les entreprises suisses. Un tap entre vous et tout ce que vous partagez.",
+      "Realizziamo carte NFC premium per le aziende svizzere. Un tap tra te e tutto ciò che condividi.",
     ),
     sections: [
       {
         heading: l("Our mission", "Unsere Mission", "Notre mission", "La nostra missione"),
         body: l(
-          "Every business deserves a simple, elegant way to connect with its customers. We turn a single tap into more reviews, live menus and link hubs — with no app to install and no friction for your guests.",
-          "Jedes Unternehmen verdient eine einfache, elegante Art, mit seinen Kunden in Kontakt zu treten. Wir verwandeln einen einzigen Tap in mehr Bewertungen, Live-Menüs und Link-Hubs — ohne App-Installation und ohne Hürden für Ihre Gäste.",
-          "Chaque entreprise mérite un moyen simple et élégant de rester en lien avec ses clients. Nous transformons un simple tap en plus d'avis, de menus en direct et de hubs de liens — sans application à installer, sans friction pour vos clients.",
-          "Ogni attività merita un modo semplice ed elegante per connettersi con i propri clienti. Trasformiamo un singolo tap in più recensioni, menu live e hub di link — senza app da installare e senza ostacoli per i tuoi clienti.",
+          "Every business deserves a simple, elegant way to connect with its customers. We turn a single tap into more reviews, live menus and link hubs, with no app to install and no friction for your guests.",
+          "Jedes Unternehmen verdient eine einfache, elegante Art, mit seinen Kunden in Kontakt zu treten. Wir verwandeln einen einzigen Tap in mehr Bewertungen, Live-Menüs und Link-Hubs, ohne App-Installation und ohne Hürden für Ihre Gäste.",
+          "Chaque entreprise mérite un moyen simple et élégant de rester en lien avec ses clients. Nous transformons un simple tap en plus d'avis, de menus en direct et de hubs de liens, sans application à installer, sans friction pour vos clients.",
+          "Ogni attività merita un modo semplice ed elegante per connettersi con i propri clienti. Trasformiamo un singolo tap in più recensioni, menu live e hub di link, senza app da installare e senza ostacoli per i tuoi clienti.",
         ),
       },
       {
@@ -996,46 +1047,115 @@ export const pages: Record<"about" | "privacy" | "terms" | "imprint", ContentPag
       "Informativa sulla privacy",
     ),
     intro: l(
-      "We take your privacy seriously. This policy explains what we collect, why, and the rights you have over your data.",
-      "Wir nehmen Ihren Datenschutz ernst. Diese Erklärung beschreibt, welche Daten wir erheben, warum, und welche Rechte Sie an Ihren Daten haben.",
-      "Nous prenons votre confidentialité au sérieux. Cette politique explique ce que nous collectons, pourquoi, et les droits dont vous disposez sur vos données.",
-      "Prendiamo sul serio la tua privacy. Questa informativa spiega quali dati raccogliamo, perché e quali diritti hai sui tuoi dati.",
+      "We take your privacy seriously. This policy explains what personal data we collect, why we process it, who we share it with and the rights you have under Swiss data protection law.",
+      "Wir nehmen Ihren Datenschutz ernst. Diese Erklärung beschreibt, welche Personendaten wir bearbeiten, zu welchen Zwecken, an wen wir sie weitergeben und welche Rechte Ihnen nach schweizerischem Datenschutzrecht zustehen.",
+      "Nous prenons votre confidentialité au sérieux. Cette politique explique quelles données personnelles nous traitons, à quelles fins, avec qui nous les partageons et les droits dont vous disposez selon le droit suisse de la protection des données.",
+      "Prendiamo sul serio la tua privacy. Questa informativa spiega quali dati personali trattiamo, per quali finalità, con chi li condividiamo e quali diritti hai secondo il diritto svizzero sulla protezione dei dati.",
+    ),
+    updated: l(
+      "Last updated: September 2026",
+      "Zuletzt aktualisiert: September 2026",
+      "Dernière mise à jour : septembre 2026",
+      "Ultimo aggiornamento: settembre 2026",
     ),
     sections: [
       {
         heading: l("Who is responsible", "Verantwortliche Stelle", "Responsable du traitement", "Titolare del trattamento"),
         body: l(
-          "Taplino is the controller responsible for the personal data processed through this website. You can reach us at hello@taplino.ch. Full company details are listed in our imprint.",
-          "Taplino ist die für die über diese Website verarbeiteten Personendaten verantwortliche Stelle. Sie erreichen uns unter hello@taplino.ch. Die vollständigen Firmenangaben finden Sie in unserem Impressum.",
-          "Taplino est le responsable du traitement des données personnelles traitées via ce site. Vous pouvez nous joindre à hello@taplino.ch. Les coordonnées complètes figurent dans nos mentions légales.",
-          "Taplino è il titolare del trattamento dei dati personali gestiti tramite questo sito. Puoi contattarci a hello@taplino.ch. I dati completi dell'azienda sono nelle note legali.",
+          "Taplino is the controller responsible for the personal data processed through this website and our services. You can reach us with any privacy question at hello@taplino.ch. Full company details are listed in our imprint.",
+          "Taplino ist die verantwortliche Stelle für die über diese Website und unsere Dienste bearbeiteten Personendaten. Bei Fragen zum Datenschutz erreichen Sie uns unter hello@taplino.ch. Die vollständigen Firmenangaben finden Sie in unserem Impressum.",
+          "Taplino est le responsable du traitement des données personnelles traitées via ce site et nos services. Pour toute question relative à la protection des données, écrivez-nous à hello@taplino.ch. Les coordonnées complètes figurent dans nos mentions légales.",
+          "Taplino è il titolare del trattamento dei dati personali gestiti tramite questo sito e i nostri servizi. Per qualsiasi domanda sulla privacy puoi contattarci a hello@taplino.ch. I dati completi dell'azienda sono nelle note legali.",
         ),
       },
       {
-        heading: l("What we collect", "Welche Daten wir erheben", "Ce que nous collectons", "Quali dati raccogliamo"),
+        heading: l("What data we collect", "Welche Daten wir bearbeiten", "Quelles données nous collectons", "Quali dati raccogliamo"),
         body: l(
-          "When you contact us or place an order, we process the details you provide — such as your name, email address and order information. When you visit the site, we may process technical data such as your IP address and browser type to keep the service secure and reliable.",
-          "Wenn Sie uns kontaktieren oder eine Bestellung aufgeben, verarbeiten wir die von Ihnen angegebenen Daten — etwa Name, E-Mail-Adresse und Bestellinformationen. Beim Besuch der Website können wir technische Daten wie Ihre IP-Adresse und den Browsertyp verarbeiten, um den Dienst sicher und zuverlässig zu betreiben.",
-          "Lorsque vous nous contactez ou passez commande, nous traitons les informations que vous fournissez — nom, adresse e-mail et détails de commande. Lors de votre visite, nous pouvons traiter des données techniques telles que votre adresse IP et votre navigateur pour assurer la sécurité et la fiabilité du service.",
-          "Quando ci contatti o effettui un ordine, trattiamo i dati che fornisci — nome, indirizzo email e informazioni sull'ordine. Durante la visita al sito, possiamo trattare dati tecnici come l'indirizzo IP e il tipo di browser per mantenere il servizio sicuro e affidabile.",
+          "We process the following categories of personal data:\nContact and order data you provide, such as your name, business name, email address, phone number, billing and delivery address and the details of your order.\nCommunication data from the messages you send us, for example by email or through a contact form.\nPayment data needed to process your purchase, which is handled by our payment providers.\nUsage and technical data collected automatically when you visit the site, such as your IP address, browser type, device information, the pages you view and the date and time of access.",
+          "Wir bearbeiten folgende Kategorien von Personendaten:\nKontakt- und Bestelldaten, die Sie angeben, etwa Name, Firmenname, E-Mail-Adresse, Telefonnummer, Rechnungs- und Lieferadresse sowie die Angaben zu Ihrer Bestellung.\nKommunikationsdaten aus den Nachrichten, die Sie uns senden, zum Beispiel per E-Mail oder über ein Kontaktformular.\nZahlungsdaten, die zur Abwicklung Ihres Kaufs nötig sind und von unseren Zahlungsdienstleistern verarbeitet werden.\nNutzungs- und technische Daten, die beim Besuch der Website automatisch erfasst werden, etwa IP-Adresse, Browsertyp, Geräteinformationen, die aufgerufenen Seiten sowie Datum und Uhrzeit des Zugriffs.",
+          "Nous traitons les catégories de données personnelles suivantes :\nDonnées de contact et de commande que vous fournissez, comme votre nom, le nom de votre entreprise, votre adresse e-mail, votre numéro de téléphone, vos adresses de facturation et de livraison et les détails de votre commande.\nDonnées de communication issues des messages que vous nous envoyez, par exemple par e-mail ou via un formulaire de contact.\nDonnées de paiement nécessaires au traitement de votre achat, gérées par nos prestataires de paiement.\nDonnées d'utilisation et techniques collectées automatiquement lors de votre visite, telles que votre adresse IP, le type de navigateur, les informations sur l'appareil, les pages consultées ainsi que la date et l'heure d'accès.",
+          "Trattiamo le seguenti categorie di dati personali:\nDati di contatto e d'ordine che fornisci, come nome, nome dell'azienda, indirizzo email, numero di telefono, indirizzo di fatturazione e di consegna e i dettagli del tuo ordine.\nDati di comunicazione contenuti nei messaggi che ci invii, ad esempio via email o tramite un modulo di contatto.\nDati di pagamento necessari per elaborare il tuo acquisto, gestiti dai nostri fornitori di servizi di pagamento.\nDati d'uso e tecnici raccolti automaticamente quando visiti il sito, come indirizzo IP, tipo di browser, informazioni sul dispositivo, pagine visitate e data e ora dell'accesso.",
         ),
       },
       {
-        heading: l("How we use your data", "Wie wir Ihre Daten verwenden", "Utilisation de vos données", "Come usiamo i tuoi dati"),
+        heading: l("Why we use your data", "Zu welchen Zwecken wir Daten bearbeiten", "Pourquoi nous utilisons vos données", "Perché usiamo i tuoi dati"),
         body: l(
-          "We use your data only to fulfil your order, respond to your enquiries, provide our service and meet our legal obligations. We never sell your data, and we share it with service providers only as far as necessary to deliver our service.",
-          "Wir verwenden Ihre Daten ausschliesslich, um Ihre Bestellung zu erfüllen, Ihre Anfragen zu beantworten, unseren Dienst bereitzustellen und unsere gesetzlichen Pflichten zu erfüllen. Wir verkaufen Ihre Daten niemals und geben sie nur so weit an Dienstleister weiter, wie es für die Erbringung unseres Dienstes nötig ist.",
-          "Nous utilisons vos données uniquement pour traiter votre commande, répondre à vos demandes, fournir notre service et respecter nos obligations légales. Nous ne vendons jamais vos données et ne les partageons avec des prestataires que dans la mesure nécessaire à la fourniture du service.",
-          "Utilizziamo i tuoi dati solo per evadere il tuo ordine, rispondere alle tue richieste, fornire il nostro servizio e adempiere agli obblighi di legge. Non vendiamo mai i tuoi dati e li condividiamo con i fornitori di servizi solo nella misura necessaria a erogare il servizio.",
+          "We process your data to fulfil and deliver your orders, respond to your enquiries, operate and improve our website and service, keep our systems secure, send you service-related messages and, with your consent, occasional product updates, and to comply with legal obligations such as accounting and tax rules. We rely on the performance of our contract with you, our legitimate business interests, our legal obligations or your consent, which you can withdraw at any time.",
+          "Wir bearbeiten Ihre Daten, um Ihre Bestellungen zu erfüllen und auszuliefern, Ihre Anfragen zu beantworten, unsere Website und unseren Dienst zu betreiben und zu verbessern, unsere Systeme sicher zu halten, Ihnen dienstbezogene Nachrichten und, mit Ihrer Einwilligung, gelegentliche Produktinformationen zu senden sowie gesetzliche Pflichten wie Buchführungs- und Steuervorschriften zu erfüllen. Grundlage ist die Erfüllung unseres Vertrags mit Ihnen, unser berechtigtes Interesse, unsere gesetzlichen Pflichten oder Ihre Einwilligung, die Sie jederzeit widerrufen können.",
+          "Nous traitons vos données pour exécuter et livrer vos commandes, répondre à vos demandes, exploiter et améliorer notre site et notre service, sécuriser nos systèmes, vous envoyer des messages liés au service et, avec votre consentement, des informations ponctuelles sur nos produits, ainsi que pour respecter nos obligations légales telles que les règles comptables et fiscales. Nous nous fondons sur l'exécution de notre contrat avec vous, sur nos intérêts légitimes, sur nos obligations légales ou sur votre consentement, que vous pouvez retirer à tout moment.",
+          "Trattiamo i tuoi dati per evadere e consegnare i tuoi ordini, rispondere alle tue richieste, gestire e migliorare il nostro sito e servizio, mantenere sicuri i nostri sistemi, inviarti messaggi relativi al servizio e, con il tuo consenso, occasionali informazioni sui prodotti, nonché per adempiere agli obblighi di legge come le norme contabili e fiscali. Ci basiamo sull'esecuzione del contratto con te, sui nostri interessi legittimi, sui nostri obblighi di legge o sul tuo consenso, che puoi revocare in qualsiasi momento.",
+        ),
+      },
+      {
+        heading: l("Cookies and analytics", "Cookies und Analyse", "Cookies et analyse", "Cookie e analisi"),
+        body: l(
+          "We use the cookies needed to run the website and, where you agree, cookies or similar technologies that help us understand how the site is used so we can improve it. You can accept or decline non-essential cookies and change your choice at any time in your browser settings. Where we use analytics services, we configure them to limit the data collected about you.",
+          "Wir verwenden die zum Betrieb der Website nötigen Cookies und, sofern Sie zustimmen, Cookies oder ähnliche Technologien, die uns helfen zu verstehen, wie die Website genutzt wird, damit wir sie verbessern können. Nicht notwendige Cookies können Sie annehmen oder ablehnen und Ihre Wahl jederzeit in den Browsereinstellungen ändern. Wo wir Analysedienste einsetzen, konfigurieren wir sie so, dass möglichst wenige Daten über Sie erhoben werden.",
+          "Nous utilisons les cookies nécessaires au fonctionnement du site et, avec votre accord, des cookies ou technologies similaires qui nous aident à comprendre comment le site est utilisé afin de l'améliorer. Vous pouvez accepter ou refuser les cookies non essentiels et modifier votre choix à tout moment dans les paramètres de votre navigateur. Lorsque nous utilisons des services d'analyse, nous les configurons pour limiter les données collectées à votre sujet.",
+          "Utilizziamo i cookie necessari al funzionamento del sito e, se acconsenti, cookie o tecnologie simili che ci aiutano a capire come viene usato il sito per migliorarlo. Puoi accettare o rifiutare i cookie non essenziali e modificare la tua scelta in qualsiasi momento nelle impostazioni del browser. Quando utilizziamo servizi di analisi, li configuriamo in modo da limitare i dati raccolti su di te.",
+        ),
+      },
+      {
+        heading: l("Hosting and server logs", "Hosting und Server-Logs", "Hébergement et journaux serveur", "Hosting e log del server"),
+        body: l(
+          "Our website is hosted by a specialised provider that processes data on our behalf and under our instructions. For security and stability, the server automatically records log data such as your IP address, the request made and the time of access. This data helps us keep the service reliable and detect misuse, and is deleted or anonymised after a short period.",
+          "Unsere Website wird von einem spezialisierten Anbieter gehostet, der Daten in unserem Auftrag und nach unseren Weisungen bearbeitet. Aus Sicherheits- und Stabilitätsgründen erfasst der Server automatisch Log-Daten wie Ihre IP-Adresse, die getätigte Anfrage und den Zeitpunkt des Zugriffs. Diese Daten helfen uns, den Dienst zuverlässig zu halten und Missbrauch zu erkennen; sie werden nach kurzer Zeit gelöscht oder anonymisiert.",
+          "Notre site est hébergé par un prestataire spécialisé qui traite les données pour notre compte et selon nos instructions. Pour des raisons de sécurité et de stabilité, le serveur enregistre automatiquement des données de journal telles que votre adresse IP, la requête effectuée et l'heure d'accès. Ces données nous aident à assurer la fiabilité du service et à détecter les abus ; elles sont supprimées ou anonymisées après une courte période.",
+          "Il nostro sito è ospitato da un fornitore specializzato che tratta i dati per nostro conto e secondo le nostre istruzioni. Per motivi di sicurezza e stabilità, il server registra automaticamente dati di log come il tuo indirizzo IP, la richiesta effettuata e l'ora dell'accesso. Questi dati ci aiutano a mantenere affidabile il servizio e a rilevare abusi, e vengono cancellati o anonimizzati dopo un breve periodo.",
+        ),
+      },
+      {
+        heading: l("Sharing your data", "Weitergabe Ihrer Daten", "Partage de vos données", "Condivisione dei tuoi dati"),
+        body: l(
+          "We never sell your personal data. We share it only where necessary: with service providers who work on our behalf, such as hosting, payment, shipping and email providers, and with authorities or advisors where the law requires it. These providers may process your data only under our instructions and are bound to keep it confidential and secure.",
+          "Wir verkaufen Ihre Personendaten niemals. Wir geben sie nur weiter, soweit dies nötig ist: an Dienstleister, die in unserem Auftrag tätig sind, etwa für Hosting, Zahlung, Versand und E-Mail, sowie an Behörden oder Berater, wenn das Gesetz dies verlangt. Diese Dienstleister dürfen Ihre Daten nur nach unseren Weisungen bearbeiten und sind zu Vertraulichkeit und Sicherheit verpflichtet.",
+          "Nous ne vendons jamais vos données personnelles. Nous ne les partageons que lorsque c'est nécessaire : avec des prestataires qui agissent pour notre compte, comme l'hébergement, le paiement, l'expédition et la messagerie, et avec les autorités ou conseillers lorsque la loi l'exige. Ces prestataires ne peuvent traiter vos données que selon nos instructions et sont tenus d'en assurer la confidentialité et la sécurité.",
+          "Non vendiamo mai i tuoi dati personali. Li condividiamo solo quando necessario: con fornitori di servizi che operano per nostro conto, come hosting, pagamento, spedizione ed email, e con autorità o consulenti quando la legge lo richiede. Questi fornitori possono trattare i tuoi dati solo secondo le nostre istruzioni e sono tenuti a mantenerli riservati e sicuri.",
+        ),
+      },
+      {
+        heading: l("Data transfers abroad", "Datenübermittlung ins Ausland", "Transferts de données à l'étranger", "Trasferimenti di dati all'estero"),
+        body: l(
+          "Some of our service providers process data outside Switzerland, including in the European Economic Area and other countries. Where we transfer personal data to a country that does not offer an equivalent level of protection, we rely on appropriate safeguards, such as the standard contractual clauses recognised by the Swiss authorities, to protect your data.",
+          "Einige unserer Dienstleister bearbeiten Daten ausserhalb der Schweiz, unter anderem im Europäischen Wirtschaftsraum und in weiteren Ländern. Übermitteln wir Personendaten in ein Land ohne gleichwertiges Schutzniveau, stützen wir uns auf geeignete Garantien wie die von den Schweizer Behörden anerkannten Standardvertragsklauseln, um Ihre Daten zu schützen.",
+          "Certains de nos prestataires traitent des données en dehors de la Suisse, notamment dans l'Espace économique européen et dans d'autres pays. Lorsque nous transférons des données personnelles vers un pays n'offrant pas un niveau de protection équivalent, nous nous appuyons sur des garanties appropriées, telles que les clauses contractuelles types reconnues par les autorités suisses, pour protéger vos données.",
+          "Alcuni dei nostri fornitori trattano i dati al di fuori della Svizzera, anche nello Spazio economico europeo e in altri Paesi. Quando trasferiamo dati personali in un Paese che non offre un livello di protezione equivalente, ci basiamo su garanzie adeguate, come le clausole contrattuali tipo riconosciute dalle autorità svizzere, per proteggere i tuoi dati.",
+        ),
+      },
+      {
+        heading: l("How long we keep your data", "Wie lange wir Ihre Daten aufbewahren", "Combien de temps nous conservons vos données", "Per quanto tempo conserviamo i tuoi dati"),
+        body: l(
+          "We keep your personal data only as long as necessary for the purposes described above or as required by law. Order and invoicing data is retained for the statutory retention period, which in Switzerland is generally ten years. Other data is deleted once it is no longer needed.",
+          "Wir bewahren Ihre Personendaten nur so lange auf, wie es für die oben genannten Zwecke nötig ist oder das Gesetz es verlangt. Bestell- und Rechnungsdaten werden während der gesetzlichen Aufbewahrungsfrist aufbewahrt, die in der Schweiz in der Regel zehn Jahre beträgt. Andere Daten werden gelöscht, sobald sie nicht mehr benötigt werden.",
+          "Nous ne conservons vos données personnelles que le temps nécessaire aux finalités décrites ci-dessus ou requis par la loi. Les données de commande et de facturation sont conservées pendant la durée légale de conservation, qui est en Suisse généralement de dix ans. Les autres données sont supprimées dès qu'elles ne sont plus nécessaires.",
+          "Conserviamo i tuoi dati personali solo per il tempo necessario alle finalità descritte sopra o richiesto dalla legge. I dati di ordine e fatturazione vengono conservati per il periodo di conservazione previsto dalla legge, che in Svizzera è generalmente di dieci anni. Gli altri dati vengono cancellati quando non sono più necessari.",
+        ),
+      },
+      {
+        heading: l("Data security", "Datensicherheit", "Sécurité des données", "Sicurezza dei dati"),
+        body: l(
+          "We take appropriate technical and organisational measures to protect your personal data against loss, misuse and unauthorised access. No transmission over the internet can be guaranteed to be completely secure, but we work continuously to keep our safeguards up to date.",
+          "Wir treffen angemessene technische und organisatorische Massnahmen, um Ihre Personendaten vor Verlust, Missbrauch und unbefugtem Zugriff zu schützen. Kein Datentransfer über das Internet kann als vollständig sicher garantiert werden, doch wir arbeiten laufend daran, unsere Schutzmassnahmen aktuell zu halten.",
+          "Nous prenons des mesures techniques et organisationnelles appropriées pour protéger vos données personnelles contre la perte, l'usage abusif et l'accès non autorisé. Aucune transmission sur Internet ne peut être garantie totalement sûre, mais nous travaillons en permanence à maintenir nos protections à jour.",
+          "Adottiamo misure tecniche e organizzative adeguate per proteggere i tuoi dati personali da perdita, uso improprio e accesso non autorizzato. Nessuna trasmissione via Internet può essere garantita come completamente sicura, ma lavoriamo costantemente per mantenere aggiornate le nostre misure di protezione.",
         ),
       },
       {
         heading: l("Your rights", "Ihre Rechte", "Vos droits", "I tuoi diritti"),
         body: l(
-          "You have the right to access, correct or delete your personal data, and to object to or restrict its processing. To exercise these rights, contact us at hello@taplino.ch. We comply with the Swiss Federal Act on Data Protection (nFADP) and, where applicable, the EU GDPR.",
-          "Sie haben das Recht, auf Ihre Personendaten zuzugreifen, sie zu berichtigen oder zu löschen sowie der Verarbeitung zu widersprechen oder sie einzuschränken. Zur Ausübung dieser Rechte kontaktieren Sie uns unter hello@taplino.ch. Wir halten das Schweizer Datenschutzgesetz (revDSG) und, soweit anwendbar, die EU-DSGVO ein.",
-          "Vous avez le droit d'accéder à vos données personnelles, de les corriger ou de les supprimer, et de vous opposer à leur traitement ou de le limiter. Pour exercer ces droits, contactez-nous à hello@taplino.ch. Nous respectons la loi suisse sur la protection des données (nLPD) et, le cas échéant, le RGPD de l'UE.",
-          "Hai il diritto di accedere ai tuoi dati personali, correggerli o cancellarli, e di opporti al trattamento o limitarlo. Per esercitare questi diritti, contattaci a hello@taplino.ch. Rispettiamo la legge svizzera sulla protezione dei dati (nLPD) e, ove applicabile, il GDPR dell'UE.",
+          "You have the right to access the personal data we hold about you, to have it corrected or deleted, and to object to or restrict its processing. Where processing is based on your consent, you may withdraw it at any time. To exercise these rights, contact us at hello@taplino.ch; we may need to verify your identity first. If you believe we have not handled your data correctly, you can lodge a complaint with the Swiss Federal Data Protection and Information Commissioner (FDPIC). We comply with the Swiss Federal Act on Data Protection (revFADP) and, where it applies to you, the EU General Data Protection Regulation (GDPR).",
+          "Sie haben das Recht, auf die von uns über Sie gespeicherten Personendaten zuzugreifen, sie berichtigen oder löschen zu lassen sowie der Bearbeitung zu widersprechen oder sie einzuschränken. Beruht die Bearbeitung auf Ihrer Einwilligung, können Sie diese jederzeit widerrufen. Zur Ausübung dieser Rechte kontaktieren Sie uns unter hello@taplino.ch; wir müssen Ihre Identität allenfalls zuerst überprüfen. Sind Sie der Ansicht, dass wir Ihre Daten nicht korrekt bearbeitet haben, können Sie beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) Beschwerde einreichen. Wir halten das Schweizer Datenschutzgesetz (revDSG) und, soweit auf Sie anwendbar, die EU-Datenschutz-Grundverordnung (DSGVO) ein.",
+          "Vous avez le droit d'accéder aux données personnelles que nous détenons à votre sujet, de les faire corriger ou supprimer, et de vous opposer à leur traitement ou de le limiter. Lorsque le traitement repose sur votre consentement, vous pouvez le retirer à tout moment. Pour exercer ces droits, contactez-nous à hello@taplino.ch ; nous pourrions devoir vérifier votre identité au préalable. Si vous estimez que nous n'avons pas traité vos données correctement, vous pouvez déposer une réclamation auprès du Préposé fédéral à la protection des données et à la transparence (PFPDT). Nous respectons la loi fédérale suisse sur la protection des données (nLPD) et, lorsqu'il s'applique à vous, le Règlement général sur la protection des données de l'UE (RGPD).",
+          "Hai il diritto di accedere ai dati personali che deteniamo su di te, di farli correggere o cancellare e di opporti al trattamento o limitarlo. Se il trattamento si basa sul tuo consenso, puoi revocarlo in qualsiasi momento. Per esercitare questi diritti, contattaci a hello@taplino.ch; potremmo dover verificare prima la tua identità. Se ritieni che non abbiamo trattato correttamente i tuoi dati, puoi presentare un reclamo all'Incaricato federale della protezione dei dati e della trasparenza (IFPDT). Rispettiamo la legge federale svizzera sulla protezione dei dati (nLPD) e, ove applicabile a te, il Regolamento generale sulla protezione dei dati dell'UE (GDPR).",
+        ),
+      },
+      {
+        heading: l("Changes to this policy", "Änderungen dieser Erklärung", "Modifications de cette politique", "Modifiche a questa informativa"),
+        body: l(
+          "We may update this policy from time to time to reflect changes to our service or the law. The current version is always available on this page, with the date of the last update shown above.",
+          "Wir können diese Erklärung von Zeit zu Zeit anpassen, um Änderungen an unserem Dienst oder an der Gesetzgebung Rechnung zu tragen. Die aktuelle Fassung ist stets auf dieser Seite verfügbar; das Datum der letzten Aktualisierung ist oben angegeben.",
+          "Nous pouvons mettre à jour cette politique de temps à autre pour tenir compte des évolutions de notre service ou de la loi. La version en vigueur est toujours disponible sur cette page, avec la date de la dernière mise à jour indiquée ci-dessus.",
+          "Possiamo aggiornare questa informativa di tanto in tanto per riflettere modifiche al nostro servizio o alla legge. La versione in vigore è sempre disponibile su questa pagina, con la data dell'ultimo aggiornamento indicata sopra.",
         ),
       },
     ],
@@ -1049,55 +1169,133 @@ export const pages: Record<"about" | "privacy" | "terms" | "imprint", ContentPag
       "Termini e condizioni",
     ),
     intro: l(
-      "These terms govern your use of the Taplino website and the purchase of our products and services.",
-      "Diese Bedingungen regeln die Nutzung der Taplino-Website sowie den Kauf unserer Produkte und Dienstleistungen.",
-      "Ces conditions régissent l'utilisation du site Taplino ainsi que l'achat de nos produits et services.",
-      "Questi termini regolano l'uso del sito Taplino e l'acquisto dei nostri prodotti e servizi.",
+      "These terms and conditions govern your use of the Taplino website, the purchase of our NFC cards and the use of the related online service. Please read them carefully before placing an order.",
+      "Diese Allgemeinen Geschäftsbedingungen regeln die Nutzung der Taplino-Website, den Kauf unserer NFC-Karten sowie die Nutzung des zugehörigen Online-Dienstes. Bitte lesen Sie sie vor einer Bestellung sorgfältig durch.",
+      "Ces conditions générales régissent l'utilisation du site Taplino, l'achat de nos cartes NFC et l'utilisation du service en ligne associé. Veuillez les lire attentivement avant de passer commande.",
+      "Questi termini e condizioni regolano l'uso del sito Taplino, l'acquisto delle nostre carte NFC e l'utilizzo del relativo servizio online. Ti invitiamo a leggerli con attenzione prima di effettuare un ordine.",
+    ),
+    updated: l(
+      "Last updated: September 2026",
+      "Zuletzt aktualisiert: September 2026",
+      "Dernière mise à jour : septembre 2026",
+      "Ultimo aggiornamento: settembre 2026",
     ),
     sections: [
       {
         heading: l("Scope", "Geltungsbereich", "Champ d'application", "Ambito di applicazione"),
         body: l(
-          "These terms apply to all orders placed with Taplino and to the use of our website. By placing an order, you accept these terms in full.",
-          "Diese Bedingungen gelten für alle bei Taplino aufgegebenen Bestellungen und für die Nutzung unserer Website. Mit der Bestellung akzeptieren Sie diese Bedingungen vollumfänglich.",
-          "Ces conditions s'appliquent à toutes les commandes passées auprès de Taplino et à l'utilisation de notre site. En passant commande, vous acceptez pleinement ces conditions.",
-          "Questi termini si applicano a tutti gli ordini effettuati presso Taplino e all'uso del nostro sito. Effettuando un ordine, accetti integralmente questi termini.",
+          "These terms apply to all orders placed with Taplino, to the use of our website and to the online service that powers your cards. By placing an order or using the service, you accept these terms. Differing conditions of yours apply only if we have agreed to them in writing. Our offer is directed primarily at businesses; where you order as a consumer, your mandatory statutory rights remain unaffected.",
+          "Diese Bedingungen gelten für alle bei Taplino aufgegebenen Bestellungen, für die Nutzung unserer Website und für den Online-Dienst, der Ihre Karten betreibt. Mit einer Bestellung oder der Nutzung des Dienstes akzeptieren Sie diese Bedingungen. Abweichende Bedingungen Ihrerseits gelten nur, wenn wir ihnen schriftlich zugestimmt haben. Unser Angebot richtet sich in erster Linie an Unternehmen; bestellen Sie als Konsumentin oder Konsument, bleiben Ihre zwingenden gesetzlichen Rechte unberührt.",
+          "Ces conditions s'appliquent à toutes les commandes passées auprès de Taplino, à l'utilisation de notre site et au service en ligne qui fait fonctionner vos cartes. En passant commande ou en utilisant le service, vous acceptez ces conditions. Des conditions divergentes de votre part ne s'appliquent que si nous les avons acceptées par écrit. Notre offre s'adresse principalement aux entreprises ; si vous commandez en tant que consommateur, vos droits légaux impératifs ne sont pas affectés.",
+          "Questi termini si applicano a tutti gli ordini effettuati presso Taplino, all'uso del nostro sito e al servizio online che fa funzionare le tue carte. Effettuando un ordine o utilizzando il servizio, accetti questi termini. Eventuali tue condizioni divergenti si applicano solo se le abbiamo accettate per iscritto. La nostra offerta è rivolta principalmente alle aziende; se ordini come consumatore, i tuoi diritti legali imperativi restano impregiudicati.",
         ),
       },
       {
-        heading: l("Orders and pricing", "Bestellungen und Preise", "Commandes et prix", "Ordini e prezzi"),
+        heading: l("How a contract is formed", "Zustandekommen des Vertrags", "Formation du contrat", "Conclusione del contratto"),
         body: l(
-          "All prices are in Swiss francs (CHF) and include applicable VAT unless stated otherwise. An order becomes binding once we confirm it. We reserve the right to correct obvious errors in prices or product descriptions.",
-          "Alle Preise verstehen sich in Schweizer Franken (CHF) und inklusive allfälliger MwSt., sofern nicht anders angegeben. Eine Bestellung wird verbindlich, sobald wir sie bestätigen. Offensichtliche Fehler in Preisen oder Produktbeschreibungen dürfen wir korrigieren.",
-          "Tous les prix sont en francs suisses (CHF) et incluent la TVA applicable, sauf indication contraire. Une commande devient ferme dès que nous la confirmons. Nous nous réservons le droit de corriger les erreurs manifestes de prix ou de description.",
-          "Tutti i prezzi sono in franchi svizzeri (CHF) e includono l'IVA applicabile, salvo diversa indicazione. Un ordine diventa vincolante non appena lo confermiamo. Ci riserviamo il diritto di correggere errori evidenti nei prezzi o nelle descrizioni.",
+          "The presentation of our products on the website is an invitation to order, not a binding offer. A contract is formed when we confirm your order or dispatch the products. We may decline an order, for example if a product is unavailable or if we suspect misuse.",
+          "Die Darstellung unserer Produkte auf der Website ist eine Aufforderung zur Bestellung und kein verbindliches Angebot. Ein Vertrag kommt zustande, wenn wir Ihre Bestellung bestätigen oder die Produkte versenden. Wir können eine Bestellung ablehnen, etwa wenn ein Produkt nicht verfügbar ist oder wir einen Missbrauch vermuten.",
+          "La présentation de nos produits sur le site constitue une invitation à commander et non une offre ferme. Le contrat est conclu lorsque nous confirmons votre commande ou expédions les produits. Nous pouvons refuser une commande, par exemple si un produit est indisponible ou si nous soupçonnons un abus.",
+          "La presentazione dei nostri prodotti sul sito è un invito a ordinare e non un'offerta vincolante. Il contratto si perfeziona quando confermiamo il tuo ordine o spediamo i prodotti. Possiamo rifiutare un ordine, ad esempio se un prodotto non è disponibile o se sospettiamo un abuso.",
+        ),
+      },
+      {
+        heading: l("Prices and payment", "Preise und Zahlung", "Prix et paiement", "Prezzi e pagamento"),
+        body: l(
+          "All prices are in Swiss francs (CHF) and include statutory VAT unless stated otherwise. Shipping costs, if any, are shown before you complete your order. Payment is due as indicated at checkout, through the payment methods offered. The products remain our property until they have been paid for in full.",
+          "Alle Preise verstehen sich in Schweizer Franken (CHF) und inklusive gesetzlicher MwSt., sofern nicht anders angegeben. Allfällige Versandkosten werden vor Abschluss der Bestellung ausgewiesen. Die Zahlung ist wie beim Checkout angegeben über die angebotenen Zahlungsmittel fällig. Die Produkte bleiben bis zur vollständigen Bezahlung unser Eigentum.",
+          "Tous les prix sont en francs suisses (CHF) et incluent la TVA légale, sauf indication contraire. Les frais d'expédition éventuels sont indiqués avant la finalisation de votre commande. Le paiement est dû comme indiqué lors du passage en caisse, par les moyens de paiement proposés. Les produits restent notre propriété jusqu'à leur paiement intégral.",
+          "Tutti i prezzi sono in franchi svizzeri (CHF) e includono l'IVA di legge, salvo diversa indicazione. Le eventuali spese di spedizione sono indicate prima di concludere l'ordine. Il pagamento è dovuto come indicato al momento del checkout, tramite i metodi di pagamento offerti. I prodotti restano di nostra proprietà fino al loro completo pagamento.",
         ),
       },
       {
         heading: l("Delivery", "Lieferung", "Livraison", "Consegna"),
         body: l(
-          "We ship across Switzerland, typically within 3 to 5 business days after your design is approved. Delivery times are estimates and not guaranteed.",
-          "Wir liefern in die ganze Schweiz, in der Regel innert 3 bis 5 Werktagen nach Freigabe Ihres Designs. Lieferfristen sind Richtwerte und nicht garantiert.",
-          "Nous livrons dans toute la Suisse, généralement sous 3 à 5 jours ouvrables après validation de votre design. Les délais de livraison sont indicatifs et non garantis.",
-          "Spediamo in tutta la Svizzera, di norma entro 3 a 5 giorni lavorativi dall'approvazione del tuo design. I tempi di consegna sono indicativi e non garantiti.",
+          "We ship across Switzerland once your design has been approved. Delivery times are estimates and not guaranteed. If a delivery is delayed or lost, contact us and we will help resolve it. The risk passes to you once the products are handed over to you or, for business customers, to the carrier.",
+          "Wir liefern in die ganze Schweiz, sobald Ihr Design freigegeben ist. Lieferfristen sind Richtwerte und nicht garantiert. Ist eine Lieferung verspätet oder geht sie verloren, kontaktieren Sie uns, und wir helfen bei der Klärung. Die Gefahr geht auf Sie über, sobald die Produkte Ihnen oder, bei Geschäftskunden, dem Transporteur übergeben werden.",
+          "Nous livrons dans toute la Suisse une fois votre design validé. Les délais de livraison sont indicatifs et non garantis. En cas de retard ou de perte d'une livraison, contactez-nous et nous vous aiderons à résoudre le problème. Le risque vous est transféré dès que les produits vous sont remis ou, pour les clients professionnels, remis au transporteur.",
+          "Spediamo in tutta la Svizzera una volta approvato il tuo design. I tempi di consegna sono indicativi e non garantiti. Se una consegna è in ritardo o va persa, contattaci e ti aiuteremo a risolvere il problema. Il rischio passa a te non appena i prodotti ti vengono consegnati o, per i clienti aziendali, consegnati al vettore.",
         ),
       },
       {
-        heading: l("Cancellation and returns", "Widerruf und Rückgabe", "Annulation et retours", "Recesso e resi"),
+        heading: l("Personalised products, cancellation and returns", "Personalisierte Produkte, Widerruf und Rückgabe", "Produits personnalisés, annulation et retours", "Prodotti personalizzati, annullamento e resi"),
         body: l(
-          "Because our cards are personalised to your brand, they are made to order and generally cannot be returned once production has started. If a product is defective, contact us and we will arrange a replacement.",
-          "Da unsere Karten individuell auf Ihre Marke abgestimmt sind, werden sie auf Bestellung gefertigt und können nach Produktionsbeginn in der Regel nicht zurückgegeben werden. Ist ein Produkt fehlerhaft, kontaktieren Sie uns, und wir sorgen für Ersatz.",
-          "Comme nos cartes sont personnalisées à votre marque, elles sont fabriquées sur commande et ne peuvent généralement pas être retournées une fois la production lancée. En cas de produit défectueux, contactez-nous et nous organiserons un remplacement.",
-          "Poiché le nostre carte sono personalizzate con il tuo marchio, sono realizzate su ordinazione e in genere non possono essere restituite una volta avviata la produzione. Se un prodotto è difettoso, contattaci e provvederemo alla sostituzione.",
+          "Because our cards are personalised to your brand, they are made to order. Once you have approved your design and production has started, an order can no longer be cancelled or returned for reasons of preference. This does not affect your rights if a product is defective. Under Swiss law there is generally no statutory right of withdrawal for distance purchases, so please check your design carefully before approving it.",
+          "Da unsere Karten individuell auf Ihre Marke abgestimmt sind, werden sie auf Bestellung gefertigt. Sobald Sie Ihr Design freigegeben haben und die Produktion begonnen hat, kann eine Bestellung nicht mehr aus Gründen des Nichtgefallens storniert oder zurückgegeben werden. Ihre Rechte bei einem fehlerhaften Produkt bleiben davon unberührt. Nach schweizerischem Recht besteht bei Fernkäufen grundsätzlich kein gesetzliches Widerrufsrecht; bitte prüfen Sie Ihr Design daher vor der Freigabe sorgfältig.",
+          "Comme nos cartes sont personnalisées à votre marque, elles sont fabriquées sur commande. Une fois votre design validé et la production lancée, une commande ne peut plus être annulée ou retournée pour des raisons de convenance. Cela n'affecte pas vos droits en cas de produit défectueux. Le droit suisse ne prévoit en général aucun droit de rétractation légal pour les achats à distance ; veuillez donc vérifier votre design attentivement avant de le valider.",
+          "Poiché le nostre carte sono personalizzate con il tuo marchio, sono realizzate su ordinazione. Una volta approvato il design e avviata la produzione, un ordine non può più essere annullato o restituito per motivi di gradimento. Ciò non pregiudica i tuoi diritti in caso di prodotto difettoso. Secondo il diritto svizzero, per gli acquisti a distanza non esiste in genere un diritto di recesso legale; ti invitiamo quindi a controllare con attenzione il tuo design prima di approvarlo.",
         ),
       },
       {
-        heading: l("Liability and governing law", "Haftung und anwendbares Recht", "Responsabilité et droit applicable", "Responsabilità e legge applicabile"),
+        heading: l("The Taplino service", "Der Taplino-Dienst", "Le service Taplino", "Il servizio Taplino"),
         body: l(
-          "We provide our products and services with due care, but to the extent permitted by law we exclude liability for indirect or consequential damages. These terms are governed by Swiss law, and the exclusive place of jurisdiction is our registered seat in Switzerland.",
-          "Wir erbringen unsere Produkte und Dienstleistungen mit der gebotenen Sorgfalt, schliessen jedoch im gesetzlich zulässigen Rahmen die Haftung für indirekte Schäden und Folgeschäden aus. Es gilt Schweizer Recht; ausschliesslicher Gerichtsstand ist unser Sitz in der Schweiz.",
-          "Nous fournissons nos produits et services avec le soin requis, mais dans la mesure permise par la loi, nous excluons toute responsabilité pour les dommages indirects ou consécutifs. Ces conditions sont régies par le droit suisse et le for exclusif est notre siège en Suisse.",
-          "Forniamo i nostri prodotti e servizi con la dovuta diligenza, ma nei limiti consentiti dalla legge escludiamo la responsabilità per danni indiretti o consequenziali. Questi termini sono regolati dal diritto svizzero e il foro esclusivo è la nostra sede in Svizzera.",
+          "Each card links to an online destination, such as a review page, menu or link hub, that you control through our service. We aim to keep the service available and reliable, but we do not guarantee uninterrupted access and may carry out maintenance or make reasonable changes to features. Where the service is provided on a subscription or ongoing basis, the term and fees are those stated when you sign up.",
+          "Jede Karte verweist auf ein Online-Ziel, etwa eine Bewertungsseite, ein Menü oder einen Link-Hub, das Sie über unseren Dienst steuern. Wir sind bestrebt, den Dienst verfügbar und zuverlässig zu halten, garantieren jedoch keinen unterbrechungsfreien Zugang und können Wartungen durchführen oder Funktionen in angemessenem Rahmen ändern. Wird der Dienst als Abonnement oder laufend erbracht, gelten die bei der Anmeldung angegebene Laufzeit und Gebühren.",
+          "Chaque carte renvoie vers une destination en ligne, telle qu'une page d'avis, un menu ou un hub de liens, que vous gérez via notre service. Nous nous efforçons de maintenir le service disponible et fiable, mais nous ne garantissons pas un accès ininterrompu et pouvons effectuer des opérations de maintenance ou apporter des modifications raisonnables aux fonctionnalités. Lorsque le service est fourni sur abonnement ou de manière continue, la durée et les frais sont ceux indiqués lors de votre inscription.",
+          "Ogni carta rimanda a una destinazione online, come una pagina di recensioni, un menu o un hub di link, che gestisci tramite il nostro servizio. Ci impegniamo a mantenere il servizio disponibile e affidabile, ma non garantiamo un accesso ininterrotto e possiamo eseguire manutenzioni o apportare modifiche ragionevoli alle funzionalità. Quando il servizio è fornito in abbonamento o in modo continuativo, la durata e i costi sono quelli indicati al momento della registrazione.",
+        ),
+      },
+      {
+        heading: l("Your content and intellectual property", "Ihre Inhalte und geistiges Eigentum", "Vos contenus et propriété intellectuelle", "I tuoi contenuti e proprietà intellettuale"),
+        body: l(
+          "You keep all rights to the logos, text and other content you provide, and you grant us the right to use it only to produce your cards and operate your service. You confirm that you are entitled to use this content and that it does not infringe the rights of others. All rights in our website, designs, software and the Taplino brand remain with us.",
+          "Sie behalten alle Rechte an den von Ihnen bereitgestellten Logos, Texten und weiteren Inhalten und räumen uns das Recht ein, diese ausschliesslich zur Herstellung Ihrer Karten und zum Betrieb Ihres Dienstes zu nutzen. Sie bestätigen, dass Sie zur Nutzung dieser Inhalte berechtigt sind und dass sie keine Rechte Dritter verletzen. Alle Rechte an unserer Website, unseren Designs, unserer Software und der Marke Taplino verbleiben bei uns.",
+          "Vous conservez tous les droits sur les logos, textes et autres contenus que vous fournissez, et vous nous accordez le droit de les utiliser uniquement pour produire vos cartes et exploiter votre service. Vous confirmez être en droit d'utiliser ces contenus et qu'ils ne portent pas atteinte aux droits de tiers. Tous les droits sur notre site, nos designs, nos logiciels et la marque Taplino nous restent réservés.",
+          "Mantieni tutti i diritti su loghi, testi e altri contenuti che fornisci e ci concedi il diritto di utilizzarli esclusivamente per produrre le tue carte e gestire il tuo servizio. Confermi di avere il diritto di utilizzare tali contenuti e che essi non violano i diritti di terzi. Tutti i diritti sul nostro sito, sui nostri design, sul nostro software e sul marchio Taplino restano di nostra proprietà.",
+        ),
+      },
+      {
+        heading: l("Acceptable use", "Zulässige Nutzung", "Utilisation acceptable", "Uso consentito"),
+        body: l(
+          "You agree to use the service lawfully and not to link it to content that is illegal, misleading, infringing or harmful. We may suspend or terminate a card or account that is used in breach of these terms or the law.",
+          "Sie verpflichten sich, den Dienst rechtmässig zu nutzen und ihn nicht mit rechtswidrigen, irreführenden, rechtsverletzenden oder schädlichen Inhalten zu verknüpfen. Wir können eine Karte oder ein Konto sperren oder kündigen, das unter Verstoss gegen diese Bedingungen oder das Gesetz genutzt wird.",
+          "Vous vous engagez à utiliser le service de manière licite et à ne pas le relier à des contenus illégaux, trompeurs, contrefaisants ou préjudiciables. Nous pouvons suspendre ou résilier une carte ou un compte utilisé en violation de ces conditions ou de la loi.",
+          "Ti impegni a utilizzare il servizio in modo lecito e a non collegarlo a contenuti illegali, ingannevoli, lesivi di diritti o dannosi. Possiamo sospendere o chiudere una carta o un account utilizzato in violazione di questi termini o della legge.",
+        ),
+      },
+      {
+        heading: l("Warranty for defects", "Gewährleistung für Mängel", "Garantie des défauts", "Garanzia per i difetti"),
+        body: l(
+          "We provide our products with due care. If a product is defective, contact us within a reasonable time of discovering the defect and we will repair it, replace it or refund it, at our discretion. Statutory warranty rights for consumers under Swiss law apply and are not limited by these terms.",
+          "Wir erbringen unsere Produkte mit der gebotenen Sorgfalt. Ist ein Produkt mangelhaft, melden Sie sich innert angemessener Frist nach Entdeckung des Mangels bei uns; wir reparieren, ersetzen oder erstatten das Produkt nach unserem Ermessen. Die gesetzlichen Gewährleistungsrechte von Konsumentinnen und Konsumenten nach schweizerischem Recht gelten und werden durch diese Bedingungen nicht eingeschränkt.",
+          "Nous fournissons nos produits avec le soin requis. Si un produit est défectueux, contactez-nous dans un délai raisonnable après avoir découvert le défaut et nous procéderons, à notre discrétion, à sa réparation, à son remplacement ou à son remboursement. Les droits de garantie légaux des consommateurs prévus par le droit suisse s'appliquent et ne sont pas limités par ces conditions.",
+          "Forniamo i nostri prodotti con la dovuta diligenza. Se un prodotto è difettoso, contattaci entro un termine ragionevole dalla scoperta del difetto e provvederemo, a nostra discrezione, alla riparazione, alla sostituzione o al rimborso. I diritti di garanzia legali dei consumatori previsti dal diritto svizzero si applicano e non sono limitati da questi termini.",
+        ),
+      },
+      {
+        heading: l("Liability", "Haftung", "Responsabilité", "Responsabilità"),
+        body: l(
+          "We provide our products and services with due care. To the extent permitted by law, we exclude liability for slight negligence and for indirect or consequential damages, such as lost profit or lost data. Nothing in these terms limits our liability for death or personal injury, for unlawful intent or gross negligence, or where liability cannot be excluded by law.",
+          "Wir erbringen unsere Produkte und Dienstleistungen mit der gebotenen Sorgfalt. Im gesetzlich zulässigen Rahmen schliessen wir die Haftung für leichte Fahrlässigkeit sowie für indirekte Schäden und Folgeschäden wie entgangenen Gewinn oder Datenverlust aus. Keine Bestimmung dieser Bedingungen beschränkt unsere Haftung für Tod oder Körperverletzung, für rechtswidrige Absicht oder grobe Fahrlässigkeit oder soweit die Haftung gesetzlich nicht ausgeschlossen werden kann.",
+          "Nous fournissons nos produits et services avec le soin requis. Dans la mesure permise par la loi, nous excluons toute responsabilité pour négligence légère ainsi que pour les dommages indirects ou consécutifs, tels que la perte de bénéfice ou de données. Aucune disposition de ces conditions ne limite notre responsabilité en cas de décès ou de dommage corporel, d'intention illicite ou de négligence grave, ou lorsque la responsabilité ne peut être exclue par la loi.",
+          "Forniamo i nostri prodotti e servizi con la dovuta diligenza. Nei limiti consentiti dalla legge, escludiamo la responsabilità per colpa lieve e per danni indiretti o consequenziali, come mancato guadagno o perdita di dati. Nessuna disposizione di questi termini limita la nostra responsabilità in caso di morte o lesioni personali, di dolo o colpa grave, o quando la responsabilità non può essere esclusa per legge.",
+        ),
+      },
+      {
+        heading: l("Data protection", "Datenschutz", "Protection des données", "Protezione dei dati"),
+        body: l(
+          "We process personal data in accordance with our privacy policy, which forms part of your agreement with us.",
+          "Wir bearbeiten Personendaten gemäss unserer Datenschutzerklärung, die Bestandteil Ihrer Vereinbarung mit uns ist.",
+          "Nous traitons les données personnelles conformément à notre politique de confidentialité, qui fait partie intégrante de votre contrat avec nous.",
+          "Trattiamo i dati personali in conformità con la nostra informativa sulla privacy, che è parte integrante del tuo accordo con noi.",
+        ),
+      },
+      {
+        heading: l("Changes to these terms", "Änderungen dieser Bedingungen", "Modifications de ces conditions", "Modifiche a questi termini"),
+        body: l(
+          "We may update these terms to reflect changes to our products, service or the law. The version in force at the time of your order applies to that order. The current version is always available on this page.",
+          "Wir können diese Bedingungen anpassen, um Änderungen an unseren Produkten, unserem Dienst oder der Gesetzgebung Rechnung zu tragen. Für eine Bestellung gilt die zum Zeitpunkt der Bestellung geltende Fassung. Die aktuelle Fassung ist stets auf dieser Seite verfügbar.",
+          "Nous pouvons mettre à jour ces conditions pour tenir compte des évolutions de nos produits, de notre service ou de la loi. La version en vigueur au moment de votre commande s'applique à cette commande. La version actuelle est toujours disponible sur cette page.",
+          "Possiamo aggiornare questi termini per riflettere modifiche ai nostri prodotti, al servizio o alla legge. All'ordine si applica la versione in vigore al momento dell'ordine stesso. La versione attuale è sempre disponibile su questa pagina.",
+        ),
+      },
+      {
+        heading: l("Governing law and jurisdiction", "Anwendbares Recht und Gerichtsstand", "Droit applicable et for", "Legge applicabile e foro competente"),
+        body: l(
+          "These terms are governed by Swiss law, excluding its conflict-of-law rules and the UN Convention on Contracts for the International Sale of Goods. The exclusive place of jurisdiction is our registered seat in Switzerland, subject to any mandatory place of jurisdiction that the law provides for consumers.",
+          "Diese Bedingungen unterstehen schweizerischem Recht unter Ausschluss der Kollisionsnormen und des UN-Kaufrechts (CISG). Ausschliesslicher Gerichtsstand ist unser Sitz in der Schweiz, vorbehältlich eines zwingenden Gerichtsstands, den das Gesetz für Konsumentinnen und Konsumenten vorsieht.",
+          "Ces conditions sont régies par le droit suisse, à l'exclusion de ses règles de conflit de lois et de la Convention des Nations Unies sur les contrats de vente internationale de marchandises. Le for exclusif est notre siège en Suisse, sous réserve de tout for impératif prévu par la loi pour les consommateurs.",
+          "Questi termini sono regolati dal diritto svizzero, con esclusione delle norme sui conflitti di legge e della Convenzione delle Nazioni Unite sui contratti di vendita internazionale di merci. Il foro esclusivo è la nostra sede in Svizzera, fatto salvo ogni foro imperativo previsto dalla legge per i consumatori.",
         ),
       },
     ],
@@ -1115,10 +1313,10 @@ export const pages: Record<"about" | "privacy" | "terms" | "imprint", ContentPag
       {
         heading: l("Responsible for this website", "Verantwortlich für diese Website", "Responsable de ce site", "Responsabile di questo sito"),
         body: l(
-          "Taplino\n[Your full name]\n[Street and number]\n[Postcode and city]\nSwitzerland",
-          "Taplino\n[Ihr vollständiger Name]\n[Strasse und Nummer]\n[PLZ und Ort]\nSchweiz",
-          "Taplino\n[Votre nom complet]\n[Rue et numéro]\n[Code postal et ville]\nSuisse",
-          "Taplino\n[Il tuo nome completo]\n[Via e numero]\n[CAP e città]\nSvizzera",
+          "Taplino\nMarco Jucker\nSchwarztorstrasse 115\n3007 Bern\nSwitzerland",
+          "Taplino\nMarco Jucker\nSchwarztorstrasse 115\n3007 Bern\nSchweiz",
+          "Taplino\nMarco Jucker\nSchwarztorstrasse 115\n3007 Bern\nSuisse",
+          "Taplino\nMarco Jucker\nSchwarztorstrasse 115\n3007 Bern\nSvizzera",
         ),
       },
       {
