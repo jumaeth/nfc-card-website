@@ -43,6 +43,28 @@ function CardVisual({ accent }: { accent: boolean }) {
   );
 }
 
+function Check() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      className="mt-0.5 shrink-0 text-accent"
+      aria-hidden="true"
+    >
+      <circle cx="10" cy="10" r="10" fill="currentColor" opacity="0.12" />
+      <path
+        d="M6 10.5l2.5 2.5L14 7.5"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 type Product = {
   name: string;
   material: L;
@@ -114,7 +136,7 @@ export function Products() {
         <ProductGrid items={products} badge={ui.products.range.badge} />
       </section>
 
-      {/* Separate line: the Google review card — designed in our editor */}
+      {/* Separate line: the Google review card, pitched as our editor feature */}
       <section id="review-cards" className="section-pad py-24 sm:py-32">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <Reveal>
@@ -127,9 +149,14 @@ export function Products() {
                 title={t(ui.products.review.title)}
                 intro={t(ui.products.review.intro)}
               />
-              <p className="mt-6 leading-relaxed text-ink-soft">
-                {t(reviewCards[0].blurb)}
-              </p>
+              <ul className="mt-8 space-y-3">
+                {ui.products.review.features.map((f, i) => (
+                  <li key={i} className="flex items-start gap-3 text-ink-soft">
+                    <Check />
+                    <span className="leading-relaxed">{t(f)}</span>
+                  </li>
+                ))}
+              </ul>
               <div className="mt-8 flex flex-wrap items-center gap-6">
                 <p>
                   <span className="text-xs text-muted">{t(ui.products.from)}</span>
@@ -138,6 +165,9 @@ export function Products() {
                 </p>
                 <Button href="/editor" variant="solid">
                   {t(ui.products.review.editorCta)} <Arrow />
+                </Button>
+                <Button href="#pricing" variant="ghost">
+                  {t(ui.products.review.cta)}
                 </Button>
               </div>
             </div>
