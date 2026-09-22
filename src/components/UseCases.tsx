@@ -71,7 +71,7 @@ export function UseCases() {
             className="pointer-events-none absolute inset-0 opacity-40"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 30% 20%, rgba(240,67,31,0.4), transparent 45%)",
+                "radial-gradient(circle at 30% 20%, rgba(47,109,240,0.4), transparent 45%)",
             }}
           />
           <AnimatePresence mode="wait">

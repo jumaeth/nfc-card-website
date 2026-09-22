@@ -34,7 +34,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Run on everything except Next internals and files with an extension
-  // (robots.txt, sitemap.xml, llms.txt, favicon.ico, icon.svg, assets…).
-  matcher: ["/((?!_next|.*\\..*).*)"],
+  // Run on everything except Next internals, API route handlers, and files
+  // with an extension (robots.txt, sitemap.xml, llms.txt, favicon.ico, assets).
+  matcher: ["/((?!_next|api|.*\\..*).*)"],
 };

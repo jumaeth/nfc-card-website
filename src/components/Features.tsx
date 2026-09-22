@@ -41,7 +41,7 @@ const icons: Record<string, React.ReactNode> = {
 export function Features() {
   const t = useT();
   return (
-    <section className="section-pad relative overflow-hidden bg-ink py-24 text-paper sm:py-32">
+    <section id="features" className="section-pad relative overflow-hidden bg-ink py-24 text-paper sm:py-32">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
@@ -52,7 +52,7 @@ export function Features() {
       />
       <div
         className="pointer-events-none absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full blur-3xl"
-        style={{ background: "rgba(240,67,31,0.18)" }}
+        style={{ background: "rgba(47,109,240,0.18)" }}
       />
 
       <div className="relative">

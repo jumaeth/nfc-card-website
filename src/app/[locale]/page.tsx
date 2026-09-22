@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Logos } from "@/components/Logos";
-import { HowItWorks } from "@/components/HowItWorks";
-import { UseCases } from "@/components/UseCases";
-import { Features } from "@/components/Features";
+import { Problem } from "@/components/Problem";
+import { Solution } from "@/components/Solution";
 import { Products } from "@/components/Products";
+import { HowItWorks } from "@/components/HowItWorks";
+import { Features } from "@/components/Features";
+import { ForWhom } from "@/components/ForWhom";
 import { Pricing } from "@/components/Pricing";
-import { Testimonials } from "@/components/Testimonials";
 import { FAQ } from "@/components/FAQ";
 import { CTA } from "@/components/CTA";
 import { Footer } from "@/components/Footer";
@@ -43,12 +44,13 @@ export default async function Home({
       <main className="flex-1">
         <Hero />
         <Logos />
-        <HowItWorks />
-        <UseCases />
-        <Features />
+        <Problem />
+        <Solution />
         <Products />
+        <HowItWorks />
+        <Features />
+        <ForWhom />
         <Pricing />
-        <Testimonials />
         <FAQ />
         <CTA />
       </main>

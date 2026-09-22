@@ -2,7 +2,7 @@
 
 import { useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
-import { ui, site } from "@/lib/site";
+import { ui } from "@/lib/site";
 import { useT } from "@/lib/i18n";
 import { Button, Arrow } from "@/components/ui";
 import { CardPreview } from "./CardPreview";
@@ -216,6 +216,8 @@ export function CardEditor() {
   const [qty, setQty] = useState(50);
   const [step, setStep] = useState(0);
   const [ordered, setOrdered] = useState(false);
+  const [placing, setPlacing] = useState(false);
+  const [orderFailed, setOrderFailed] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const activeType = CARD_TYPES.find((c) => c.key === config.cardType) ?? CARD_TYPES[1];
@@ -286,8 +288,8 @@ export function CardEditor() {
   const savingsNum = subtotalNum - totalNum;
   const total = chf(totalNum);
 
-  const placeOrder = () => {
-    if (!activeType.available) return;
+  const placeOrder = async () => {
+    if (!activeType.available || placing) return;
     const lines = [
       "New card order",
       "",
@@ -354,10 +356,26 @@ export function CardEditor() {
     const subject = `Card order: ${
       isBusiness ? config.company || config.fullName || "Business card" : config.category || "Custom"
     } (${qty} pcs)`;
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(lines)}`;
-    setOrdered(true);
+
+    setPlacing(true);
+    setOrderFailed(false);
+    try {
+      const res = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          subject,
+          text: lines,
+          replyTo: isBusiness ? config.email : undefined,
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setOrdered(true);
+    } catch {
+      setOrderFailed(true);
+    } finally {
+      setPlacing(false);
+    }
   };
 
   return (
@@ -855,11 +873,16 @@ export function CardEditor() {
                 {t(ui.editor.continue)} <Arrow />
               </Button>
             ) : (
-              <Button onClick={placeOrder}>
-                {t(ui.editor.placeOrder)} <Arrow />
+              <Button onClick={placeOrder} aria-disabled={placing}>
+                {placing ? t(ui.editor.orderSending) : t(ui.editor.placeOrder)} <Arrow />
               </Button>
             )}
           </div>
+          {orderFailed && (
+            <p className="mt-4 text-center text-sm font-medium text-accent">
+              {t(ui.editor.orderError)}
+            </p>
+          )}
           <button
             type="button"
             onClick={reset}
@@ -959,8 +982,8 @@ export function CardEditor() {
                 )}
               </div>
               {activeType.available ? (
-                <Button onClick={placeOrder}>
-                  {t(ui.editor.placeOrder)} <Arrow />
+                <Button onClick={placeOrder} aria-disabled={placing}>
+                  {placing ? t(ui.editor.orderSending) : t(ui.editor.placeOrder)} <Arrow />
                 </Button>
               ) : (
                 <span className="inline-flex items-center rounded-full border border-line px-6 py-3 text-sm font-semibold text-muted">
@@ -969,6 +992,9 @@ export function CardEditor() {
               )}
             </div>
 
+            {orderFailed && (
+              <p className="mt-3 text-sm font-medium text-accent">{t(ui.editor.orderError)}</p>
+            )}
             <p className="mt-3 text-xs leading-relaxed text-muted">{t(ui.editor.orderNote)}</p>
           </div>
         </div>
@@ -988,7 +1014,7 @@ export function CardEditor() {
               <Image src="/logo/taplino-mark.svg" alt="" width={64} height={64} className="h-8 w-8" />
             </div>
             <h3 className="display text-2xl text-ink">{t(ui.editor.orderThanks)}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted">{t(ui.editor.orderThanksBody)}</p>
+            <p className="mt-3 text-sm leading-relaxed text-muted">{t(ui.editor.orderThanksSentBody)}</p>
             <button
               type="button"
               onClick={() => setOrdered(false)}

@@ -62,9 +62,9 @@ export function Footer() {
           <p className="text-sm font-semibold text-ink">{t(ui.footer.contactHeading)}</p>
           <ul className="mt-4 space-y-2.5 text-sm text-muted">
             <li>
-              <a href={`mailto:${site.email}`} className="link-underline hover:text-ink">
-                {site.email}
-              </a>
+              <Link href={localize("/contact")} className="link-underline hover:text-ink">
+                {t(ui.footer.contactLink)}
+              </Link>
             </li>
           </ul>
         </div>

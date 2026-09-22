@@ -2,19 +2,78 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { destinations, ui } from "@/lib/site";
+import { destinations, site, ui } from "@/lib/site";
 import { useT } from "@/lib/i18n";
 
-function TaplinoMark({ size = 38, accent = "#F24B1F" }: { size?: number; accent?: string }) {
+function TaplinoMark({
+  size = 38,
+  accent = "#2F6DF0",
+  body = "#F6F3EE",
+}: {
+  size?: number;
+  accent?: string;
+  body?: string;
+}) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" fill="none">
       <g transform="rotate(-12 32 32)">
-        <rect x="6" y="24" width="38" height="24" rx="6" fill="#F6F3EE" />
+        <rect x="6" y="24" width="38" height="24" rx="6" fill={body} />
       </g>
       <circle cx="52" cy="14" r="4" fill={accent} />
       <circle cx="52" cy="14" r="9.5" stroke={accent} strokeWidth="3" fill="none" />
     </svg>
   );
+}
+
+// The three destinations each ride on a different physical card finish, so the
+// hero cycles through the real product range: brushed silver metal (the flagship
+// metal card), brushed black metal, and a printed colour card. The brushed-metal
+// gradients are the exact swatches used by the live editor preview (FINISHES).
+type CardStyle = {
+  surface: string; // card background (brushed-metal gradient or printed colour)
+  ring: string; // hairline border colour
+  ink: string; // primary text colour
+  sub: string; // muted text colour
+  dotIdle: string; // inactive progress-dot colour
+  markBody: string; // fill of the Taplino card glyph so it reads on the surface
+  accent: string; // mark stroke, ripple and active-dot colour
+  sheen: boolean; // brushed-metal light streak overlay
+};
+
+const METAL_SILVER = {
+  surface: "linear-gradient(135deg,#f2f3f5 0%,#c3c6cd 38%,#e9eaee 55%,#a9adb6 78%,#dfe1e6 100%)",
+  ring: "#b9bcc4",
+  ink: "#18171c",
+  sub: "rgba(24,23,28,0.55)",
+  dotIdle: "rgba(20,18,15,0.18)",
+  markBody: "#1b1a1f",
+  sheen: true,
+};
+
+const METAL_BLACK = {
+  surface: "linear-gradient(135deg,#43444a 0%,#161719 38%,#33343a 55%,#0d0e10 78%,#2a2b31 100%)",
+  ring: "#2b2c31",
+  ink: "#f4f1ea",
+  sub: "rgba(244,241,234,0.6)",
+  dotIdle: "rgba(244,241,234,0.28)",
+  markBody: "#f4f1ea",
+  sheen: true,
+};
+
+function cardStyleFor(d: (typeof destinations)[number]): CardStyle {
+  if (d.key === "menu") return { ...METAL_BLACK, accent: d.accent };
+  if (d.key === "links")
+    return {
+      surface: "linear-gradient(140deg,#3b7bf6 0%,#2f6df0 45%,#1a4dbf 100%)",
+      ring: "rgba(255,255,255,0.18)",
+      ink: "#ffffff",
+      sub: "rgba(255,255,255,0.72)",
+      dotIdle: "rgba(255,255,255,0.35)",
+      markBody: "#eaf1fd",
+      accent: "#ffffff",
+      sheen: false,
+    };
+  return { ...METAL_SILVER, accent: d.accent };
 }
 
 function Stars() {
@@ -103,6 +162,7 @@ export function TapCard() {
   const [i, setI] = useState(0);
   const t = useT();
   const d = destinations[i];
+  const cs = cardStyleFor(d);
 
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % destinations.length), 3400);
@@ -141,31 +201,46 @@ export function TapCard() {
         </div>
       </motion.div>
 
-      {/* Card */}
+      {/* Card — cycles through the real product finishes (silver metal, black
+          metal, printed colour), one per destination. */}
       <motion.div
         initial={{ opacity: 0, y: 40, rotate: -10 }}
         animate={{ opacity: 1, y: 0, rotate: -8 }}
         transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         whileHover={{ rotate: -4, y: -6 }}
-        className="absolute bottom-0 left-0 h-[180px] w-[280px] rounded-[1.4rem] bg-gradient-to-br from-ink-2 to-ink p-5 text-paper shadow-[0_40px_80px_-24px_rgba(0,0,0,0.6)] sm:bottom-4 sm:left-2 sm:h-[210px] sm:w-[330px] sm:p-6"
+        className="absolute bottom-0 left-0 h-[180px] w-[280px] overflow-hidden rounded-[1.4rem] border p-5 shadow-[0_40px_80px_-24px_rgba(0,0,0,0.6)] transition-colors duration-700 sm:bottom-4 sm:left-2 sm:h-[210px] sm:w-[330px] sm:p-6"
+        style={{ background: cs.surface, borderColor: cs.ring, color: cs.ink }}
       >
+        {/* brushed-metal sheen */}
+        {cs.sheen && (
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(120deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 34%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.22) 100%)",
+            }}
+          />
+        )}
+
         {/* Taplino logo with ripples radiating from its center */}
         <div className="absolute right-6 top-6 grid place-items-center">
           {[0, 0.8, 1.6].map((delay) => (
             <span
               key={delay}
               className="ripple-ring absolute left-1/2 top-1/2 -ml-4 -mt-4 h-8 w-8 rounded-full border"
-              style={{ borderColor: `${d.accent}`, animationDelay: `${delay}s` }}
+              style={{ borderColor: cs.accent, animationDelay: `${delay}s` }}
             />
           ))}
           <span className="relative">
-            <TaplinoMark accent={d.accent} />
+            <TaplinoMark accent={cs.accent} body={cs.markBody} />
           </span>
         </div>
 
-        <div className="flex h-full flex-col justify-between">
+        <div className="relative flex h-full flex-col justify-between">
           <div>
-            <span className="eyebrow text-paper/50">Taplino</span>
+            <span className="eyebrow" style={{ color: cs.sub }}>
+              Taplino
+            </span>
           </div>
           <div>
             <div className="mb-3 flex gap-1.5">
@@ -175,13 +250,15 @@ export function TapCard() {
                   className="h-1 rounded-full transition-all duration-500"
                   style={{
                     width: idx === i ? 22 : 8,
-                    background: idx === i ? d.accent : "rgba(246,243,236,0.25)",
+                    background: idx === i ? cs.accent : cs.dotIdle,
                   }}
                 />
               ))}
             </div>
             <p className="display text-2xl">{t(d.label)}</p>
-            <p className="mt-1 text-sm text-paper/50">{t(ui.tapCard.tapToOpen)}</p>
+            <p className="mt-1 text-sm" style={{ color: cs.sub }}>
+              {t(ui.tapCard.tapToOpen)}
+            </p>
           </div>
         </div>
       </motion.div>

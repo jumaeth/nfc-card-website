@@ -97,7 +97,7 @@ export function buildMetadata({
 
 // ── Localized SEO copy for routes without their own long-form copy ─────
 // (About/Privacy/Terms/Imprint reuse their page title + intro from site.ts.)
-export const seoCopy: Record<"home" | "editor", { title: L; description: L }> = {
+export const seoCopy: Record<"home" | "editor" | "contact", { title: L; description: L }> = {
   home: {
     // Home sits in the same segment as the title template, so it isn't wrapped;
     // it leads with the brand explicitly. Sub-pages get "%s · Taplino".
@@ -126,6 +126,20 @@ export const seoCopy: Record<"home" | "editor", { title: L; description: L }> = 
       "Gestalten Sie Ihre NFC-Karte online: Logo hochladen, Farben wählen, Tap-Ziel festlegen und in Minuten bestellen. Hergestellt und versandt in der Schweiz.",
       "Concevez votre carte NFC en ligne : ajoutez votre logo, choisissez les couleurs, définissez la destination d'un tap et commandez en minutes. Fabriquée et expédiée en Suisse.",
       "Progetta la tua carta NFC online: carica il logo, scegli i colori, imposta la destinazione del tap e ordina in pochi minuti. Prodotta e spedita in Svizzera.",
+    ),
+  },
+  contact: {
+    title: l(
+      "Contact us",
+      "Kontakt",
+      "Contactez-nous",
+      "Contattaci",
+    ),
+    description: l(
+      "Get in touch with the Taplino team about NFC cards, pricing or a larger rollout. We usually reply within a few hours.",
+      "Nehmen Sie Kontakt mit dem Taplino-Team auf, zu NFC-Karten, Preisen oder einem grösseren Rollout. Wir antworten meist innert weniger Stunden.",
+      "Contactez l'équipe Taplino au sujet des cartes NFC, des tarifs ou d'un déploiement plus large. Nous répondons généralement en quelques heures.",
+      "Contatta il team Taplino per carte NFC, prezzi o un rollout più ampio. Di solito rispondiamo in poche ore.",
     ),
   },
 };

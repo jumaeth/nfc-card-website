@@ -4,7 +4,7 @@
 import type { Locale } from "@/lib/locale";
 import { LOCALES, localeToSlug } from "@/lib/locale";
 import { ORG, SITE_NAME, SITE_URL, localeUrl } from "@/lib/seo";
-import { products, reviewCards, faqs } from "@/lib/site";
+import { products, menuCard, reviewCards, faqs } from "@/lib/site";
 
 function JsonLd({ data }: { data: unknown }) {
   return (
@@ -63,7 +63,7 @@ export function SiteJsonLd({ locale }: { locale: Locale }) {
 export function HomeJsonLd({ locale }: { locale: Locale }) {
   const home = localeUrl(locale);
 
-  const productList = [...products, ...reviewCards].map((p) => ({
+  const productList = [...products, menuCard, ...reviewCards].map((p) => ({
     "@type": "Product",
     name: p.name,
     description: p.blurb[locale],

@@ -28,9 +28,18 @@ export const site = {
 };
 
 export const nav = [
-  { label: l("Products", "Produkte", "Produits", "Prodotti"), href: "#products" },
+  { label: l("How it works", "So funktioniert's", "Comment ça marche", "Come funziona"), href: "#how" },
+  { label: l("Benefits", "Vorteile", "Avantages", "Vantaggi"), href: "#features" },
+  { label: l("FAQ", "FAQ", "FAQ", "FAQ"), href: "#faq" },
+  { label: l("Design your card", "Karte gestalten", "Concevez votre carte", "Progetta la tua carta"), href: "/editor" },
+];
+
+// Header navigation. Diverges from `nav` (which still feeds the footer's
+// product column): the header leads with pricing, the card editor and contact.
+export const headerNav = [
   { label: l("Pricing", "Preise", "Tarifs", "Prezzi"), href: "#pricing" },
   { label: l("Design your card", "Karte gestalten", "Concevez votre carte", "Progetta la tua carta"), href: "/editor" },
+  { label: l("Contact", "Kontakt", "Contact", "Contatto"), href: "/contact" },
 ];
 
 export const heroStats = [
@@ -44,7 +53,7 @@ export const destinations = [
     label: l("Google Reviews", "Google-Bewertungen", "Avis Google", "Recensioni Google"),
     title: l("Rate your visit", "Bewerten Sie Ihren Besuch", "Évaluez votre visite", "Valuta la tua visita"),
     subtitle: "Café Bellevue",
-    accent: "#f0431f",
+    accent: "#2f6df0",
   },
   {
     key: "menu",
@@ -65,32 +74,32 @@ export const destinations = [
 export const steps = [
   {
     n: "01",
-    title: l("Design & customise", "Gestalten & anpassen", "Concevez & personnalisez", "Progetta e personalizza"),
+    title: l("Tap the card", "Karte antippen", "Approcher la carte", "Tappa la carta"),
     body: l(
-      "Pick your card, add your logo and choose where a tap leads: reviews, menu or a link page.",
-      "Wählen Sie Ihre Karte, fügen Sie Ihr Logo hinzu und legen Sie fest, wohin ein Tap führt: zu Bewertungen, zum Menü oder zu einer Linkseite.",
-      "Choisissez votre carte, ajoutez votre logo et décidez où mène un tap : avis, menu ou page de liens.",
-      "Scegli la tua carta, aggiungi il tuo logo e decidi dove porta un tap: recensioni, menu o pagina di link.",
+      "Your guest holds their smartphone to the NFC card.",
+      "Der Gast hält sein Smartphone an die NFC-Karte.",
+      "Le client approche son smartphone de la carte NFC.",
+      "L'ospite avvicina lo smartphone alla carta NFC.",
     ),
   },
   {
     n: "02",
-    title: l("Personalised & shipped", "Personalisiert & versendet", "Personnalisé & expédié", "Personalizzato e spedito"),
+    title: l("Open the menu", "Speisekarte öffnen", "Ouvrir le menu", "Apri il menu"),
     body: l(
-      "We personalise, encode and quality-check every piece in Switzerland, then ship it to your door within a few days.",
-      "Wir personalisieren, codieren und prüfen jedes Stück in der Schweiz und liefern es innert weniger Tage zu Ihnen.",
-      "Nous personnalisons, encodons et contrôlons chaque pièce en Suisse, puis l'expédions chez vous en quelques jours.",
-      "Personalizziamo, codifichiamo e controlliamo ogni pezzo in Svizzera, poi te lo spediamo in pochi giorni.",
+      "The digital menu opens straight in the browser, in the language they choose.",
+      "Die digitale Karte erscheint direkt im Browser, in der gewünschten Sprache.",
+      "Le menu numérique s'ouvre directement dans le navigateur, dans la langue choisie.",
+      "Il menu digitale si apre subito nel browser, nella lingua scelta.",
     ),
   },
   {
     n: "03",
-    title: l("Tap & grow", "Tippen & wachsen", "Tapez & progressez", "Tappa e cresci"),
+    title: l("Connect & review", "Verbinden & bewerten", "Se connecter & noter", "Connetti e recensisci"),
     body: l(
-      "Customers tap their phone. No app, no scanning. You watch clicks, reviews and followers climb in your dashboard.",
-      "Kunden halten ihr Handy an die Karte. Keine App, kein umständliches Scannen. Im Dashboard sehen Sie, wie Klicks, Bewertungen und Follower wachsen.",
-      "Les clients approchent leur téléphone. Sans application, sans scan compliqué. Vous voyez les clics, les avis et les abonnés grimper dans votre tableau de bord.",
-      "I clienti avvicinano il telefono. Niente app, niente scansioni complicate. Nella dashboard vedi crescere clic, recensioni e follower.",
+      "Use the WiFi, explore the dishes and leave a Google review in one tap.",
+      "WLAN nutzen, Gerichte entdecken und mit einem Klick Google-Bewertung abgeben.",
+      "Utiliser le WiFi, découvrir les plats et laisser un avis Google en un clic.",
+      "Usa il WiFi, scopri i piatti e lascia una recensione Google con un clic.",
     ),
   },
 ];
@@ -209,69 +218,69 @@ export const useCases = [
 export const features = [
   {
     key: "no-app",
-    title: l("No app required", "Keine App nötig", "Aucune appli requise", "Nessuna app richiesta"),
+    title: l("Multilingual", "Mehrsprachig", "Multilingue", "Multilingue"),
     body: l(
-      "Works straight out of the box on any modern phone. Customers just tap.",
-      "Funktioniert sofort auf jedem modernen Handy. Kunden tippen einfach.",
-      "Fonctionne d'emblée sur tout téléphone récent. Les clients tapent, c'est tout.",
-      "Funziona subito su ogni telefono moderno. I clienti tappano e basta.",
-    ),
-  },
-  {
-    key: "compat",
-    title: l("iPhone & Android", "iPhone & Android", "iPhone & Android", "iPhone & Android"),
-    body: l(
-      "Compatible with iPhone XR and newer, and all NFC-enabled Android phones.",
-      "Kompatibel mit iPhone XR und neuer sowie allen NFC-fähigen Android-Handys.",
-      "Compatible avec iPhone XR et plus récents, et tous les Android équipés NFC.",
-      "Compatibile con iPhone XR e successivi e con tutti gli Android dotati di NFC.",
-    ),
-  },
-  {
-    key: "durable",
-    title: l("Waterproof & durable", "Wasserfest & robust", "Étanche & durable", "Impermeabile e resistente"),
-    body: l(
-      "Built to survive spills, sun and daily handling in a busy venue.",
-      "Gemacht für verschüttete Getränke, Sonne und den täglichen Betrieb.",
-      "Conçu pour résister aux éclaboussures, au soleil et à un usage quotidien intense.",
-      "Costruito per resistere a schizzi, sole e uso quotidiano intenso.",
-    ),
-  },
-  {
-    key: "dashboard",
-    title: l("Live dashboard", "Live-Dashboard", "Tableau de bord en direct", "Dashboard in tempo reale"),
-    body: l(
-      "Track taps, reviews and menu views. Change destinations anytime.",
-      "Verfolgen Sie Taps, Bewertungen und Menüaufrufe. Das Ziel ändern Sie jederzeit.",
-      "Suivez taps, avis et vues du menu. Changez de destination à tout moment.",
-      "Monitora tap, recensioni e visualizzazioni del menu. Cambia destinazione quando vuoi.",
+      "Every guest understands your offer, with no questions asked.",
+      "Jeder Gast versteht Ihr Angebot, ohne Nachfragen.",
+      "Chaque client comprend votre offre, sans avoir à demander.",
+      "Ogni ospite capisce la tua offerta, senza chiedere.",
     ),
   },
   {
     key: "swiss",
-    title: l("Swiss software", "Swiss Software", "Logiciel suisse", "Software svizzero"),
+    title: l("Always up to date", "Immer aktuell", "Toujours à jour", "Sempre aggiornato"),
     body: l(
-      "Built and run by a Swiss team, with local support you can actually reach.",
-      "Von einem Schweizer Team entwickelt und betrieben, mit lokalem Support, den Sie wirklich erreichen.",
-      "Développé et exploité par une équipe suisse, avec un support local vraiment joignable.",
-      "Sviluppato e gestito da un team svizzero, con un supporto locale davvero raggiungibile.",
+      "Change dishes, prices and specials instantly. No reprints.",
+      "Gerichte, Preise und Aktionen sofort ändern. Kein Neudruck.",
+      "Modifiez plats, prix et offres instantanément. Aucune réimpression.",
+      "Cambia piatti, prezzi e offerte all'istante. Nessuna ristampa.",
+    ),
+  },
+  {
+    key: "durable",
+    title: l("Less work", "Weniger Aufwand", "Moins d'efforts", "Meno lavoro"),
+    body: l(
+      "WiFi and the menu explain themselves.",
+      "WLAN und Speisekarte erklären sich von selbst.",
+      "Le WiFi et le menu s'expliquent tout seuls.",
+      "WiFi e menu si spiegano da soli.",
+    ),
+  },
+  {
+    key: "dashboard",
+    title: l("More Google reviews", "Mehr Google-Bewertungen", "Plus d'avis Google", "Più recensioni Google"),
+    body: l(
+      "Happy guests leave a review in seconds.",
+      "Zufriedene Gäste bewerten in Sekunden.",
+      "Les clients satisfaits laissent un avis en quelques secondes.",
+      "Gli ospiti soddisfatti recensiscono in pochi secondi.",
+    ),
+  },
+  {
+    key: "compat",
+    title: l("No app download", "Kein App-Download", "Aucun téléchargement d'appli", "Nessun download di app"),
+    body: l(
+      "Works straight in the browser on iPhone and Android.",
+      "Funktioniert direkt im Browser auf iPhone und Android.",
+      "Fonctionne directement dans le navigateur sur iPhone et Android.",
+      "Funziona direttamente nel browser su iPhone e Android.",
     ),
   },
   {
     key: "privacy",
-    title: l("Privacy first", "Datenschutz zuerst", "Confidentialité d'abord", "Privacy al primo posto"),
+    title: l("A premium impression", "Hochwertiger Auftritt", "Une image haut de gamme", "Un'immagine di qualità"),
     body: l(
-      "Built to comply with Swiss data protection law. No hidden tracking.",
-      "Auf die Einhaltung des Schweizer Datenschutzgesetzes ausgelegt. Kein verstecktes Tracking.",
-      "Conçu pour respecter la loi suisse sur la protection des données. Aucun pistage caché.",
-      "Progettato per rispettare la legge svizzera sulla protezione dei dati. Nessun tracciamento nascosto.",
+      "Modern technology that fits your ambience.",
+      "Moderne Technik, die zu Ihrem Ambiente passt.",
+      "Une technologie moderne qui s'accorde à votre ambiance.",
+      "Tecnologia moderna che si abbina al tuo ambiente.",
     ),
   },
 ];
 
-// ── Our range: customisable NFC cards ─────────────────────────────────
-// Premium, bank-card-styled NFC cards, fully customised with your brand
-// and destination. One tap, no app, for any business.
+// ── Our flagship: the metal NFC business card ─────────────────────────
+// The first products section markets this card on its own. The menu card is
+// showcased separately alongside the editor (see `menuCard` below).
 export const products = [
   {
     name: "NFC Business Card",
@@ -285,31 +294,20 @@ export const products = [
     ),
     accent: true,
   },
-  {
-    name: "Menu Card",
-    material: l("PVC", "PVC", "PVC", "PVC"),
-    price: "50",
-    blurb: l(
-      "Tap to open your live digital menu in any language. Update prices and specials from your phone and never reprint again.",
-      "Ein Tap öffnet Ihr digitales Live-Menü in jeder Sprache. Preise und Angebote aktualisieren Sie bequem vom Handy und drucken nie wieder nach.",
-      "Un tap ouvre votre menu numérique en direct, dans toutes les langues. Modifiez prix et suggestions depuis votre téléphone et oubliez les réimpressions.",
-      "Un tap apre il tuo menu digitale live in ogni lingua. Aggiorna prezzi e offerte dal telefono e non ristampi mai più.",
-    ),
-    accent: false,
-  },
-  {
-    name: "Link Card",
-    material: l("Matte PVC", "Mattes PVC", "PVC mat", "PVC opaco"),
-    price: "29",
-    blurb: l(
-      "One tap to your link hub with Instagram, WiFi, booking and webshop, all in one place. Hand it over or leave it on the table.",
-      "Ein Tap zu Ihrem Link-Hub mit Instagram, WLAN, Buchung und Webshop an einem Ort. Überreichen Sie sie oder lassen Sie sie auf dem Tisch liegen.",
-      "Un tap vers votre hub de liens : Instagram, WiFi, réservation et boutique, au même endroit. À remettre en main propre ou à laisser sur la table.",
-      "Un tap al tuo hub di link con Instagram, WiFi, prenotazioni e shop, tutto in un posto. Consegnala o lasciala sul tavolo.",
-    ),
-    accent: false,
-  },
 ];
+
+// ── The menu card, showcased with the free editor ─────────────────────
+export const menuCard = {
+  name: "Menu Card",
+  material: l("PVC", "PVC", "PVC", "PVC"),
+  price: "50",
+  blurb: l(
+    "Tap to open your live digital menu in any language. Update prices and specials from your phone and never reprint again.",
+    "Ein Tap öffnet Ihr digitales Live-Menü in jeder Sprache. Preise und Angebote aktualisieren Sie bequem vom Handy und drucken nie wieder nach.",
+    "Un tap ouvre votre menu numérique en direct, dans toutes les langues. Modifiez prix et suggestions depuis votre téléphone et oubliez les réimpressions.",
+    "Un tap apre il tuo menu digitale live in ogni lingua. Aggiorna prezzi e offerte dal telefono e non ristampi mai più.",
+  ),
+};
 
 // ── Separate line: the Google Reviews card ────────────────────────────
 // A single, no-frills product just for collecting Google reviews.
@@ -431,86 +429,72 @@ export const testimonials = [
 export const faqs = [
   {
     q: l(
-      "Do my customers need to install an app?",
-      "Müssen meine Kunden eine App installieren?",
-      "Mes clients doivent-ils installer une appli ?",
-      "I miei clienti devono installare un'app?",
+      "Do my guests need an app?",
+      "Brauchen meine Gäste eine App?",
+      "Mes clients ont-ils besoin d'une appli ?",
+      "I miei ospiti hanno bisogno di un'app?",
     ),
     a: l(
-      "No. NFC is built into every modern smartphone. Customers simply hold their phone near the card and the destination opens in their browser, with no app, no account and no friction.",
-      "Nein. NFC ist in jedem modernen Smartphone eingebaut. Kunden halten ihr Handy einfach an die Karte, und das Ziel öffnet sich im Browser, ganz ohne App, ohne Konto und ohne Aufwand.",
-      "Non. Le NFC est intégré à tout smartphone récent. Les clients approchent simplement leur téléphone de la carte, et la destination s'ouvre dans leur navigateur, sans appli, sans compte et sans friction.",
-      "No. L'NFC è integrato in ogni smartphone moderno. I clienti avvicinano semplicemente il telefono alla carta e la destinazione si apre nel browser, senza app, senza account e senza ostacoli.",
+      "No. The menu opens straight in the browser.",
+      "Nein. Die Speisekarte öffnet sich direkt im Browser.",
+      "Non. Le menu s'ouvre directement dans le navigateur.",
+      "No. Il menu si apre direttamente nel browser.",
     ),
   },
   {
     q: l(
-      "Which phones are compatible?",
-      "Welche Handys sind kompatibel?",
-      "Quels téléphones sont compatibles ?",
-      "Quali telefoni sono compatibili?",
+      "What if a phone has no NFC?",
+      "Was ist, wenn ein Handy kein NFC hat?",
+      "Et si un téléphone n'a pas de NFC ?",
+      "E se un telefono non ha l'NFC?",
     ),
     a: l(
-      "All iPhones from the XR (2018) onward and virtually every NFC-enabled Android phone. For older devices, every product also carries a printed QR code as a backup.",
-      "Alle iPhones ab dem XR (2018) und praktisch jedes NFC-fähige Android-Handy. Für ältere Geräte trägt jedes Produkt zusätzlich einen gedruckten QR-Code als Reserve.",
-      "Tous les iPhone depuis le XR (2018) et pratiquement tout Android équipé NFC. Pour les appareils plus anciens, chaque produit porte aussi un QR code imprimé en secours.",
-      "Tutti gli iPhone dall'XR (2018) in poi e praticamente ogni Android dotato di NFC. Per i dispositivi più vecchi, ogni prodotto riporta anche un QR code stampato come riserva.",
+      "On request, we add a QR code as a backup.",
+      "Auf Wunsch integrieren wir einen QR-Code als Backup.",
+      "Sur demande, nous intégrons un QR code de secours.",
+      "Su richiesta, aggiungiamo un QR code di riserva.",
     ),
   },
   {
     q: l(
-      "Can I change where a card points to later?",
-      "Kann ich das Ziel einer Karte später ändern?",
-      "Puis-je changer la destination d'une carte plus tard ?",
-      "Posso cambiare la destinazione di una carta in seguito?",
+      "Can I change the menu myself?",
+      "Kann ich die Speisekarte selbst ändern?",
+      "Puis-je modifier le menu moi-même ?",
+      "Posso modificare il menu da solo?",
     ),
     a: l(
-      "Yes. On the Pro and Managed plans you can repoint any card to a new URL from your dashboard at any time, without reordering.",
-      "Ja. Mit den Plänen Pro und Managed leiten Sie jede Karte jederzeit im Dashboard auf eine neue URL um, ohne neu zu bestellen.",
-      "Oui. Avec les forfaits Pro et Managed, vous pouvez rediriger n'importe quelle carte vers une nouvelle URL depuis votre tableau de bord, à tout moment, sans recommander.",
-      "Sì. Con i piani Pro e Managed puoi reindirizzare qualsiasi carta a un nuovo URL dalla dashboard, in qualsiasi momento, senza riordinare.",
+      "Yes. Content is easy to update, with no reprints.",
+      "Ja. Inhalte lassen sich unkompliziert aktualisieren, ohne Neudruck.",
+      "Oui. Le contenu se met à jour facilement, sans réimpression.",
+      "Sì. I contenuti si aggiornano facilmente, senza ristampe.",
     ),
   },
   {
     q: l(
-      "Where are the cards made?",
-      "Wo werden die Karten hergestellt?",
-      "Où les cartes sont-elles fabriquées ?",
-      "Dove vengono prodotte le carte?",
+      "Which languages is the menu available in?",
+      "In welchen Sprachen ist die Speisekarte verfügbar?",
+      "Dans quelles langues le menu est-il disponible ?",
+      "In quali lingue è disponibile il menu?",
     ),
     a: l(
-      "We're a Swiss company. We design your cards, program them and run the whole platform ourselves. The NFC hardware itself is produced by trusted partners to our specifications, using premium, durable materials, then quality-checked by our team.",
-      "Wir sind ein Schweizer Unternehmen. Wir gestalten Ihre Karten, programmieren sie und betreiben die gesamte Plattform selbst. Die NFC-Hardware wird von vertrauenswürdigen Partnern nach unseren Vorgaben aus hochwertigen, langlebigen Materialien gefertigt und anschliessend von unserem Team geprüft.",
-      "Nous sommes une entreprise suisse. Nous concevons vos cartes, les programmons et exploitons toute la plateforme nous-mêmes. Le matériel NFC est produit par des partenaires de confiance selon nos spécifications, avec des matériaux premium et durables, puis contrôlé par notre équipe.",
-      "Siamo un'azienda svizzera. Progettiamo le tue carte, le programmiamo e gestiamo noi l'intera piattaforma. L'hardware NFC è prodotto da partner affidabili secondo le nostre specifiche, con materiali di qualità e durevoli, e controllato dal nostro team.",
+      "Any you like, e.g. German, English, Italian, Turkish, Chinese and more.",
+      "Beliebig erweiterbar, z. B. Deutsch, Englisch, Italienisch, Türkisch, Chinesisch und mehr.",
+      "Autant que vous voulez, p. ex. allemand, anglais, italien, turc, chinois et plus.",
+      "Quante ne vuoi, es. tedesco, inglese, italiano, turco, cinese e altre.",
     ),
   },
   {
     q: l(
-      "Is it privacy compliant?",
-      "Ist es datenschutzkonform?",
-      "Est-ce conforme à la protection des données ?",
-      "È conforme alla privacy?",
+      "How quickly is it ready to use?",
+      "Wie schnell ist es einsatzbereit?",
+      "En combien de temps est-ce prêt ?",
+      "Quanto velocemente è pronto all'uso?",
     ),
     a: l(
-      "Taplino is built to comply with Swiss data protection law (the revised Federal Act on Data Protection, revFADP).",
-      "Taplino ist auf die Einhaltung des Schweizer Datenschutzrechts (revidiertes Datenschutzgesetz, revDSG) ausgelegt.",
-      "Taplino est conçu pour respecter le droit suisse de la protection des données (loi fédérale révisée sur la protection des données, nLPD).",
-      "Taplino è progettato per rispettare il diritto svizzero sulla protezione dei dati (legge federale riveduta sulla protezione dei dati, nLPD).",
-    ),
-  },
-  {
-    q: l(
-      "What if a card gets damaged?",
-      "Was, wenn eine Karte beschädigt wird?",
-      "Que se passe-t-il si une carte est endommagée ?",
-      "Cosa succede se una carta si danneggia?",
-    ),
-    a: l(
-      "Our cards are waterproof and built for daily use, but accidents happen. Replacements are quick and affordable, and included on the Managed plan.",
-      "Unsere Karten sind wasserfest und für den täglichen Einsatz gemacht, doch Missgeschicke passieren. Ersatz ist schnell und günstig und im Managed-Plan inbegriffen.",
-      "Nos cartes sont étanches et conçues pour un usage quotidien, mais les accidents arrivent. Le remplacement est rapide et abordable, et inclus dans le forfait Managed.",
-      "Le nostre carte sono impermeabili e pensate per l'uso quotidiano, ma gli incidenti capitano. La sostituzione è rapida ed economica, e inclusa nel piano Managed.",
+      "After a quick setup, usually within a few days.",
+      "Nach Abstimmung meist in wenigen Tagen.",
+      "Après concertation, généralement en quelques jours.",
+      "Dopo un breve confronto, di solito in pochi giorni.",
     ),
   },
 ];
@@ -532,18 +516,18 @@ export const ui = {
     orderCards: l("Order cards", "Karten bestellen", "Commander des cartes", "Ordina le carte"),
   },
   hero: {
-    headPre: l("One tap between you and", "Ein Tap zwischen Ihnen und", "Un tap entre vous et", "Un tap tra te e"),
-    headHighlight: l("everything", "allem", "tout", "tutto"),
+    headPre: l("One tap that delights your", "Ein Tap, der Ihre", "Un tap qui séduit vos", "Un tap che conquista i tuoi"),
+    headHighlight: l("guests", "Gäste", "invités", "ospiti"),
     // Leading separator is part of the string so each language can punctuate
-    // correctly after the highlighted word (e.g. German needs a comma).
-    headPost: l(" you share.", ", was Sie teilen.", " ce que vous partagez.", " ciò che condividi."),
+    // correctly after the highlighted word (e.g. German needs a space + verb).
+    headPost: l(".", " begeistert.", ".", "."),
     body: l(
-      "Premium, fully customisable NFC cards for any business. Customers tap their phone, with no app and no scanning, and land wherever you want: your links, socials, menu, booking or Google reviews.",
-      "Hochwertige, voll anpassbare NFC-Karten für jedes Business. Kunden halten ihr Handy an die Karte, ganz ohne App und ohne Scannen, und landen genau dort, wo Sie es möchten: bei Ihren Links, Social Media, dem Menü, der Buchung oder den Google-Bewertungen.",
-      "Des cartes NFC premium et entièrement personnalisables pour toute entreprise. Les clients approchent leur téléphone, sans application ni scan, et arrivent où vous voulez : vos liens, réseaux, menu, réservation ou avis Google.",
-      "Carte NFC premium e totalmente personalizzabili per qualsiasi attività. I clienti avvicinano il telefono, senza app e senza scansioni, e arrivano dove vuoi: link, social, menu, prenotazioni o recensioni Google.",
+      "A multilingual menu, WiFi access and Google reviews, straight from your guests' phones. No app download. No reprints. No extra work for your team.",
+      "Mehrsprachige Speisekarte, WLAN-Zugang und Google-Bewertung, direkt vom Smartphone Ihrer Gäste. Kein App-Download. Kein Neudruck. Kein zusätzlicher Aufwand für Ihr Team.",
+      "Menu multilingue, accès WiFi et avis Google, directement depuis le smartphone de vos clients. Aucun téléchargement d'appli. Aucune réimpression. Aucun effort supplémentaire pour votre équipe.",
+      "Menu multilingue, accesso WiFi e recensioni Google, direttamente dallo smartphone dei tuoi ospiti. Nessun download di app. Nessuna ristampa. Nessuno sforzo in più per il tuo team.",
     ),
-    ctaPrimary: l("Order your cards", "Karten bestellen", "Commander vos cartes", "Ordina le tue carte"),
+    ctaPrimary: l("Request a free demo", "Kostenlose Demo anfragen", "Demander une démo gratuite", "Richiedi una demo gratuita"),
     ctaSecondary: l("See how it works", "So funktioniert's", "Voir comment ça marche", "Scopri come funziona"),
   },
   logos: {
@@ -554,19 +538,73 @@ export const ui = {
       "Pensato per le attività di tutta la Svizzera",
     ),
   },
+  problem: {
+    eyebrow: l("The problem", "Das Problem", "Le problème", "Il problema"),
+    title: l("Sound familiar?", "Kennen Sie das?", "Ça vous parle ?", "Ti suona familiare?"),
+    body: l(
+      "Paper menus go out of date fast. Foreign-language guests keep asking for explanations. The WiFi password gets hunted down. And happy guests forget the Google review. On top of that, a professional-looking card usually means paying a designer.",
+      "Papierkarten sind schnell veraltet. Fremdsprachige Gäste fragen ständig nach Erklärungen. Das WLAN-Passwort wird gesucht. Und zufriedene Gäste vergessen die Google-Bewertung. Und für eine professionelle Karte braucht es meist einen Designer.",
+      "Les cartes papier se démodent vite. Les clients étrangers demandent sans cesse des explications. On cherche le mot de passe WiFi. Et les clients satisfaits oublient l'avis Google. En plus, une carte à l'allure professionnelle nécessite généralement un graphiste.",
+      "I menu di carta invecchiano in fretta. Gli ospiti stranieri chiedono continuamente spiegazioni. Si cerca la password del WiFi. E gli ospiti soddisfatti dimenticano la recensione Google. In più, una carta dall'aspetto professionale di solito richiede un grafico.",
+    ),
+    note: l(
+      "Yet service should be simple, for your team and for your guests.",
+      "Dabei soll Service einfach sein, für Ihr Team und für Ihre Gäste.",
+      "Pourtant, le service devrait être simple, pour votre équipe et pour vos clients.",
+      "Eppure il servizio dovrebbe essere semplice, per il tuo team e per i tuoi ospiti.",
+    ),
+  },
+  solution: {
+    eyebrow: l("The solution", "Die Lösung", "La solution", "La soluzione"),
+    title: l(
+      "The NFC menu for your restaurant",
+      "Die NFC-Speisekarte für Ihr Restaurant",
+      "Le menu NFC pour votre restaurant",
+      "Il menu NFC per il tuo ristorante",
+    ),
+    body: l(
+      "A premium card on the table, that's all it takes. Guests hold their smartphone to it and land straight on your digital menu. There they pick their language, see every dish, connect to your WiFi and, if they like, leave a Google review right away.",
+      "Eine hochwertige Karte auf dem Tisch, mehr braucht es nicht. Gäste halten ihr Smartphone daran und landen sofort auf Ihrer digitalen Speisekarte. Dort wählen sie ihre Sprache, sehen alle Gerichte, verbinden sich mit Ihrem WLAN und geben bei Bedarf direkt eine Google-Bewertung ab.",
+      "Une belle carte sur la table, il n'en faut pas plus. Les clients y approchent leur smartphone et arrivent aussitôt sur votre menu numérique. Ils y choisissent leur langue, voient tous les plats, se connectent à votre WiFi et laissent au besoin un avis Google directement.",
+      "Una carta di qualità sul tavolo, non serve altro. Gli ospiti vi avvicinano lo smartphone e arrivano subito sul tuo menu digitale. Lì scelgono la lingua, vedono tutti i piatti, si connettono al tuo WiFi e, se vogliono, lasciano subito una recensione Google.",
+    ),
+    note: l(
+      "No app download. No out-of-date menus. No misunderstandings.",
+      "Kein App-Download. Keine veralteten Karten. Keine Missverständnisse.",
+      "Aucun téléchargement d'appli. Aucune carte périmée. Aucun malentendu.",
+      "Nessun download di app. Nessun menu obsoleto. Nessun malinteso.",
+    ),
+    designer: l(
+      "And you design the card yourself in our free editor, no designer needed.",
+      "Und die Karte gestalten Sie selbst in unserem kostenlosen Editor, ganz ohne Designer.",
+      "Et vous concevez la carte vous-même dans notre éditeur gratuit, sans graphiste.",
+      "E progetti la carta da solo nel nostro editor gratuito, senza grafico.",
+    ),
+    editorCta: l("Open the editor", "Editor öffnen", "Ouvrir l'éditeur", "Apri l'editor"),
+  },
+  forWhom: {
+    eyebrow: l("Who it's for", "Für wen", "Pour qui", "Per chi"),
+    title: l("Who is it for?", "Für wen?", "Pour qui ?", "Per chi?"),
+    body: l(
+      "For restaurants, cafés, bars, hotels, food trucks and anyone who wants to give their guests a simpler, more modern service.",
+      "Für Restaurants, Cafés, Bars, Hotels, Food Trucks und alle, die ihren Gästen einen einfacheren, moderneren Service bieten wollen.",
+      "Pour les restaurants, cafés, bars, hôtels, food trucks et tous ceux qui veulent offrir à leurs clients un service plus simple et plus moderne.",
+      "Per ristoranti, caffè, bar, hotel, food truck e tutti coloro che vogliono offrire ai propri ospiti un servizio più semplice e moderno.",
+    ),
+  },
   how: {
     eyebrow: l("How it works", "So funktioniert's", "Comment ça marche", "Come funziona"),
     title: l(
-      "From order to live in three steps",
-      "In drei Schritten von der Bestellung zum Start",
-      "De la commande au lancement en trois étapes",
-      "Dall'ordine all'attivazione in tre passi",
+      "In 3 steps to a better guest experience",
+      "In 3 Schritten zum besseren Gästeerlebnis",
+      "En 3 étapes vers une meilleure expérience client",
+      "In 3 passi verso una migliore esperienza per gli ospiti",
     ),
     intro: l(
-      "No technical setup. No app for your customers. Just a beautifully made card that does one thing brilliantly.",
-      "Kein technisches Setup. Keine App für Ihre Kunden. Nur eine schön gemachte Karte, die eine Sache brillant macht.",
-      "Aucune configuration technique. Aucune appli pour vos clients. Juste une carte superbement conçue qui fait une chose à merveille.",
-      "Nessuna configurazione tecnica. Nessuna app per i tuoi clienti. Solo una carta ben fatta che fa una cosa in modo eccellente.",
+      "No technical setup. No app for your guests. Just a beautifully made card on the table.",
+      "Kein technisches Setup. Keine App für Ihre Gäste. Nur eine schön gemachte Karte auf dem Tisch.",
+      "Aucune configuration technique. Aucune appli pour vos clients. Juste une belle carte sur la table.",
+      "Nessuna configurazione tecnica. Nessuna app per i tuoi ospiti. Solo una carta ben fatta sul tavolo.",
     ),
   },
   useCases: {
@@ -615,12 +653,12 @@ export const ui = {
     ],
   },
   features: {
-    eyebrow: l("Built for real venues", "Für den echten Betrieb gemacht", "Conçu pour de vrais établissements", "Pensato per attività reali"),
+    eyebrow: l("Benefits", "Vorteile", "Avantages", "Vantaggi"),
     title: l(
-      "Premium hardware, effortless software",
-      "Premium-Hardware, mühelose Software",
-      "Matériel premium, logiciel sans effort",
-      "Hardware premium, software senza sforzo",
+      "What it brings you and your guests",
+      "Das bringt's Ihnen und Ihren Gästen",
+      "Ce que ça vous apporte, à vous et à vos clients",
+      "Cosa offre a te e ai tuoi ospiti",
     ),
     intro: l(
       "Everything is engineered to just work, for you and for every guest who taps.",
@@ -633,16 +671,16 @@ export const ui = {
     range: {
       eyebrow: l("Our products", "Unsere Produkte", "Nos produits", "I nostri prodotti"),
       title: l(
-        "Customisable NFC cards, endless destinations",
-        "Anpassbare NFC-Karten, unendlich viele Ziele",
-        "Des cartes NFC personnalisables, une infinité de destinations",
-        "Carte NFC personalizzabili, infinite destinazioni",
+        "The metal NFC business card",
+        "Die NFC-Metall-Visitenkarte",
+        "La carte de visite NFC en métal",
+        "Il biglietto da visita NFC in metallo",
       ),
       intro: l(
-        "Business cards, menu cards, link cards and more, each customised with your brand and whatever a tap should open, all powered by our Swiss-built platform.",
-        "Visitenkarten, Menükarten, Linkkarten und mehr, jede individuell gestaltet mit Ihrer Marke und dem gewünschten Tap-Ziel, betrieben von unserer in der Schweiz entwickelten Plattform.",
-        "Cartes de visite, cartes menu, cartes de liens et plus encore, chacune personnalisée à votre marque et à la destination de votre choix, le tout propulsé par notre plateforme conçue en Suisse.",
-        "Biglietti da visita, carte menu, carte link e altro ancora, ognuna personalizzata con il tuo marchio e la destinazione che preferisci, tutto gestito dalla nostra piattaforma sviluppata in Svizzera.",
+        "Our flagship card in premium anodised aluminium. One tap shares your contact details, socials and links, fully customised with your brand.",
+        "Unser Flaggschiff aus hochwertigem eloxiertem Aluminium. Ein Tap teilt Ihre Kontaktdaten, Social Media und Links, individuell gestaltet mit Ihrer Marke.",
+        "Notre produit phare en aluminium anodisé premium. Un tap partage vos coordonnées, réseaux et liens, entièrement personnalisé à votre marque.",
+        "Il nostro prodotto di punta in alluminio anodizzato premium. Un tap condivide contatti, social e link, personalizzato con il tuo marchio.",
       ),
       cta: l("See bundles", "Pakete ansehen", "Voir les offres", "Vedi i pacchetti"),
       badge: l("Most popular", "Am beliebtesten", "Le plus populaire", "Più popolare"),
@@ -650,10 +688,10 @@ export const ui = {
     review: {
       eyebrow: l("Free card editor", "Kostenloser Karteneditor", "Éditeur de cartes gratuit", "Editor di carte gratuito"),
       title: l(
-        "Design your Google review card in minutes",
-        "Gestalten Sie Ihre Google-Bewertungskarte in Minuten",
-        "Concevez votre carte d'avis Google en quelques minutes",
-        "Progetta la tua carta recensioni Google in pochi minuti",
+        "Design your menu card in minutes",
+        "Gestalten Sie Ihre Menükarte in Minuten",
+        "Concevez votre carte menu en quelques minutes",
+        "Progetta la tua carta menu in pochi minuti",
       ),
       intro: l(
         "Open our editor, pick a preset for your trade, drop in your logo and brand colours, and watch the card come to life as you type. No designer, no back-and-forth. When it looks right, order it in a couple of taps.",
@@ -741,18 +779,18 @@ export const ui = {
   cta: {
     eyebrow: l("Get started", "Loslegen", "Commencer", "Inizia"),
     title: l(
-      "Ready to turn taps into reviews?",
-      "Bereit, Taps in Bewertungen zu verwandeln?",
-      "Prêt à transformer les taps en avis ?",
-      "Pronto a trasformare i tap in recensioni?",
+      "Make the first tap.",
+      "Machen Sie den ersten Tap.",
+      "Faites le premier tap.",
+      "Fai il primo tap.",
     ),
     body: l(
-      "Design your card and place your order in minutes. We ship across Switzerland.",
-      "Gestalten Sie Ihre Karte und bestellen Sie in wenigen Minuten. Wir versenden in die ganze Schweiz.",
-      "Concevez votre carte et commandez en quelques minutes. Nous livrons dans toute la Suisse.",
-      "Progetta la tua carta e ordina in pochi minuti. Spediamo in tutta la Svizzera.",
+      "In a free demo we'll show you how your digital menu looks, with no obligation and tailored to you.",
+      "Wir zeigen Ihnen in einer kostenlosen Demo, wie Ihre digitale Speisekarte aussieht, unverbindlich und individuell.",
+      "Lors d'une démo gratuite, nous vous montrons à quoi ressemble votre menu numérique, sans engagement et personnalisé.",
+      "In una demo gratuita ti mostriamo com'è il tuo menu digitale, senza impegno e su misura.",
     ),
-    primary: l("Order your cards", "Karten bestellen", "Commander vos cartes", "Ordina le tue carte"),
+    primary: l("Request a free demo", "Kostenlose Demo anfragen", "Demander une démo gratuite", "Richiedi una demo gratuita"),
   },
   editor: {
     // ── Card editor page ────────────────────────────────────────────
@@ -946,18 +984,71 @@ export const ui = {
     resetDesign: l("Reset design", "Design zurücksetzen", "Réinitialiser", "Reimposta"),
     // Confirmation
     orderThanks: l(
-      "Your design is ready to send",
-      "Ihr Design ist bereit zum Absenden",
-      "Votre design est prêt à être envoyé",
-      "Il tuo design è pronto per l'invio",
-    ),
-    orderThanksBody: l(
-      "We've opened an email with your card specification. Send it and we'll reply with a proof within 24 hours.",
-      "Wir haben eine E-Mail mit Ihrer Kartenspezifikation geöffnet. Senden Sie sie ab, wir antworten innert 24 Stunden mit einem Entwurf.",
-      "Nous avons ouvert un e-mail avec la spécification de votre carte. Envoyez-le et nous répondrons avec une épreuve sous 24 heures.",
-      "Abbiamo aperto un'email con la specifica della tua carta. Inviala e ti risponderemo con una bozza entro 24 ore.",
+      "Order received",
+      "Bestellung erhalten",
+      "Commande reçue",
+      "Ordine ricevuto",
     ),
     orderClose: l("Keep editing", "Weiter bearbeiten", "Continuer l'édition", "Continua a modificare"),
+    // Order sending states (order is emailed to our sales inbox)
+    orderSending: l("Sending…", "Wird gesendet…", "Envoi…", "Invio…"),
+    orderThanksSentBody: l(
+      "Your card specification is on its way to our team. We'll reply with a proof within 24 hours.",
+      "Ihre Kartenspezifikation ist auf dem Weg zu unserem Team. Wir antworten innert 24 Stunden mit einem Entwurf.",
+      "La spécification de votre carte est en route vers notre équipe. Nous répondons avec une épreuve sous 24 heures.",
+      "La specifica della tua carta è in viaggio verso il nostro team. Ti risponderemo con una bozza entro 24 ore.",
+    ),
+    orderError: l(
+      "Something went wrong while sending your order. Please try again in a moment.",
+      "Beim Senden Ihrer Bestellung ist etwas schiefgelaufen. Bitte versuchen Sie es gleich noch einmal.",
+      "Une erreur s'est produite lors de l'envoi de votre commande. Veuillez réessayer dans un instant.",
+      "Qualcosa è andato storto durante l'invio del tuo ordine. Riprova tra un istante.",
+    ),
+  },
+  contact: {
+    eyebrow: l("Contact", "Kontakt", "Contact", "Contatto"),
+    title: l(
+      "Let's talk",
+      "Sprechen wir",
+      "Discutons",
+      "Parliamone",
+    ),
+    intro: l(
+      "Questions about cards, pricing or a bigger rollout? Send us a message and we usually reply within a few hours.",
+      "Fragen zu Karten, Preisen oder einem grösseren Rollout? Schreiben Sie uns, wir antworten meist innert weniger Stunden.",
+      "Des questions sur les cartes, les tarifs ou un déploiement plus large ? Écrivez-nous, nous répondons généralement en quelques heures.",
+      "Domande su carte, prezzi o un rollout più ampio? Scrivici, di solito rispondiamo in poche ore.",
+    ),
+    fieldName: l("Name", "Name", "Nom", "Nome"),
+    fieldNamePh: l("Jane Meier", "Jane Meier", "Jane Meier", "Jane Meier"),
+    fieldEmail: l("Email", "E-Mail", "E-mail", "Email"),
+    fieldEmailPh: l("jane@meier.ch", "jane@meier.ch", "jane@meier.ch", "jane@meier.ch"),
+    fieldCompany: l("Company (optional)", "Firma (optional)", "Entreprise (facultatif)", "Azienda (facoltativo)"),
+    fieldCompanyPh: l("Meier GmbH", "Meier GmbH", "Meier Sàrl", "Meier SA"),
+    fieldPhone: l("Phone (optional)", "Telefon (optional)", "Téléphone (facultatif)", "Telefono (facoltativo)"),
+    fieldPhonePh: l("+41 79 123 45 67", "+41 79 123 45 67", "+41 79 123 45 67", "+41 79 123 45 67"),
+    fieldMessage: l("Message", "Nachricht", "Message", "Messaggio"),
+    fieldMessagePh: l(
+      "Tell us what you're looking for…",
+      "Erzählen Sie uns, wonach Sie suchen…",
+      "Dites-nous ce que vous cherchez…",
+      "Raccontaci cosa cerchi…",
+    ),
+    submit: l("Send message", "Nachricht senden", "Envoyer le message", "Invia messaggio"),
+    sending: l("Sending…", "Wird gesendet…", "Envoi…", "Invio…"),
+    successTitle: l("Message sent", "Nachricht gesendet", "Message envoyé", "Messaggio inviato"),
+    successBody: l(
+      "Thanks for reaching out. We'll get back to you shortly.",
+      "Danke für Ihre Nachricht. Wir melden uns in Kürze.",
+      "Merci de nous avoir contactés. Nous vous répondrons sous peu.",
+      "Grazie per averci scritto. Ti risponderemo a breve.",
+    ),
+    error: l(
+      "Something went wrong. Please try again in a moment.",
+      "Etwas ist schiefgelaufen. Bitte versuchen Sie es gleich noch einmal.",
+      "Une erreur s'est produite. Veuillez réessayer dans un instant.",
+      "Qualcosa è andato storto. Riprova tra un istante.",
+    ),
   },
   footer: {
     description: l(
@@ -969,6 +1060,7 @@ export const ui = {
     productHeading: l("Product", "Produkt", "Produit", "Prodotto"),
     companyHeading: l("Company", "Unternehmen", "Entreprise", "Azienda"),
     contactHeading: l("Contact", "Kontakt", "Contact", "Contatto"),
+    contactLink: l("Contact form", "Kontaktformular", "Formulaire de contact", "Modulo di contatto"),
     companyLinks: [
       { href: "/about", label: l("About", "Über uns", "À propos", "Chi siamo") },
     ],

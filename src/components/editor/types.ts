@@ -5,8 +5,8 @@ export type FontStyle = "sans" | "serif" | "rounded" | "display";
 
 // The physical card the customer is ordering. "business" is the premium metal
 // card (available in a silver or black finish); "review" is our classic printed
-// card (the one shown across the site); "simple" is the budget matte-PVC card.
-export type CardType = "business" | "review" | "simple";
+// card (the one shown across the site).
+export type CardType = "business" | "review";
 export type CardFinish = "silver" | "black";
 
 export type CardTypeDef = {
@@ -55,22 +55,6 @@ export const CARD_TYPES: CardTypeDef[] = [
     aspect: "5 / 6", // large portrait review/menu card
     previewScale: 1,
     sizeLabel: l("120 × 120 mm", "120 × 120 mm", "120 × 120 mm", "120 × 120 mm"),
-  },
-  {
-    key: "simple",
-    name: l("Simple card", "Einfache Karte", "Carte simple", "Carta semplice"),
-    tagline: l(
-      "Clean and budget-friendly matte PVC",
-      "Schlicht und günstig, mattes PVC",
-      "Sobre et économique, PVC mat",
-      "Essenziale ed economica, PVC opaco",
-    ),
-    material: l("Matte PVC", "Mattes PVC", "PVC mat", "PVC opaco"),
-    price: 29,
-    available: false,
-    aspect: "5 / 6", // compact portrait card
-    previewScale: 0.74,
-    sizeLabel: l("85 × 100 mm", "85 × 100 mm", "85 × 100 mm", "85 × 100 mm"),
   },
 ];
 
@@ -194,11 +178,11 @@ export const PRESETS: Preset[] = [
     name: l("Restaurant", "Restaurant", "Restaurant", "Ristorante"),
     category: l("Fast food & restaurant", "Schnellrestaurant", "Restauration rapide", "Ristorazione veloce"),
     layout: "list",
-    headerColor: "#e8452a",
+    headerColor: "#2f6df0",
     headerTextColor: "#ffffff",
-    bodyColor: "#fbede9",
+    bodyColor: "#eaf1fd",
     starColor: "#ffd23f",
-    accentColor: "#e8452a",
+    accentColor: "#2f6df0",
     font: "sans",
     headerShape: "wave",
     showStars: true,

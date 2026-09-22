@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { nav, site, BRAND, ui } from "@/lib/site";
+import { headerNav, site, BRAND, ui } from "@/lib/site";
 import { Button, Arrow } from "@/components/ui";
 import { useLang, useLocaleHref } from "@/lib/i18n";
 import type { Locale } from "@/lib/locale";
@@ -135,7 +135,7 @@ export function Nav() {
           <Wordmark />
 
           <nav className="hidden items-center gap-8 lg:flex">
-            {nav.map((item) => (
+            {headerNav.map((item) => (
               <Link
                 key={item.href}
                 href={localize(item.href)}
@@ -179,7 +179,7 @@ export function Nav() {
         {open && (
           <div className="mt-2 rounded-2xl border border-line bg-paper/95 p-4 backdrop-blur-xl lg:hidden">
             <nav className="flex flex-col">
-              {nav.map((item) => (
+              {headerNav.map((item) => (
                 <Link
                   key={item.href}
                   href={localize(item.href)}

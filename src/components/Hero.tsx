@@ -54,7 +54,7 @@ export function Hero() {
 
           <Reveal delay={0.18}>
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Button href="#pricing">
+              <Button href="#contact">
                 {t(ui.hero.ctaPrimary)} <Arrow />
               </Button>
               <Button href="#how" variant="outline">

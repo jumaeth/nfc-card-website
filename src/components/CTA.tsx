@@ -1,6 +1,6 @@
 "use client";
 
-import { site, ui } from "@/lib/site";
+import { ui } from "@/lib/site";
 import { Button, Arrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { useT } from "@/lib/i18n";
@@ -15,7 +15,7 @@ export function CTA() {
             className="pointer-events-none absolute inset-0"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 50% 120%, rgba(240,67,31,0.35), transparent 55%)",
+                "radial-gradient(circle at 50% 120%, rgba(47,109,240,0.35), transparent 55%)",
             }}
           />
           <div
@@ -34,16 +34,9 @@ export function CTA() {
             <p className="mx-auto mt-6 max-w-xl text-lg text-paper/70">
               {t(ui.cta.body)}
             </p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-              <Button href={`mailto:${site.email}`} variant="light">
+            <div className="mt-10 flex justify-center">
+              <Button href="/contact" variant="light">
                 {t(ui.cta.primary)} <Arrow />
-              </Button>
-              <Button
-                href={`mailto:${site.email}`}
-                variant="ghost"
-                className="text-paper hover:text-accent"
-              >
-                {site.email}
               </Button>
             </div>
           </div>

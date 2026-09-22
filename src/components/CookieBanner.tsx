@@ -75,7 +75,7 @@ export function CookieBanner() {
           <button
             type="button"
             onClick={() => decide("accepted")}
-            className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_30px_-12px_rgba(240,67,31,0.7)] transition-all duration-300 hover:bg-accent-ink"
+            className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_30px_-12px_rgba(47,109,240,0.7)] transition-all duration-300 hover:bg-accent-ink"
           >
             {t(ui.cookie.accept)}
           </button>

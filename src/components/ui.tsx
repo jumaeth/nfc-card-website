@@ -20,7 +20,7 @@ export function Button({
     "group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 will-change-transform";
   const styles = {
     solid:
-      "bg-accent text-white hover:bg-accent-ink hover:-translate-y-0.5 shadow-[0_10px_30px_-12px_rgba(240,67,31,0.7)]",
+      "bg-accent text-white hover:bg-accent-ink hover:-translate-y-0.5 shadow-[0_10px_30px_-12px_rgba(47,109,240,0.7)]",
     outline:
       "border border-ink/20 text-ink hover:border-ink hover:-translate-y-0.5",
     ghost: "text-ink hover:text-accent",
@@ -71,7 +71,7 @@ export function SectionHeading({
   align = "left",
   dark = false,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: ReactNode;
   intro?: ReactNode;
   align?: "left" | "center";
@@ -79,11 +79,13 @@ export function SectionHeading({
 }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <div className={`flex items-center gap-3 ${align === "center" ? "justify-center" : ""}`}>
-        {align === "center" && <span className="hidden h-px w-8 bg-accent sm:block" />}
-        <span className="eyebrow text-accent">{eyebrow}</span>
-        {align === "center" && <span className="hidden h-px w-8 bg-accent sm:block" />}
-      </div>
+      {eyebrow && (
+        <div className={`flex items-center gap-3 ${align === "center" ? "justify-center" : ""}`}>
+          {align === "center" && <span className="hidden h-px w-8 bg-accent sm:block" />}
+          <span className="eyebrow text-accent">{eyebrow}</span>
+          {align === "center" && <span className="hidden h-px w-8 bg-accent sm:block" />}
+        </div>
+      )}
       <h2
         className={`display mt-4 text-4xl sm:text-5xl ${
           dark ? "text-paper" : "text-ink"

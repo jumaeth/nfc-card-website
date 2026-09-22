@@ -13,7 +13,7 @@ export function generateStaticParams() {
 // Brand palette (mirrors src/app/globals.css).
 const INK = "#14120f";
 const PAPER = "#f6f3ec";
-const ACCENT = "#f0431f";
+const ACCENT = "#2f6df0";
 
 export const alt = `${SITE_NAME} — Swiss NFC cards`;
 
