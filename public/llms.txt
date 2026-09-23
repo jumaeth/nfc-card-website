@@ -4,7 +4,7 @@
 > businesses. A customer taps their phone on the card (no app, no scanning) and
 > instantly opens whatever the business chooses: Google reviews, a digital menu,
 > a link hub, socials, WiFi or booking. Cards are personalised, encoded and
-> quality-checked in Switzerland and ship in 3-5 days.
+> quality-checked in Switzerland and shipped once your design is approved.
 
 Website: https://taplino.ch
 Contact: hello@taplino.ch
@@ -22,15 +22,14 @@ Compatibility: iPhone XR (2018) and newer, and all NFC-enabled Android phones. E
 ## Products (prices in CHF)
 
 - NFC Business Card: from CHF 89, anodised aluminium. Shares contact details, socials and links with one tap, customised to your brand.
-- Menu Card: from CHF 39, recycled PVC. Opens a live digital menu in any language; update prices/specials from your phone, never reprint.
-- Link Card: from CHF 29, matte PVC. One tap to a link hub with Instagram, WiFi, booking and webshop.
-- Google Review Card: from CHF 50, recycled PVC. Credit-card sized; one tap opens your Google review form.
+- Menu Card: from CHF 50, PVC. Opens a live digital menu in any language; update prices and specials from your phone, never reprint.
+- Google Review Card: from CHF 50, PVC. Credit-card sized; one tap opens your Google review form.
 
 ## Pricing plans
 
 - Starter: CHF 50 one-time per card. Buy cards, manage them yourself; one destination per card, free backup QR, email support.
 - Pro: CHF 39/month. Unlimited destination changes, analytics & review insights, multiple locations, priority support.
-- Managed: CHF 250/month. We run your menu and reviews: 10 personalised cards, menu translation & updates, replies to every Google review, dedicated account manager.
+- Managed: CHF 250/month. We run your menu and reviews for you: everything in Pro, 10 personalised cards, menu translation and updates, and a dedicated account manager.
 
 ## Use cases
 
@@ -41,8 +40,8 @@ Compatibility: iPhone XR (2018) and newer, and all NFC-enabled Android phones. E
 ## Key facts
 
 - Swiss company; cards designed, encoded and quality-checked in Switzerland.
-- Waterproof and durable, built for daily use in busy venues.
-- Free shipping in Switzerland, delivery in 3-5 days.
+- Made from premium, durable materials, built for daily use in busy venues.
+- Free shipping in Switzerland; cards ship once your design is approved.
 - Live dashboard to track taps, reviews and menu views.
 
 ## Localized pages

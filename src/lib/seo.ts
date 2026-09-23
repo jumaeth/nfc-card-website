@@ -34,6 +34,12 @@ export function localeUrl(locale: Locale, path = ""): string {
   return `${SITE_URL}/${localeToSlug(locale)}${path}`;
 }
 
+// The regional hreflang value for one locale (e.g. "de-CH"), used for the
+// `inLanguage` field in JSON-LD so it matches the hreflang tags in <head>.
+export function localeToHreflang(locale: Locale): string {
+  return HREFLANG[locale];
+}
+
 // hreflang alternates map for a given path across every locale (+ x-default).
 export function languageAlternates(path = ""): Record<string, string> {
   const languages: Record<string, string> = {};
@@ -152,15 +158,29 @@ export const seoKeywords: L = l(
 );
 
 // ── Organisation facts (used by JSON-LD and llms.txt) ─────────────────
-// Social profiles and the registered legal name/address are pending from the
-// owner; leave `sameAs` empty and it is omitted from structured data rather
-// than inventing links. Fill these in once available.
+// The registered legal name/address, phone, VAT and social profiles are
+// pending from the owner. Every optional field below is emitted into JSON-LD
+// only when non-empty (see SiteJsonLd), so leaving a value as "" simply omits
+// it rather than publishing a placeholder. Fill these in once available.
 export const ORG = {
   name: SITE_NAME,
-  legalName: SITE_NAME, // TODO: replace with registered company name
+  // Sole proprietorship operated by Marco Jucker (see the imprint). If Taplino
+  // is later incorporated (e.g. "Taplino GmbH"), update this to the registered name.
+  legalName: SITE_NAME,
   url: SITE_URL,
   email: "hello@taplino.ch",
+  telephone: "", // TODO: e.g. "+41 44 123 45 67"
   logo: `${SITE_URL}/logo/taplino-mark.svg`,
   country: "CH",
+  // Registered business address (from the imprint). Any empty field is dropped.
+  address: {
+    streetAddress: "Schwarztorstrasse 115",
+    postalCode: "3007",
+    locality: "Bern",
+    region: "BE",
+  },
+  founder: "Marco Jucker", // Responsible person named in the imprint.
+  vatID: "", // TODO: Swiss UID, e.g. "CHE-123.456.789 MWST"
+  foundingDate: "", // TODO: ISO year or date, e.g. "2024"
   sameAs: [] as string[], // TODO: add Instagram / LinkedIn / TikTok URLs
 };

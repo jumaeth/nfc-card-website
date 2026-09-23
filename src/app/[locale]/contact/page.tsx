@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ContactPage } from "@/components/ContactPage";
+import { ContactJsonLd } from "@/components/JsonLd";
 import { slugToLocale } from "@/lib/locale";
 import { buildMetadata, seoCopy } from "@/lib/seo";
 
@@ -19,9 +20,15 @@ export async function generateMetadata({
   });
 }
 
-export default function Page() {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const loc = slugToLocale((await params).locale) ?? "DE";
   return (
     <>
+      <ContactJsonLd locale={loc} />
       <Nav />
       <main className="flex-1 pt-28 sm:pt-32">
         <ContactPage />

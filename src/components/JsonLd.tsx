@@ -3,8 +3,15 @@
 // component: no hooks, localized via the `locale` prop passed from the layout.
 import type { Locale } from "@/lib/locale";
 import { LOCALES, localeToSlug } from "@/lib/locale";
-import { ORG, SITE_NAME, SITE_URL, localeUrl } from "@/lib/seo";
-import { products, menuCard, reviewCards, faqs } from "@/lib/site";
+import {
+  ORG,
+  SITE_NAME,
+  SITE_URL,
+  localeUrl,
+  localeToHreflang,
+  seoCopy,
+} from "@/lib/seo";
+import { products, menuCard, reviewCards, faqs, pages } from "@/lib/site";
 
 function JsonLd({ data }: { data: unknown }) {
   return (
@@ -21,6 +28,17 @@ const availableLanguage = LOCALES.map((l) => localeToSlug(l));
 
 // Organization + WebSite — rendered on every page (in the root layout).
 export function SiteJsonLd({ locale }: { locale: Locale }) {
+  const address = {
+    "@type": "PostalAddress",
+    addressCountry: ORG.country,
+    ...(ORG.address.streetAddress
+      ? { streetAddress: ORG.address.streetAddress }
+      : {}),
+    ...(ORG.address.postalCode ? { postalCode: ORG.address.postalCode } : {}),
+    ...(ORG.address.locality ? { addressLocality: ORG.address.locality } : {}),
+    ...(ORG.address.region ? { addressRegion: ORG.address.region } : {}),
+  };
+
   const organization = {
     "@type": "Organization",
     "@id": ORG_ID,
@@ -29,17 +47,19 @@ export function SiteJsonLd({ locale }: { locale: Locale }) {
     url: ORG.url,
     logo: ORG.logo,
     email: ORG.email,
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: ORG.country,
-    },
+    ...(ORG.telephone ? { telephone: ORG.telephone } : {}),
+    address,
     areaServed: { "@type": "Country", name: "Switzerland" },
     contactPoint: {
       "@type": "ContactPoint",
       email: ORG.email,
+      ...(ORG.telephone ? { telephone: ORG.telephone } : {}),
       contactType: "customer support",
       availableLanguage,
     },
+    ...(ORG.founder ? { founder: { "@type": "Person", name: ORG.founder } } : {}),
+    ...(ORG.vatID ? { vatID: ORG.vatID } : {}),
+    ...(ORG.foundingDate ? { foundingDate: ORG.foundingDate } : {}),
     ...(ORG.sameAs.length ? { sameAs: ORG.sameAs } : {}),
   };
 
@@ -48,7 +68,7 @@ export function SiteJsonLd({ locale }: { locale: Locale }) {
     "@id": `${SITE_URL}/#website`,
     name: SITE_NAME,
     url: localeUrl(locale),
-    inLanguage: localeToSlug(locale),
+    inLanguage: localeToHreflang(locale),
     publisher: { "@id": ORG_ID },
   };
 
@@ -69,9 +89,11 @@ export function HomeJsonLd({ locale }: { locale: Locale }) {
     description: p.blurb[locale],
     material: p.material[locale],
     brand: { "@type": "Brand", name: SITE_NAME },
+    // Prices are shown as "from CHF X" on the page, so model them as a lower
+    // bound (AggregateOffer.lowPrice) rather than an exact Offer.price.
     offers: {
-      "@type": "Offer",
-      price: p.price,
+      "@type": "AggregateOffer",
+      lowPrice: p.price,
       priceCurrency: "CHF",
       availability: "https://schema.org/InStock",
       url: `${home}#products`,
@@ -101,6 +123,45 @@ export function HomeJsonLd({ locale }: { locale: Locale }) {
       data={{
         "@context": "https://schema.org",
         "@graph": [...productList, faqPage, breadcrumb],
+      }}
+    />
+  );
+}
+
+// AboutPage — links the page to the Organization it describes (E-E-A-T signal).
+export function AboutJsonLd({ locale }: { locale: Locale }) {
+  const url = localeUrl(locale, "/about");
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "@id": `${url}#aboutpage`,
+        url,
+        name: pages.about.title[locale],
+        inLanguage: localeToHreflang(locale),
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": ORG_ID },
+        publisher: { "@id": ORG_ID },
+      }}
+    />
+  );
+}
+
+// ContactPage — marks the contact route and links it to the Organization.
+export function ContactJsonLd({ locale }: { locale: Locale }) {
+  const url = localeUrl(locale, "/contact");
+  return (
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "@id": `${url}#contactpage`,
+        url,
+        name: seoCopy.contact.title[locale],
+        inLanguage: localeToHreflang(locale),
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        about: { "@id": ORG_ID },
       }}
     />
   );
